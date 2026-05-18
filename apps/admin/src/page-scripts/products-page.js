@@ -13,7 +13,7 @@ import {
 import { subscribeToProductRuntime } from "@siggistore/services/admin/realtime.js";
 
 const PAGE_SIZE = 10;
-const TAB_KEYS = ["all", "archived", "publish", "unpublish"];
+const TAB_KEYS = ["all"];
 const tableState = createTableUrlState({
   defaultPage: 1,
   defaultPageSize: PAGE_SIZE,
@@ -39,24 +39,6 @@ function formatMoney(value) {
 }
 
 function filterProductsByTab(products, tabKey) {
-  if (tabKey === "archived") {
-    return products.filter(
-      (product) => product.status === "archived" || product.isPublished === false,
-    );
-  }
-
-  if (tabKey === "publish") {
-    return products.filter(
-      (product) => product.status === "publish" && product.isPublished !== false,
-    );
-  }
-
-  if (tabKey === "unpublish") {
-    return products.filter(
-      (product) => product.status === "unpublish" || product.isAvailable === false,
-    );
-  }
-
   return products;
 }
 
