@@ -1,0 +1,27 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.tsbuildinfo",
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"],
+      "@admin/*": ["../admin/src/*"],
+      "@siggistore/auth": ["../../packages/auth/src/index.ts"],
+      "@siggistore/auth/*": ["../../packages/auth/src/*"],
+      "@siggistore/supabase": ["../../packages/supabase/src/index.ts"],
+      "@siggistore/supabase/*": ["../../packages/supabase/src/*"],
+      "@siggistore/sanity": ["../../packages/sanity/src/index.ts"],
+      "@siggistore/services": ["../../packages/services/src/index.ts"],
+      "@siggistore/services/*": ["../../packages/services/src/*"],
+      "@siggistore/shared-types": ["../../packages/shared-types/src/index.ts"],
+      "@siggistore/shared-types/*": ["../../packages/shared-types/src/*"],
+      "@siggistore/utils": ["../../packages/utils/src/index.ts"],
+      "@siggistore/ui": ["../../packages/ui/src/index.ts"]
+    }
+  },
+  "files": [],
+  "references": [
+    { "path": "./tsconfig.app.json" },
+    { "path": "./tsconfig.node.json" }
+  ]
+}

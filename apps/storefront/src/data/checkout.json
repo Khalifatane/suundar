@@ -1,0 +1,73 @@
+{
+  "steps": [
+    { "label": "Cart", "current": false },
+    { "label": "Shipping", "current": true },
+    { "label": "Review & Pay", "current": false },
+    { "label": "Confirmation", "current": false }
+  ],
+  "backLink": {
+    "label": "Back to cart",
+    "href": "/cart"
+  },
+  "checkoutType": "guest",
+  "loginLink": {
+    "label": "Log in",
+    "href": "/login"
+  },
+  "loginHint": "for a faster checkout experience and to save your details for next time.",
+  "sections": [
+    {
+      "title": "Contact Details",
+      "type": "contactDetails",
+      "fields": [
+        { "type": "email", "name": "email", "placeholder": "Email address", "required": true }
+      ],
+      "newsletterCheckbox": {
+        "label": "Subscribe to our newsletter for exclusive offers and updates"
+      }
+    },
+    {
+      "title": "Shipping Address",
+      "type": "shippingAddress",
+      "fields": [
+        { "type": "text", "name": "firstName", "placeholder": "First name", "required": true },
+        { "type": "text", "name": "lastName", "placeholder": "Last name", "required": true },
+        { "type": "text", "name": "address1", "placeholder": "Address line 1", "required": true },
+        { "type": "text", "name": "address2", "placeholder": "Address line 2 (optional)", "required": false },
+        { "type": "text", "name": "city", "placeholder": "City", "required": true },
+        { "type": "text", "name": "postalCode", "placeholder": "Postal code", "required": true },
+        { "type": "select", "name": "country", "placeholder": "Country", "required": true, "defaultValue": "United Kingdom", "options": ["United Kingdom", "United States", "Canada", "Germany", "France", "Australia"] },
+        { "type": "tel", "name": "phone", "placeholder": "Phone number", "required": true }
+      ],
+      "defaultAddressCheckbox": {
+        "label": "Save as default address"
+      }
+    },
+    {
+      "title": "Shipping Method",
+      "type": "shippingMethod",
+      "options": [
+        { "id": "standard", "label": "Standard Shipping (3-5 business days)", "priceLabel": "Free", "selected": true },
+        { "id": "express", "label": "Express Shipping (1-2 business days)", "priceLabel": "$9.99", "selected": false }
+      ]
+    }
+  ],
+  "orderSummary": {
+    "editCartLink": "/cart",
+    "promoCode": {
+      "placeholder": "Enter promo code",
+      "buttonText": "Apply"
+    },
+    "subtotal": 229,
+    "shipping": "Free",
+    "estimatedTax": "Calculated at checkout",
+    "saleDiscount": null,
+    "total": 229,
+    "currency": "USD",
+    "items": [
+      { "name": "Nike Air Force 1", "color": "White", "size": "M", "quantity": 1, "price": 149 },
+      { "name": "Camo Blend Jacket", "color": "Camo", "size": "M", "quantity": 1, "price": 40 },
+      { "name": "Mahabis Classic", "color": "White", "size": "M", "quantity": 1, "price": 40 }
+    ]
+  }
+}

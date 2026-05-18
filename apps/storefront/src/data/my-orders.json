@@ -1,0 +1,96 @@
+{
+  "sidebar": {
+    "title": "My Account",
+    "items": [
+      { "label": "Personal Info", "href": "/personal-info", "icon": "User", "active": false },
+      { "label": "My Orders", "href": "/my-orders", "icon": "ShoppingBag", "active": true },
+      { "label": "Addresses", "href": "/addresses", "icon": "MapPin", "active": false },
+      { "divider": true },
+      { "label": "Logout", "href": "/login", "icon": "LogOut", "active": false }
+    ]
+  },
+  "pageContent": {
+    "title": "My Orders",
+    "orderCount": 3,
+    "yearFilter": ["2026", "2025", "2024"],
+    "tabs": [
+      { "id": "all", "label": "All", "active": true },
+      { "id": "processing", "label": "Processing", "active": false },
+      { "id": "shipped", "label": "Shipped", "active": false },
+      { "id": "delivered", "label": "Delivered", "active": false }
+    ],
+    "orders": [
+      {
+        "id": "1",
+        "number": "#NMR-2026-0003",
+        "status": "Processing",
+        "statusColor": "blue",
+        "date": "April 28, 2026",
+        "total": 229,
+        "timeline": [
+          { "label": "Order placed", "completed": true, "current": false },
+          { "label": "Processing", "completed": true, "current": true },
+          { "label": "Shipped", "completed": false, "current": false },
+          { "label": "Delivered", "completed": false, "current": false }
+        ],
+        "estimatedDelivery": "May 5, 2026",
+        "shippingAddress": "123 Main Street, London, UK",
+        "items": [
+          { "id": "1", "name": "Nike Air Force 1", "color": "White", "size": "M" },
+          { "id": "2", "name": "Camo Blend Jacket", "color": "Camo", "size": "M" },
+          { "id": "3", "name": "Mahabis Classic", "color": "White", "size": "M" }
+        ],
+        "actions": {
+          "viewDetailsLink": "/order-details",
+          "writeReviewLink": null
+        }
+      },
+      {
+        "id": "2",
+        "number": "#NMR-2026-0002",
+        "status": "Delivered",
+        "statusColor": "green",
+        "date": "March 15, 2026",
+        "total": 95,
+        "timeline": [
+          { "label": "Order placed", "completed": true, "current": false },
+          { "label": "Processing", "completed": true, "current": false },
+          { "label": "Shipped", "completed": true, "current": false },
+          { "label": "Delivered", "completed": true, "current": true }
+        ],
+        "deliveredDate": "March 18, 2026",
+        "shippingAddress": "123 Main Street, London, UK",
+        "items": [
+          { "id": "4", "name": "Denim Jacket", "color": "Blue", "size": "L" }
+        ],
+        "actions": {
+          "viewDetailsLink": "/order-details",
+          "writeReviewLink": "#"
+        }
+      },
+      {
+        "id": "3",
+        "number": "#NMR-2026-0001",
+        "status": "Delivered",
+        "statusColor": "green",
+        "date": "January 10, 2026",
+        "total": 139,
+        "timeline": [
+          { "label": "Order placed", "completed": true, "current": false },
+          { "label": "Processing", "completed": true, "current": false },
+          { "label": "Shipped", "completed": true, "current": false },
+          { "label": "Delivered", "completed": true, "current": true }
+        ],
+        "deliveredDate": "January 14, 2026",
+        "shippingAddress": "123 Main Street, London, UK",
+        "items": [
+          { "id": "5", "name": "Running Sneakers", "color": "Black", "size": "42" }
+        ],
+        "actions": {
+          "viewDetailsLink": "/order-details",
+          "writeReviewLink": "#"
+        }
+      }
+    ]
+  }
+}

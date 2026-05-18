@@ -1,0 +1,271 @@
+<!doctype html>
+<html
+  class="relative iidaq light"
+  data-brand="avocado"
+  data-font="sans"
+  data-theme="theme-olive"
+  lang="en"
+>
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+      name="viewport"
+    />
+    <meta
+      content="Engaging shopping experiences with advanced product filters, detailed descriptions, easy checkout, and full account management."
+      name="description"
+    />
+    <title>Shop | Preline Pro</title>
+    <link href="/css/css2.css" rel="stylesheet" />
+    <link href="/css/obfuscated.min.css" rel="stylesheet" />
+    <link href="/css/apexcharts.css" rel="stylesheet" />
+    <script src="/js/hs-unavailable-color-themes.js"></script>
+    <script>
+      function generateVariables(theme = "dashboard", brand = "blue") {
+        const styleId = "#hs-brand-variables";
+        let style = document.querySelector(styleId);
+
+        if (!style) {
+          style = document.createElement("style");
+          style.id = "hs-brand-variables";
+          document.head.append(style);
+        }
+
+        style.textContent = `
+          :root[data-theme="theme-${theme}"],
+          [data-theme="theme-${theme}"] {
+            --primary-50: var(--color-${brand}-50);
+            --primary-100: var(--color-${brand}-100);
+            --primary-200: var(--color-${brand}-200);
+            --primary-300: var(--color-${brand}-300);
+            --primary-400: var(--color-${brand}-400);
+            --primary-500: var(--color-${brand}-500);
+            --primary-600: var(--color-${brand}-600);
+            --primary-700: var(--color-${brand}-700);
+            --primary-800: var(--color-${brand}-800);
+            --primary-900: var(--color-${brand}-900);
+            --primary-950: var(--color-${brand}-950);
+          }
+        `;
+      }
+
+      (function () {
+        const unavailableColorThemes = window.HS_UNAVAILABLE_COLOR_THEMES ?? {};
+        const pathname = window.location.pathname;
+        const themesDefaults = {
+          default: "blue",
+          harvest: "amber",
+          retro: "fuchsia",
+          ocean: "cyan",
+          autumn: "yellow",
+          moon: "gray",
+          bubblegum: "pink",
+          cashmere: "mauve",
+          olive: "avocado",
+        };
+
+        let reducedThemes = [];
+        let defaultTheme = "default";
+        let defaultBrand = "blue";
+        let defaultFont = "sans";
+
+        for (const [key, value] of Object.entries(unavailableColorThemes)) {
+          const { theme, excludes } = value;
+
+          if (!pathname.includes(key)) continue;
+
+          defaultTheme = theme;
+
+          if (Array.isArray(excludes)) {
+            reducedThemes = excludes;
+          } else {
+            if (excludes["*"]) reducedThemes.push(...excludes["*"]);
+
+            for (const [nestedKey, nestedValue] of Object.entries(excludes)) {
+              if (nestedKey !== "*" && pathname.includes(nestedKey)) {
+                reducedThemes.push(...nestedValue);
+              }
+            }
+          }
+
+          break;
+        }
+
+        const colorTheme = localStorage.getItem("hs-clipboard-theme");
+        const brand = localStorage.getItem("hs-clipboard-brand");
+        const font = localStorage.getItem("hs-clipboard-font");
+        const html = document.documentElement;
+        const currentTheme =
+          colorTheme && !reducedThemes.includes(colorTheme)
+            ? colorTheme
+            : defaultTheme;
+        const currentBrand = brand || themesDefaults[currentTheme] || defaultBrand;
+        const currentFont = font || defaultFont;
+
+        html.setAttribute("data-theme", `theme-${currentTheme}`);
+        html.setAttribute("data-brand", currentBrand);
+        html.setAttribute("data-font", currentFont);
+        generateVariables(currentTheme, currentBrand);
+      })();
+    </script>
+    <script>
+      (function () {
+        const html = document.documentElement;
+        const storedTheme = localStorage.getItem("hs_theme");
+        const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+        const isLightMode =
+          storedTheme === "light" || (storedTheme === "auto" && !prefersDark);
+        const isDarkMode =
+          storedTheme === "dark" || (storedTheme === "auto" && prefersDark);
+
+        if (isLightMode) {
+          html.classList.remove("dark");
+          html.classList.add("light");
+        } else if (isDarkMode) {
+          html.classList.remove("light");
+          html.classList.add("dark");
+        }
+      })();
+    </script>
+    <style>
+      .apexcharts-tooltip.apexcharts-theme-light {
+        background-color: transparent !important;
+        border: none !important;
+        box-shadow: none !important;
+      }
+
+      .apexcharts-xaxistooltip {
+        background: var(--color-primary-600) !important;
+        border-color: var(--color-primary-600) !important;
+      }
+
+      .apexcharts-xaxistooltip:after,
+      .apexcharts-xaxistooltip:before {
+        border-bottom-color: var(--color-primary-600) !important;
+      }
+    </style>
+  </head>
+  <body class="gw9cg">
+    <div id="root"></div>
+    <footer class="mt-auto rvoqh r4caq qbzlc">
+      <div class="w-full max-w-[85rem] mx-auto ei6q1 nirzj cti9j gwqpr c4mnv">
+        <div class="njjrs flex flex-col oskez">
+          <div class="b70oy">
+            <label for="hs-pro-shfsei" class="block wgwtz at2zb c4t4j">
+              Subscribe &amp; get 10% off
+            </label>
+            <div class="flex items-center osjzw">
+              <input id="hs-pro-shfsei" type="text" class="dvh79 cti9j block w-full robkw x3ljb edpyz rbu8c c4t4j qnoha ajd3x jobdj disabled:opacity-50 disabled:pointer-events-none" placeholder="Enter email address" />
+              <button type="button" class="dvh79 cti9j offh6 inline-flex lp3ls items-center my9gz rbu8c at2zb edpyz pm6ks mak94 ve4ck bni17 pucrg disabled:opacity-50 disabled:pointer-events-none focus:outline-hidden soa63">
+                Sign up
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="tex4h da7vf u7utu c3uoj q3gap qyakg">
+          <div>
+            <h4 class="a3olr at2zb yymkp c4t4j">Help</h4>
+            <ul class="tex4h space-y-2">
+              <li><a class="yymkp f1ztf a8v2i lpc02 cihbd focus:outline-hidden jnkmc hj22m" href="#">Help Center</a></li>
+              <li><a class="yymkp f1ztf a8v2i lpc02 cihbd focus:outline-hidden jnkmc hj22m" href="#">Order Status</a></li>
+              <li><a class="yymkp f1ztf a8v2i lpc02 cihbd focus:outline-hidden jnkmc hj22m" href="#">Contact Us</a></li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 class="a3olr at2zb yymkp c4t4j">Resources</h4>
+            <ul class="tex4h space-y-2">
+              <li><a class="yymkp f1ztf a8v2i lpc02 cihbd focus:outline-hidden jnkmc hj22m" href="#">Gift Cards</a></li>
+              <li><a class="yymkp f1ztf a8v2i lpc02 cihbd focus:outline-hidden jnkmc hj22m" href="#">Find a Store</a></li>
+              <li><a class="yymkp f1ztf a8v2i lpc02 cihbd focus:outline-hidden jnkmc hj22m" href="#">Membership</a></li>
+            </ul>
+          </div>
+
+          <div class="space-y-10">
+            <div class="space-y-3">
+              <button type="button" class="flex items-center i220p m4rra yymkp c4t4j oxpaq focus:outline-hidden rjy76">
+                <svg class="y6rh0 xqxx6" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"></path>
+                  <circle cx="12" cy="10" r="3"></circle>
+                </svg>
+                Location
+                <svg class="y6rh0 x215h" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="m9 18 6-6-6-6"></path>
+                </svg>
+              </button>
+
+              <button type="button" class="flex items-center i220p m4rra yymkp c4t4j oxpaq focus:outline-hidden rjy76">
+                <svg class="y6rh0 xqxx6" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"></path>
+                  <path d="M2 12h20"></path>
+                </svg>
+                United Kingdom
+                <svg class="y6rh0 x215h" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="m9 18 6-6-6-6"></path>
+                </svg>
+              </button>
+
+              <button type="button" class="flex items-center i220p m4rra yymkp c4t4j oxpaq focus:outline-hidden rjy76">
+                <svg class="y6rh0 xqxx6" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                </svg>
+                Send us feedback
+                <svg class="y6rh0 x215h" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="m9 18 6-6-6-6"></path>
+                </svg>
+              </button>
+            </div>
+
+            <div>
+              <h4 class="at2zb yymkp c4t4j">Stay connected</h4>
+              <div class="ljp3z qb57m space-x-4">
+                <a class="relative inline-block yymkp f1ztf a8v2i lpc02 cihbd focus:outline-hidden jnkmc hj22m" href="#">
+                  <svg class="y6rh0 x215h" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
+                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                    <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line>
+                  </svg>
+                  <span class="rfrdb">Instagram</span>
+                </a>
+                <a class="relative inline-block yymkp f1ztf a8v2i lpc02 cihbd focus:outline-hidden jnkmc hj22m" href="#">
+                  <svg class="y6rh0 xqxx6" width="48" height="50" viewBox="0 0 48 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M28.5665 20.7714L46.4356 0H42.2012L26.6855 18.0355L14.2931 0H0L18.7397 27.2728L0 49.0548H4.23464L20.6196 30.0087L33.7069 49.0548H48L28.5655 20.7714H28.5665ZM22.7666 27.5131L5.76044 3.18778H12.2646L42.2032 46.012H35.699L22.7666 27.5142V27.5131Z" fill="currentColor"></path>
+                  </svg>
+                  <span class="rfrdb">X (Twitter)</span>
+                </a>
+                <a class="relative inline-block yymkp f1ztf a8v2i lpc02 cihbd focus:outline-hidden jnkmc hj22m" href="#">
+                  <svg class="y6rh0 x215h" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17"></path>
+                    <path d="m10 15 5-3-5-3z"></path>
+                  </svg>
+                  <span class="rfrdb">YouTube</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="w-full max-w-[85rem] pwc5m u3wpp mx-auto cti9j gwqpr c4mnv">
+          <ul class="flex flex-wrap items-center offh6 oskez">
+            <li class="inline-flex items-center relative m859b f1ztf jr33k qt51h last:after:hidden after:absolute after:top-1/2 after:end-0 after:inline-block after:size-[3px] after:bg-surface-3 after:rounded-full after:-translate-y-1/2">
+              2026 Preline Labs.
+            </li>
+            <li class="inline-flex items-center relative m859b f1ztf jr33k qt51h last:after:hidden after:absolute after:top-1/2 after:end-0 after:inline-block after:size-[3px] after:bg-surface-3 after:rounded-full after:-translate-y-1/2">
+              <a class="m859b f1ztf a8v2i lpc02 cihbd focus:outline-hidden jnkmc hj22m" href="#">Terms</a>
+            </li>
+            <li class="inline-flex items-center relative m859b f1ztf jr33k qt51h last:after:hidden after:absolute after:top-1/2 after:end-0 after:inline-block after:size-[3px] after:bg-surface-3 after:rounded-full after:-translate-y-1/2">
+              <a class="m859b f1ztf a8v2i lpc02 cihbd focus:outline-hidden jnkmc hj22m" href="#">Privacy</a>
+            </li>
+            <li class="inline-flex items-center relative m859b f1ztf jr33k qt51h last:after:hidden after:absolute after:top-1/2 after:end-0 after:inline-block after:size-[3px] after:bg-surface-3 after:rounded-full after:-translate-y-1/2">
+              <a class="m859b f1ztf a8v2i lpc02 cihbd focus:outline-hidden jnkmc hj22m" href="#">Your Privacy Choices</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+    <script type="module" src="./src/main.jsx"></script>
+  </body>
+</html>

@@ -1,0 +1,64 @@
+{
+  "user": {
+    "name": "",
+    "email": "",
+    "phone": ""
+  },
+  "sidebar": {
+    "title": "My Account",
+    "items": [
+      { "label": "Personal Info", "href": "/personal-info", "icon": "User", "active": true },
+      { "label": "My Orders", "href": "/my-orders", "icon": "ShoppingBag", "active": false },
+      { "label": "Addresses", "href": "/addresses", "icon": "MapPin", "active": false },
+      { "divider": true },
+      { "label": "Logout", "href": "/login", "icon": "LogOut", "active": false }
+    ]
+  },
+  "sections": [
+    {
+      "type": "profilePhoto",
+      "uploadButton": "Upload new photo"
+    },
+    {
+      "type": "infoField",
+      "label": "First name",
+      "value": "",
+      "editable": true
+    },
+    {
+      "type": "infoField",
+      "label": "Last name",
+      "value": "",
+      "editable": true
+    },
+    {
+      "type": "infoField",
+      "label": "Email",
+      "value": "",
+      "editable": true
+    },
+    {
+      "type": "infoField",
+      "label": "Phone",
+      "value": "",
+      "editable": true
+    },
+    {
+      "type": "actionField",
+      "label": "Password",
+      "description": "Change your account password",
+      "actionButton": {
+        "label": "Change password",
+        "href": "/forgot-password"
+      }
+    },
+    {
+      "type": "dangerField",
+      "label": "Delete account",
+      "description": "Permanently delete your account and all associated data",
+      "actionButton": {
+        "label": "Delete account"
+      }
+    }
+  ]
+}

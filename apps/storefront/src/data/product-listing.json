@@ -1,0 +1,88 @@
+{
+  "category": "Men's Clothing",
+  "itemCount": 42,
+  "sortOptions": ["Featured", "Price: Low to High", "Price: High to Low", "Newest", "Best Selling"],
+  "defaultSort": "Featured",
+  "banner": {
+    "text": "Free shipping on orders over $50"
+  },
+  "subCategories": [
+    { "label": "T-Shirts", "count": 12, "image": "/images/cat-tshirts.jpg" },
+    { "label": "Shirts", "count": 8, "image": "/images/cat-shirts.jpg" },
+    { "label": "Pants", "count": 10, "image": "/images/cat-pants.jpg" },
+    { "label": "Jackets", "count": 6, "image": "/images/cat-jackets.jpg" },
+    { "label": "Shoes", "count": 14, "image": "/images/cat-shoes.jpg" }
+  ],
+  "products": [
+    {
+      "id": "1",
+      "name": "Everyday Solid Black T-Shirt",
+      "category": "T-Shirts",
+      "price": 40,
+      "originalPrice": 60,
+      "rating": 4,
+      "reviewCount": 24,
+      "badge": "Sale"
+    },
+    {
+      "id": "2",
+      "name": "Classic White Oxford Shirt",
+      "category": "Shirts",
+      "price": 65,
+      "rating": 5,
+      "reviewCount": 12
+    },
+    {
+      "id": "3",
+      "name": "Slim Fit Chino Pants",
+      "category": "Pants",
+      "price": 55,
+      "rating": 4,
+      "reviewCount": 8
+    },
+    {
+      "id": "4",
+      "name": "Denim Jacket",
+      "category": "Jackets",
+      "price": 95,
+      "originalPrice": 120,
+      "rating": 4,
+      "reviewCount": 18,
+      "badge": "Sale"
+    },
+    {
+      "id": "5",
+      "name": "Nike Air Force 1",
+      "category": "Shoes",
+      "price": 139,
+      "rating": 5,
+      "reviewCount": 56
+    },
+    {
+      "id": "6",
+      "name": "Running Sneakers",
+      "category": "Shoes",
+      "price": 89,
+      "originalPrice": 110,
+      "rating": 4,
+      "reviewCount": 32,
+      "badge": "Sale"
+    },
+    {
+      "id": "7",
+      "name": "Leather Belt",
+      "category": "Accessories",
+      "price": 35,
+      "rating": 4,
+      "reviewCount": 6
+    },
+    {
+      "id": "8",
+      "name": "Wool Beanie",
+      "category": "Accessories",
+      "price": 25,
+      "rating": 3,
+      "reviewCount": 4
+    }
+  ]
+}

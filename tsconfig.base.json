@@ -1,0 +1,38 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "useDefineForClassFields": true,
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "allowImportingTsExtensions": true,
+    "resolveJsonModule": true,
+    "allowJs": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "skipLibCheck": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "react-jsx",
+    "strict": false,
+    "baseUrl": ".",
+    "paths": {
+      "@admin/*": ["apps/admin/src/*"],
+      "@storefront/*": ["apps/storefront/src/*"],
+      "@siggistore/auth": ["packages/auth/src/index.ts"],
+      "@siggistore/auth/*": ["packages/auth/src/*"],
+      "@siggistore/supabase": ["packages/supabase/src/index.ts"],
+      "@siggistore/supabase/*": ["packages/supabase/src/*"],
+      "@siggistore/sanity": ["packages/sanity/src/index.ts"],
+      "@siggistore/sanity/*": ["packages/sanity/src/*"],
+      "@siggistore/services": ["packages/services/src/index.ts"],
+      "@siggistore/services/*": ["packages/services/src/*"],
+      "@siggistore/shared-types": ["packages/shared-types/src/index.ts"],
+      "@siggistore/shared-types/*": ["packages/shared-types/src/*"],
+      "@siggistore/utils": ["packages/utils/src/index.ts"],
+      "@siggistore/utils/*": ["packages/utils/src/*"],
+      "@siggistore/ui": ["packages/ui/src/index.ts"],
+      "@siggistore/ui/*": ["packages/ui/src/*"]
+    }
+  }
+}

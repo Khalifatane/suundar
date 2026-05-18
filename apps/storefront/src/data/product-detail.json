@@ -1,0 +1,69 @@
+{
+  "breadcrumb": [
+    { "label": "Home", "href": "/" },
+    { "label": "Men's Clothing", "href": "/product-listing" },
+    { "label": "T-Shirts", "href": "/product-listing?category=tshirts" },
+    { "label": "Everyday Solid Black T-Shirt", "href": "#" }
+  ],
+  "product": {
+    "name": "Everyday Solid Black T-Shirt",
+    "subCategory": "Men's T-Shirts",
+    "price": 40,
+    "originalPrice": 60,
+    "rating": 4,
+    "reviewCount": 24,
+    "selectedColor": "Black",
+    "colors": [
+      { "label": "Black", "value": "#000000", "selected": true },
+      { "label": "White", "value": "#ffffff", "selected": false },
+      { "label": "Navy", "value": "#1e3a5f", "selected": false },
+      { "label": "Gray", "value": "#808080", "selected": false }
+    ],
+    "sizes": [
+      { "value": "XS", "available": false },
+      { "value": "S", "available": true },
+      { "value": "M", "available": true },
+      { "value": "L", "available": true },
+      { "value": "XL", "available": true },
+      { "value": "XXL", "available": false }
+    ],
+    "images": [
+      { "url": "/images/product-1.jpg" },
+      { "url": "/images/product-2.jpg" },
+      { "url": "/images/product-3.jpg" },
+      { "url": "/images/product-4.jpg" }
+    ],
+    "features": [
+      { "title": "Free shipping", "description": "On orders over $50" },
+      { "title": "Easy returns", "description": "30-day return policy" },
+      { "title": "Secure payment", "description": "100% secure checkout" }
+    ],
+    "socialProof": [
+      { "text": "Over 1,000 happy customers" },
+      { "text": "Rated 4.5/5 from 200+ reviews" }
+    ]
+  },
+  "relatedProducts": [
+    {
+      "id": "2",
+      "name": "Classic White Oxford Shirt",
+      "category": "Shirts",
+      "price": 65,
+      "badge": "New"
+    },
+    {
+      "id": "3",
+      "name": "Slim Fit Chino Pants",
+      "category": "Pants",
+      "price": 55
+    },
+    {
+      "id": "4",
+      "name": "Denim Jacket",
+      "category": "Jackets",
+      "price": 95,
+      "originalPrice": 120,
+      "badge": "Sale"
+    }
+  ]
+}

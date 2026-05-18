@@ -1,0 +1,27 @@
+{
+  "name": "siggistore-monorepo",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Siggistore monorepo - storefront and admin applications with shared packages",
+  "scripts": {
+    "build": "node ./scripts/build-soft-merged.mjs",
+    "build:storefront": "turbo run build --filter=storefront",
+    "build:admin": "turbo run build --filter=admin",
+    "dev": "powershell -ExecutionPolicy Bypass -File ./scripts/dev-soft-merged.ps1",
+    "dev:storefront": "powershell -ExecutionPolicy Bypass -File ./scripts/dev-soft-merged.ps1",
+    "dev:admin": "powershell -ExecutionPolicy Bypass -File ./scripts/dev-soft-merged.ps1",
+    "type-check": "turbo run type-check",
+    "lint": "turbo run lint",
+    "clean": "turbo run clean && rm -rf node_modules/.cache",
+    "sanity": "sanity --cwd apps/storefront",
+    "sanity:dev": "sanity dev --cwd apps/storefront --host 127.0.0.1 --port 3333"
+  },
+  "devDependencies": {
+    "turbo": "^2.0.0"
+  },
+  "packageManager": "pnpm@9.0.0",
+  "engines": {
+    "node": ">=20.0.0"
+  }
+}

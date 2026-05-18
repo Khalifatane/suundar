@@ -1,0 +1,71 @@
+{
+  "newsletter": {
+    "label": "Subscribe & get 10% off",
+    "placeholder": "Enter email address",
+    "buttonText": "Sign up"
+  },
+  "sections": [
+    {
+      "title": "Help",
+      "links": [
+        { "label": "Help Center", "href": "#" },
+        { "label": "FAQs", "href": "#" },
+        { "label": "Subscription", "href": "#" },
+        { "label": "Order Status", "href": "#" },
+        { "label": "Returns & Exchanges", "href": "#" },
+        { "label": "Contact Us", "href": "#" }
+      ]
+    },
+    {
+      "title": "Resources",
+      "links": [
+        { "label": "Gift Cards", "href": "#" },
+        { "label": "Find a Store", "href": "#" },
+        { "label": "Membership", "href": "#" }
+      ]
+    },
+    {
+      "title": "Company",
+      "links": [
+        { "label": "Newsroom", "href": "#" },
+        { "label": "New features", "href": "#" },
+        { "label": "Careers", "href": "#" },
+        { "label": "Investors", "href": "#" },
+        { "label": "Purpose", "href": "#" }
+      ]
+    }
+  ],
+  "location": {
+    "label": "Location",
+    "value": "United Kingdom"
+  },
+  "feedback": {
+    "label": "Send us feedback"
+  },
+  "socialLinks": [
+    {
+      "label": "Instagram",
+      "href": "#",
+      "icon": "Instagram"
+    },
+    {
+      "label": "X (Twitter)",
+      "href": "#",
+      "icon": "Twitter"
+    },
+    {
+      "label": "YouTube",
+      "href": "#",
+      "icon": "Youtube"
+    }
+  ],
+  "bottom": {
+    "copyright": "2026 Nimara Storefront.",
+    "links": [
+      { "label": "Terms", "href": "#" },
+      { "label": "Privacy", "href": "#" },
+      { "label": "Your Privacy Choices", "href": "#" }
+    ],
+    "darkModeToggle": true
+  }
+}

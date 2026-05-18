@@ -1,0 +1,8 @@
+node_modules/
+dist/
+apps/*/dist/
+apps/*/node_modules/
+store/node_modules/
+apps/*/.env.local
+apps/*/.sanity/
+npm-debug.log*

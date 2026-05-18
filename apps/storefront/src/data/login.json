@@ -1,0 +1,21 @@
+{
+  "form": {
+    "title": "Log In",
+    "fields": [
+      { "type": "email", "name": "email", "label": "Email address", "placeholder": "Enter your email", "required": true, "showToggle": false },
+      { "type": "password", "name": "password", "label": "Password", "placeholder": "Enter your password", "required": true, "showToggle": true }
+    ],
+    "rememberMe": {
+      "label": "Remember me"
+    },
+    "forgotPasswordLink": {
+      "label": "Forgot password?",
+      "href": "/forgot-password"
+    },
+    "submitButton": "Log In",
+    "createAccountLink": {
+      "label": "Don't have an account? Create one",
+      "href": "/create-account"
+    }
+  }
+}

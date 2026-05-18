@@ -1,0 +1,59 @@
+{
+  "steps": [
+    { "label": "Cart", "current": false },
+    { "label": "Shipping", "current": false },
+    { "label": "Review & Pay", "current": false },
+    { "label": "Confirmation", "current": true }
+  ],
+  "backLink": {
+    "label": "Back to home",
+    "href": "/"
+  },
+  "continueShoppingLink": {
+    "label": "Continue shopping",
+    "href": "/product-listing"
+  },
+  "confirmation": {
+    "heading": "Thank you for your order!",
+    "orderNumberLabel": "Order number:",
+    "orderNumber": "#NMR-2026-0001",
+    "emailConfirmation": "A confirmation email has been sent to",
+    "email": "",
+    "actions": [
+      { "label": "View order details", "href": "/order-details" },
+      { "label": "Print receipt", "action": "print" }
+    ]
+  },
+  "whatsNext": {
+    "title": "What's next?",
+    "timeline": [
+      { "label": "Order placed", "status": "completed", "date": "May 1, 2026" },
+      { "label": "Processing", "status": "completed", "date": "May 1, 2026" },
+      { "label": "Shipped", "status": "pending" },
+      { "label": "Delivered", "status": "pending" }
+    ]
+  },
+  "needHelp": {
+    "title": "Need help?",
+    "description": "Our customer service team is available to assist you with any questions.",
+    "availability": "Mon-Fri, 9am-6pm GMT",
+    "contactLink": {
+      "label": "Contact customer service",
+      "href": "#"
+    }
+  },
+  "orderSummary": {
+    "title": "Order Summary",
+    "status": "Confirmed",
+    "subtotal": 229,
+    "shipping": "Free",
+    "estimatedTax": "Calculated",
+    "total": 229,
+    "currency": "USD",
+    "items": [
+      { "name": "Nike Air Force 1", "color": "White", "size": "M", "quantity": 1, "price": 149 },
+      { "name": "Camo Blend Jacket", "color": "Camo", "size": "M", "quantity": 1, "price": 40 },
+      { "name": "Mahabis Classic", "color": "White", "size": "M", "quantity": 1, "price": 40 }
+    ]
+  }
+}

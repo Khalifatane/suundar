@@ -1,0 +1,93 @@
+{
+  "sidebar": {
+    "title": "My Account",
+    "items": [
+      { "label": "Personal Info", "href": "/personal-info", "icon": "User", "active": false },
+      { "label": "My Orders", "href": "/my-orders", "icon": "ShoppingBag", "active": false },
+      { "label": "Addresses", "href": "/addresses", "icon": "MapPin", "active": false },
+      { "divider": true },
+      { "label": "Logout", "href": "/login", "icon": "LogOut", "active": false }
+    ]
+  },
+  "order": {
+    "title": "Order Details",
+    "number": "#NMR-2026-0003",
+    "date": "April 28, 2026",
+    "status": "Processing",
+    "statusColor": "blue",
+    "total": 229,
+    "currency": "USD",
+    "shippingAddress": {
+      "name": "",
+      "street": "",
+      "city": "",
+      "state": "",
+      "country": "",
+      "phone": ""
+    },
+    "contactDetails": {
+      "email": ""
+    },
+    "paymentMethod": {
+      "type": "Visa",
+      "last4": "4242"
+    },
+    "costs": {
+      "subtotal": 229,
+      "shipping": "Free",
+      "estimatedTax": "Calculated",
+      "saleDiscount": null,
+      "total": 229
+    },
+    "estimatedDelivery": "May 5, 2026",
+    "timeline": [
+      { "label": "Order placed", "completed": true, "current": false },
+      { "label": "Processing", "completed": true, "current": true },
+      { "label": "Shipped", "completed": false, "current": false },
+      { "label": "Delivered", "completed": false, "current": false }
+    ],
+    "items": [
+      {
+        "id": "1",
+        "name": "Nike Air Force 1",
+        "color": "White",
+        "size": "M",
+        "quantity": 1,
+        "price": 149,
+        "actions": {
+          "buyAgainButton": true,
+          "writeReviewLink": null
+        }
+      },
+      {
+        "id": "2",
+        "name": "Camo Blend Jacket",
+        "color": "Camo",
+        "size": "M",
+        "quantity": 1,
+        "price": 40,
+        "actions": {
+          "buyAgainButton": true,
+          "writeReviewLink": null
+        }
+      },
+      {
+        "id": "3",
+        "name": "Mahabis Classic",
+        "color": "White",
+        "size": "M",
+        "quantity": 1,
+        "price": 40,
+        "actions": {
+          "buyAgainButton": true,
+          "writeReviewLink": null
+        }
+      }
+    ],
+    "actions": {
+      "changeAddressLink": "/addresses",
+      "cancelOrderButton": "Cancel order",
+      "printReceiptButton": "Print receipt"
+    }
+  }
+}

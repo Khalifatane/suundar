@@ -1,0 +1,9 @@
+{
+  "icon": "ShoppingBag",
+  "heading": "Your cart is empty",
+  "description": "Looks like you haven't added anything to your cart yet. Explore our products and find something you love.",
+  "actionButton": {
+    "label": "Continue shopping",
+    "href": "/product-listing"
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "tabs": [
+    { "id": "returning", "label": "Returning Customer", "active": true },
+    { "id": "track", "label": "Track Order", "active": false }
+  ],
+  "returningCustomer": {
+    "loginForm": {
+      "fields": [
+        { "type": "email", "name": "email", "label": "Email address", "placeholder": "Enter your email", "required": true, "showToggle": false },
+        { "type": "password", "name": "password", "label": "Password", "placeholder": "Enter your password", "required": true, "showToggle": true }
+      ],
+      "rememberMe": {
+        "label": "Remember me"
+      },
+      "forgotPasswordLink": {
+        "label": "Forgot password?",
+        "href": "/forgot-password"
+      },
+      "submitButton": "Log In",
+      "createAccountLink": {
+        "label": "Don't have an account? Create one",
+        "href": "/create-account"
+      }
+    }
+  },
+  "trackOrder": {
+    "title": "Track your order",
+    "lookupBy": {
+      "label": "Lookup by",
+      "options": [
+        { "id": "phone", "label": "Phone number" },
+        { "id": "email", "label": "Email address" }
+      ]
+    },
+    "fields": [
+      { "type": "text", "name": "orderNumber", "label": "Order number", "placeholder": "Enter order number", "required": true },
+      { "type": "email", "name": "email", "label": "Email address", "placeholder": "Enter your email", "required": true }
+    ],
+    "helperLink": {
+      "label": "Forgot order number?",
+      "href": "#"
+    },
+    "submitButton": "Track Order",
+    "createAccountDescription": "Create an account for faster checkout and order tracking.",
+    "createAccountLink": {
+      "label": "Create an account",
+      "href": "/create-account"
+    }
+  }
+}

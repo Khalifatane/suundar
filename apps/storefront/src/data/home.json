@@ -1,0 +1,35 @@
+{
+  "title": "Shop | Nimara Storefront",
+  "description": "Engaging shopping experiences with advanced product filters, detailed descriptions, easy checkout, and full account management.",
+  "hero": {
+    "backgroundImage": "/images/hero-banner.jpg",
+    "badge": "Summer sale",
+    "title": "Up to 50% off",
+    "buttons": [
+      { "label": "Shop men", "href": "/product-listing?category=men", "variant": "outline-light" },
+      { "label": "Shop women", "href": "/product-listing?category=women", "variant": "outline-light" }
+    ]
+  },
+  "sections": [
+    {
+      "type": "categories",
+      "title": "Shop by Category",
+      "categories": [
+        { "label": "Men's Clothing", "href": "/product-listing?category=men", "image": "/images/cat-men.jpg" },
+        { "label": "Women's Clothing", "href": "/product-listing?category=women", "image": "/images/cat-women.jpg" },
+        { "label": "Shoes", "href": "/product-listing?category=shoes", "image": "/images/cat-shoes.jpg" },
+        { "label": "Accessories", "href": "/product-listing?category=accessories", "image": "/images/cat-accessories.jpg" }
+      ]
+    },
+    {
+      "type": "featuredProducts",
+      "title": "Featured Products",
+      "products": [
+        { "id": "1", "href": "/product-detail" },
+        { "id": "2", "href": "/product-detail" },
+        { "id": "3", "href": "/product-detail" },
+        { "id": "4", "href": "/product-detail" }
+      ]
+    }
+  ]
+}

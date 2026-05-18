@@ -1,0 +1,52 @@
+{
+  "sidebar": {
+    "title": "My Account",
+    "items": [
+      { "label": "Personal Info", "href": "/personal-info", "icon": "User", "active": false },
+      { "label": "My Orders", "href": "/my-orders", "icon": "ShoppingBag", "active": false },
+      { "label": "Addresses", "href": "/addresses", "icon": "MapPin", "active": true },
+      { "divider": true },
+      { "label": "Logout", "href": "/login", "icon": "LogOut", "active": false }
+    ]
+  },
+  "pageContent": {
+    "title": "Addresses",
+    "addAddressButton": {
+      "label": "Add new address"
+    },
+    "addresses": [
+      {
+        "id": "1",
+        "label": "Home",
+        "isDefault": true,
+        "name": "",
+        "street": "",
+        "city": "",
+        "state": "",
+        "country": "",
+        "phone": "",
+        "actions": {
+          "edit": true,
+          "setAsDefault": false,
+          "remove": true
+        }
+      },
+      {
+        "id": "2",
+        "label": "Work",
+        "isDefault": false,
+        "name": "",
+        "street": "",
+        "city": "",
+        "state": "",
+        "country": "",
+        "phone": "",
+        "actions": {
+          "edit": true,
+          "setAsDefault": true,
+          "remove": true
+        }
+      }
+    ]
+  }
+}

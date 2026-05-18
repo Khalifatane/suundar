@@ -1,0 +1,1053 @@
+﻿
+<!DOCTYPE html>
+<html lang="en" class="relative iidaq light" data-theme="theme-olive" data-brand="avocado" data-font="sans">
+<head>
+  <!-- Required Meta Tags Always Come First -->
+  <meta charset="utf-8">
+  <meta name="robots" content="max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+  <link rel="canonical" href="https://preline.co/pro/templates.html">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Engaging shopping experiences with advanced product filters, detailed descriptions, easy checkout, and full account management.">
+
+  <meta name="twitter:site" content="@preline">
+  <meta name="twitter:creator" content="@preline">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Review and Pay | Preline Pro">
+  <meta name="twitter:description" content="Engaging shopping experiences with advanced product filters, detailed descriptions, easy checkout, and full account management.">
+  <meta name="twitter:image" content="https://preline.co/assets/img/og-image.png">
+
+  <meta property="og:url" content="https://preline.co/pro/templates.html">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Preline">
+  <meta property="og:title" content="Review and Pay | Preline Pro">
+  <meta property="og:description" content="Engaging shopping experiences with advanced product filters, detailed descriptions, easy checkout, and full account management.">
+  <meta property="og:image" content="https://preline.co/assets/img/og-image.png">
+
+  <!-- Title -->
+  <title>Review and Pay | Preline Pro</title>
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="../../favicon.ico">
+
+  <!-- Font -->
+  <link href="/css/css2.css" rel="stylesheet"/>
+
+  <!-- CSS HS -->
+  <link href="/css/obfuscated.min.css" rel="stylesheet"/>
+
+  <!-- Theme Check and Update -->
+  <script src="/js/hs-unavailable-color-themes.js"></script>
+  <script>
+    function generateVariables(theme = "dashboard", brand = "blue") {
+      const styleId = "#hs-brand-variables";
+      let style = null;
+
+      if (!document.querySelector(styleId)) {
+        const head = document.querySelector("head");
+        style = document.createElement("style");
+        style.id = "hs-brand-variables";
+
+        head.append(style);
+      } else {
+        style = document.querySelector(styleId);
+      }
+
+      style.textContent = `
+        :root[data-theme="theme-${theme}"],
+        [data-theme="theme-${theme}"] {
+          --primary-50:       var(--color-${brand}-50);
+          --primary-100:      var(--color-${brand}-100);
+          --primary-200:      var(--color-${brand}-200);
+          --primary-300:      var(--color-${brand}-300);
+          --primary-400:      var(--color-${brand}-400);
+          --primary-500:      var(--color-${brand}-500);
+          --primary-600:      var(--color-${brand}-600);
+          --primary-700:      var(--color-${brand}-700);
+          --primary-800:      var(--color-${brand}-800);
+          --primary-900:      var(--color-${brand}-900);
+          --primary-950:      var(--color-${brand}-950);
+        }
+      `;
+    }
+
+    (function () {
+      const unavailableColorThemes = window.HS_UNAVAILABLE_COLOR_THEMES;
+      const pathname = window.location.pathname;
+      let reducedThemes = [];
+      let defaultTheme = "default";
+      let defaultBrand = "blue";
+      let defaultFont = "sans";
+
+      const themesDefaults = {
+        "default": "blue",
+        "harvest": "amber",
+        "retro": "fuchsia",
+        "ocean": "cyan",
+        "autumn": "yellow",
+        "moon": "gray",
+        "bubblegum": "pink",
+        "cashmere": "mauve",
+        "olive": "avocado",
+      };
+
+      for (const [key_i, value_i] of Object.entries(unavailableColorThemes)) {
+        const { theme, excludes } = value_i;
+
+        if (pathname.includes(key_i)) {
+          defaultTheme = theme;
+
+          if (Array.isArray(excludes)) {
+            reducedThemes = excludes;
+            break;
+          } else {
+            const result = [];
+
+            if (excludes['*']) result.push(...excludes['*']);
+
+            for (const [key_j, value_j] of Object.entries(excludes)) {
+              if (key_j !== '*' && pathname.includes(key_j)) result.push(...value_j);
+            }
+
+            reducedThemes = result;
+            break;
+          }
+        }
+      }
+
+      const colorTheme = localStorage.getItem('hs-clipboard-theme');
+      const font = localStorage.getItem('hs-clipboard-font');
+      const brand = localStorage.getItem('hs-clipboard-brand');
+      const html = document.querySelector('html');
+      const accessibleFilePathPatterns = [
+        "/templates/",
+        "/pro/agency/",
+        "/pro/ai-chat/",
+        "/pro/analytics/",
+        "/pro/calendars/",
+        "/pro/chat/",
+        "/pro/cms/",
+        "/pro/coffee-shop/",
+        "/pro/crm/",
+        "/pro/dashboard/",
+        "/pro/ecommerce/",
+        "/pro/files/",
+        "/pro/inbox/",
+        "/pro/payment/",
+        "/pro/personal/",
+        "/pro/project/",
+        "/pro/shop/",
+        "/pro/shop-marketplace/",
+        "/pro/smart-home/",
+        "/pro/startup/",
+        "/pro/video-call/",
+        "/pro/workspace/",
+      ];
+      const currentUrl = window.location.href;
+      const isIncludedUrl = accessibleFilePathPatterns.some((pattern) => currentUrl.includes(pattern));
+
+      if (isIncludedUrl) {
+        (function () {
+          const currentTheme = colorTheme && !reducedThemes.includes(colorTheme) ? colorTheme : defaultTheme;
+          const currentBrand = brand || themesDefaults[currentTheme];
+
+          console.log("Current Theme:", currentTheme);
+          console.log("Current Brand:", brand, themesDefaults[currentTheme]);
+
+          html.setAttribute('data-theme', `theme-${currentTheme}`);
+          html.setAttribute('data-brand', currentBrand);
+
+          generateVariables(currentTheme, currentBrand)
+        })();
+
+        (function () {
+          const currentFont = font ?? defaultFont;
+
+          html.setAttribute('data-font', currentFont);
+        })();
+      }
+    })();
+  </script>
+  <script>
+    (function () {
+      const html = document.querySelector('html');
+      const isLightOrAuto = localStorage.getItem('hs_theme') === 'light' || (localStorage.getItem('hs_theme') === 'auto' && !window.matchMedia('(prefers-color-scheme: dark)').matches);
+      const isDarkOrAuto = localStorage.getItem('hs_theme') === 'dark' || (localStorage.getItem('hs_theme') === 'auto' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+
+      if (isLightOrAuto && html.classList.contains('dark')) html.classList.remove('dark');
+      else if (isDarkOrAuto && html.classList.contains('light')) html.classList.remove('light');
+      else if (isDarkOrAuto && !html.classList.contains('dark')) html.classList.add('dark');
+      else if (isLightOrAuto && !html.classList.contains('light')) html.classList.add('light');
+    })();
+  </script>
+
+  <link href="/css/apexcharts.css" rel="stylesheet"/>
+  <style type="text/css">
+    .apexcharts-tooltip.apexcharts-theme-light
+    {
+      background-color: transparent !important;
+      border: none !important;
+      box-shadow: none !important;
+    }
+
+    .apexcharts-xaxistooltip
+    {
+      background: var(--color-primary-600) !important;
+      border-color: var(--color-primary-600) !important;
+    }
+
+    .apexcharts-xaxistooltip:after,
+    .apexcharts-xaxistooltip:before
+    {
+      border-bottom-color: var(--color-primary-600) !important;
+    }
+  </style>
+</head>
+
+<body class="flex flex-col cyqbg overflow-x-hidden gw9cg">
+  <!-- ========== HEADER ========== -->
+  <header class=" flex flex-wrap c41c0 md:flex-nowrap hh3zb xbrjb">
+    <div class="o3m6v tex4h hfud4 pjr9t o1yno  d8ttz items-center w-full mx-auto dvh79 cti9j gwqpr c4mnv">
+      <div class="ed9df uj5nx">
+        <div class="flex items-center jdzig">
+          <!-- Logo -->
+          <a class="flex-none y9dku taweu inline-block ctc9x focus:outline-hidden d8pr2" href="./index.html" aria-label="Preline">
+            <svg class="rydhd h-auto" width="116" height="32" viewBox="0 0 116 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M33.5696 30.8182V11.3182H37.4474V13.7003H37.6229C37.7952 13.3187 38.0445 12.9309 38.3707 12.5369C38.7031 12.1368 39.134 11.8045 39.6634 11.5398C40.1989 11.2689 40.8636 11.1335 41.6577 11.1335C42.6918 11.1335 43.6458 11.4044 44.5199 11.946C45.3939 12.4815 46.0926 13.291 46.6158 14.3743C47.139 15.4515 47.4006 16.8026 47.4006 18.4276C47.4006 20.0095 47.1451 21.3452 46.6342 22.4347C46.1295 23.518 45.4401 24.3397 44.5661 24.8999C43.6982 25.4538 42.7256 25.7308 41.6484 25.7308C40.8852 25.7308 40.2358 25.6046 39.7003 25.3523C39.1709 25.0999 38.737 24.7829 38.3984 24.4013C38.0599 24.0135 37.8014 23.6226 37.6229 23.2287H37.5028V30.8182H33.5696ZM37.4197 18.4091C37.4197 19.2524 37.5367 19.9879 37.7706 20.6158C38.0045 21.2436 38.343 21.733 38.7862 22.0838C39.2294 22.4285 39.768 22.6009 40.402 22.6009C41.0421 22.6009 41.5838 22.4254 42.027 22.0746C42.4702 21.7176 42.8056 21.2251 43.0334 20.5973C43.2673 19.9633 43.3842 19.2339 43.3842 18.4091C43.3842 17.5904 43.2704 16.8703 43.0426 16.2486C42.8149 15.6269 42.4794 15.1406 42.0362 14.7898C41.593 14.4389 41.0483 14.2635 40.402 14.2635C39.7618 14.2635 39.2202 14.4328 38.777 14.7713C38.34 15.1098 38.0045 15.59 37.7706 16.2116C37.5367 16.8333 37.4197 17.5658 37.4197 18.4091ZM49.2427 25.5V11.3182H53.0559V13.7926H53.2037C53.4622 12.9124 53.8961 12.2476 54.5055 11.7983C55.1149 11.3428 55.8166 11.1151 56.6106 11.1151C56.8076 11.1151 57.02 11.1274 57.2477 11.152C57.4754 11.1766 57.6755 11.2105 57.8478 11.2536V14.7436C57.6632 14.6882 57.4077 14.639 57.0815 14.5959C56.7553 14.5528 56.4567 14.5312 56.1859 14.5312C55.6073 14.5312 55.0903 14.6574 54.6348 14.9098C54.1854 15.156 53.8284 15.5007 53.5638 15.9439C53.3052 16.3871 53.176 16.898 53.176 17.4766V25.5H49.2427ZM64.9043 25.777C63.4455 25.777 62.1898 25.4815 61.1373 24.8906C60.0909 24.2936 59.2845 23.4503 58.7182 22.3608C58.1519 21.2652 57.8688 19.9695 57.8688 18.4737C57.8688 17.0149 58.1519 15.7346 58.7182 14.6328C59.2845 13.531 60.0816 12.6723 61.1096 12.0568C62.1437 11.4413 63.3563 11.1335 64.7474 11.1335C65.683 11.1335 66.5539 11.2843 67.3603 11.5859C68.1728 11.8814 68.8806 12.3277 69.4839 12.9247C70.0932 13.5218 70.5672 14.2727 70.9057 15.1776C71.2443 16.0762 71.4135 17.1288 71.4135 18.3352V19.4155H59.4384V16.978H67.7111C67.7111 16.4117 67.588 15.91 67.3418 15.473C67.0956 15.036 66.754 14.6944 66.317 14.4482C65.8861 14.1958 65.3844 14.0696 64.812 14.0696C64.2149 14.0696 63.6856 14.2081 63.2239 14.4851C62.7684 14.7559 62.4114 15.1222 62.1529 15.5838C61.8944 16.0393 61.762 16.5471 61.7559 17.1072V19.4247C61.7559 20.1264 61.8851 20.7327 62.1437 21.2436C62.4083 21.7545 62.7807 22.1484 63.2608 22.4254C63.741 22.7024 64.3103 22.8409 64.9689 22.8409C65.406 22.8409 65.8061 22.7794 66.1692 22.6562C66.5324 22.5331 66.8432 22.3485 67.1018 22.1023C67.3603 21.8561 67.5572 21.5545 67.6927 21.1974L71.3304 21.4375C71.1458 22.3116 70.7672 23.0748 70.1948 23.7273C69.6285 24.3736 68.896 24.8783 67.9974 25.2415C67.1048 25.5985 66.0738 25.777 64.9043 25.777ZM77.1335 6.59091V25.5H73.2003V6.59091H77.1335ZM79.5043 25.5V11.3182H83.4375V25.5H79.5043ZM81.4801 9.49006C80.8954 9.49006 80.3937 9.29616 79.9752 8.90838C79.5628 8.51444 79.3566 8.04356 79.3566 7.49574C79.3566 6.95407 79.5628 6.48935 79.9752 6.10156C80.3937 5.70762 80.8954 5.51065 81.4801 5.51065C82.0649 5.51065 82.5635 5.70762 82.9759 6.10156C83.3944 6.48935 83.6037 6.95407 83.6037 7.49574C83.6037 8.04356 83.3944 8.51444 82.9759 8.90838C82.5635 9.29616 82.0649 9.49006 81.4801 9.49006ZM89.7415 17.3011V25.5H85.8083V11.3182H89.5569V13.8203H89.723C90.037 12.9955 90.5632 12.343 91.3019 11.8629C92.0405 11.3767 92.9361 11.1335 93.9887 11.1335C94.9735 11.1335 95.8322 11.349 96.5647 11.7798C97.2971 12.2107 97.8665 12.8262 98.2728 13.6264C98.679 14.4205 98.8821 15.3684 98.8821 16.4702V25.5H94.9489V17.1719C94.9551 16.304 94.7335 15.6269 94.2841 15.1406C93.8348 14.6482 93.2162 14.402 92.4283 14.402C91.8989 14.402 91.4311 14.5159 91.0249 14.7436C90.6248 14.9714 90.3109 15.3037 90.0831 15.7408C89.8615 16.1716 89.7477 16.6918 89.7415 17.3011ZM107.665 25.777C106.206 25.777 104.951 25.4815 103.898 24.8906C102.852 24.2936 102.045 23.4503 101.479 22.3608C100.913 21.2652 100.63 19.9695 100.63 18.4737C100.63 17.0149 100.913 15.7346 101.479 14.6328C102.045 13.531 102.842 12.6723 103.87 12.0568C104.905 11.4413 106.117 11.1335 107.508 11.1335C108.444 11.1335 109.315 11.2843 110.121 11.5859C110.934 11.8814 111.641 12.3277 112.245 12.9247C112.854 13.5218 113.328 14.2727 113.667 15.1776C114.005 16.0762 114.174 17.1288 114.174 18.3352V19.4155H102.199V16.978H110.472C110.472 16.4117 110.349 15.91 110.103 15.473C109.856 15.036 109.515 14.6944 109.078 14.4482C108.647 14.1958 108.145 14.0696 107.573 14.0696C106.976 14.0696 106.446 14.2081 105.985 14.4851C105.529 14.7559 105.172 15.1222 104.914 15.5838C104.655 16.0393 104.523 16.5471 104.517 17.1072V19.4247C104.517 20.1264 104.646 20.7327 104.905 21.2436C105.169 21.7545 105.542 22.1484 106.022 22.4254C106.502 22.7024 107.071 22.8409 107.73 22.8409C108.167 22.8409 108.567 22.7794 108.93 22.6562C109.293 22.5331 109.604 22.3485 109.863 22.1023C110.121 21.8561 110.318 21.5545 110.454 21.1974L114.091 21.4375C113.907 22.3116 113.528 23.0748 112.956 23.7273C112.389 24.3736 111.657 24.8783 110.758 25.2415C109.866 25.5985 108.835 25.777 107.665 25.777Z" class="np124" fill="currentColor" />
+              <path d="M1 29.5V16.5C1 9.87258 6.37258 4.5 13 4.5C19.6274 4.5 25 9.87258 25 16.5C25 23.1274 19.6274 28.5 13 28.5H12" class="q1i2z" stroke="currentColor" stroke-width="2" />
+              <path d="M5 29.5V16.66C5 12.1534 8.58172 8.5 13 8.5C17.4183 8.5 21 12.1534 21 16.66C21 21.1666 17.4183 24.82 13 24.82H12" class="q1i2z" stroke="currentColor" stroke-width="2" />
+              <circle cx="13" cy="16.5214" r="5" class="np124" fill="currentColor" />
+            </svg>
+          </a>
+          <!-- End Logo -->
+
+        
+
+      <div class="zg7pd mqy3x uj5nx flex r49qf">
+        <!-- Account Button Icon -->
+        <a class="relative n0kov inline-flex lp3ls items-center jdzig nj29a c4t4j bnjlx focus:outline-hidden d298d" href="./Cart.html">
+          <svg class="y6rh0 x215h -ms-1" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m15 18-6-6 6-6" />
+          </svg>
+          <svg class="y6rh0 x215h" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z" />
+            <path d="M3 6h18" />
+            <path d="M16 10a4 4 0 0 1-8 0" />
+          </svg>
+          <span class="rfrdb">Back to Cart</span>
+        </a>
+        <!-- End Account Button Icon -->
+      </div>
+
+      <div class="lpw3f fg3vz csy0u rogrs">
+        <!-- Breadcrumbs -->
+        <ol class="flex yq846 items-center [counter-reset:list-item-1] offh6">
+          <li class="wjqcz yxjoc inline-flex items-center f1ztf text-[13px] before:content-[counter(list-item)'.'] before:[counter-increment:list-item] before:me-1">
+            Checkout
+            <svg class="y6rh0 bz4xx xqxx6 duiq5 ctjdd n7lpx" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="m9 18 6-6-6-6" />
+            </svg>
+          </li>
+
+          <li class="wjqcz yxjoc inline-flex items-center ctc9x c4t4j text-[13px] before:content-[counter(list-item)'.'] before:[counter-increment:list-item] before:me-1">
+            Review and Pay
+            <svg class="y6rh0 bz4xx xqxx6 duiq5 ctjdd n7lpx" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="m9 18 6-6-6-6" />
+            </svg>
+          </li>
+
+          <li class="wjqcz yxjoc inline-flex items-center truncate f1ztf text-[13px] before:content-[counter(list-item)'.'] before:[counter-increment:list-item] before:me-1">
+            <span class="truncate">Order confirmation</span>
+          </li>
+        </ol>
+        <!-- End Breadcrumbs -->
+      </div>
+    </div>
+  </header>
+  <!-- ========== END HEADER ========== -->
+
+  <!-- ========== MAIN CONTENT ========== -->
+  <main id="content" class="flex-1 flex flex-col">
+    <div class="flex-1 w-full o3m6v cti9j gwqpr c4mnv mx-auto">
+      <!-- Grid -->
+      <div class="flex-1 tex4h da7vf uuht4">
+        <div class="xt03d w9r31 lp0tv w0oxt vpcbk v4aka md:w-full u03v3">
+
+          <div class="space-y-5 lulbn wfvkq e1azp mjfwa tqnt8 vq5l5 s1poj">
+            <!-- Contact Details -->
+            <div class="en2kw mak94 mjfwa edpyz">
+              <!-- Header -->
+              <div class="wgwtz flex flex-wrap g86xu items-center my9gz">
+                <h5 class="at2zb c4t4j">
+                  Contact details
+                </h5>
+
+                <a class="at2zb yymkp c4t4j carpj a8v2i bz0ic focus:outline-hidden ti70c" href="./Checkout.html">
+                  Edit
+                </a>
+              </div>
+              <!-- End Header -->
+
+              <!-- Media -->
+              <div class="flex qsqz9">
+                <svg class="y6rh0 optiv f1ztf" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
+                  <circle cx="12" cy="7" r="4" />
+                </svg>
+
+                <div class="t6ue9">
+                  <!-- List -->
+                  <ul>
+                    <li class="yymkp f1ztf" data-review-email="true">jamescollins@site.so</li>
+                  </ul>
+                  <!-- End List -->
+                </div>
+              </div>
+              <!-- End Media -->
+            </div>
+            <!-- End Contact Details -->
+
+            <!-- Shipping Address -->
+            <div class="en2kw mak94 mjfwa edpyz">
+              <!-- Header -->
+              <div class="wgwtz flex flex-wrap g86xu items-center my9gz">
+                <h5 class="at2zb c4t4j">
+                  Shipping address
+                </h5>
+
+                <a class="at2zb yymkp c4t4j carpj a8v2i bz0ic focus:outline-hidden ti70c" href="./Checkout.html">
+                  Edit
+                </a>
+              </div>
+              <!-- End Header -->
+
+              <!-- Media -->
+              <div class="flex qsqz9">
+                <svg class="y6rh0 optiv f1ztf" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M15 22a1 1 0 0 1-1-1v-4a1 1 0 0 1 .445-.832l3-2a1 1 0 0 1 1.11 0l3 2A1 1 0 0 1 22 17v4a1 1 0 0 1-1 1z" />
+                  <path d="M18 10a8 8 0 0 0-16 0c0 4.993 5.539 10.193 7.399 11.799a1 1 0 0 0 .601.2" />
+                  <path d="M18 22v-3" />
+                  <circle cx="10" cy="10" r="3" />
+                </svg>
+
+                <div class="t6ue9">
+                  <!-- List -->
+                  <ul>
+                    <li class="yymkp f1ztf" data-review-full-name="true"></li>
+                    <li class="yymkp f1ztf" data-review-address-line="true"></li>
+                  </ul>
+                  <!-- End List -->
+                </div>
+              </div>
+              <!-- End Media -->
+            </div>
+            <!-- End Shipping Address -->
+
+            <!-- Shipping Method -->
+            <div class="en2kw mak94 mjfwa edpyz">
+              <!-- Header -->
+              <div class="wgwtz flex flex-wrap g86xu items-center my9gz">
+                <h5 class="at2zb c4t4j">
+                  Shipping method
+                </h5>
+
+                <a class="at2zb yymkp c4t4j carpj a8v2i bz0ic focus:outline-hidden ti70c" href="./Checkout.html">
+                  Edit
+                </a>
+              </div>
+              <!-- End Header -->
+
+              <!-- Media -->
+              <div class="flex qsqz9">
+                <svg class="y6rh0 optiv f1ztf" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M14 18V6a2 2 0 0 0-2-2H2a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2" />
+                  <path d="M15 18H9" />
+                  <path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.624l-3.48-4.35A1 1 0 0 0 17.52 8H14" />
+                  <circle cx="17" cy="18" r="2" />
+                  <circle cx="7" cy="18" r="2" />
+                </svg>
+
+                <div class="t6ue9">
+                  <!-- List -->
+                  <ul>
+                    <li class="yymkp f1ztf" data-review-shipping-method="true">Free, 2-4 working days</li>
+                  </ul>
+                  <!-- End List -->
+                </div>
+              </div>
+              <!-- End Media -->
+            </div>
+            <!-- End Shipping Method -->
+          </div>
+
+          <!-- Card Details -->
+          <div class="lulbn wfvkq e1azp mjfwa tqnt8 vq5l5 s1poj">
+            <h2 class="a3olr at2zb c4t4j">
+              Payment methods
+            </h2>
+
+            <div class="v60qq">
+              <!-- Checkbox Grid -->
+              <div class="tex4h nt9ka osjzw">
+                <!-- Checkbox -->
+                <label for="hs-pro-shpfpm1" class="abuy9 aimp4 relative flex lp3ls items-center h7z6o yymkp s6i1l mak94 x3ljb k0ser bax7d vo967 wtype has-disabled:opacity-50 has-disabled:pointer-events-none cursor-pointer edpyz">
+                  <input type="radio" id="hs-pro-shpfpm1" class="hidden" value="Card" name="hs-pro-shpfpm" checked>
+                  <span class="block c4t4j">
+                    <svg class="y6rh0 x215h" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <rect width="20" height="14" x="2" y="5" rx="2" />
+                      <line x1="2" x2="22" y1="10" y2="10" />
+                    </svg>
+                  </span>
+                  <span class="block at2zb m859b rbu8c c4t4j text-center">
+                    Par Chario
+                  </span>
+                </label>
+                <!-- End Checkbox -->
+
+                <!-- Checkbox -->
+                <label for="hs-pro-shpfpm2" class="abuy9 aimp4 relative flex lp3ls items-center h7z6o yymkp s6i1l mak94 x3ljb k0ser bax7d vo967 wtype has-disabled:opacity-50 has-disabled:pointer-events-none cursor-pointer edpyz">
+                  <input type="radio" id="hs-pro-shpfpm2" class="hidden" value="PayPal" name="hs-pro-shpfpm">
+                  <span class="block c4t4j">
+                    <svg class="y6rh0 x215h" width="33" height="32" viewBox="0 0 33 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M10.6424 30.9152L11.197 27.3925L9.96162 27.3639H4.06256L8.16211 1.37005C8.17431 1.29063 8.21465 1.21823 8.27577 1.16607C8.33689 1.1139 8.41472 1.08543 8.49508 1.08586H18.4417C21.7438 1.08586 24.0227 1.773 25.2124 3.12927C25.7702 3.76551 26.1255 4.43039 26.2972 5.16208C26.4775 5.92981 26.4807 6.84707 26.3047 7.9658L26.2919 8.04745V8.76429L26.8497 9.08029C27.2755 9.29602 27.6583 9.58784 27.979 9.94134C28.4562 10.4853 28.7648 11.1767 28.8952 11.9964C29.0299 12.8394 28.9854 13.8426 28.7648 14.9783C28.5103 16.2847 28.0989 17.4225 27.5432 18.3536C27.053 19.1876 26.3938 19.91 25.608 20.4744C24.8699 20.9982 23.993 21.3959 23.0015 21.6504C22.0408 21.9007 20.9454 22.0268 19.7439 22.0268H18.9698C18.4163 22.0268 17.8786 22.2262 17.4566 22.5836C17.0352 22.9447 16.7556 23.4438 16.6677 23.9918L16.6093 24.3088L15.6295 30.5175L15.585 30.7455C15.5733 30.8176 15.5532 30.8537 15.5235 30.8781C15.4947 30.9016 15.4588 30.9147 15.4217 30.9152H10.6424Z" fill="#253B80"></path>
+                      <path d="M27.3778 8.13017C27.3481 8.31998 27.3142 8.51403 27.276 8.71339C25.9643 15.4481 21.4766 17.7746 15.7451 17.7746H12.8268C12.1259 17.7746 11.5352 18.2836 11.426 18.975L9.93191 28.4508L9.5088 31.1368C9.49195 31.2434 9.49838 31.3523 9.52767 31.4561C9.55695 31.5599 9.60838 31.6562 9.67842 31.7382C9.74846 31.8202 9.83545 31.8861 9.9334 31.9313C10.0313 31.9765 10.1379 31.9999 10.2458 32H15.4217C16.0346 32 16.5552 31.5546 16.6517 30.9502L16.7026 30.6872L17.6771 24.5029L17.7397 24.1636C17.8351 23.557 18.3569 23.1116 18.9698 23.1116H19.7439C24.7586 23.1116 28.6842 21.0757 29.8316 15.184C30.3109 12.7228 30.0627 10.6677 28.7945 9.22239C28.3925 8.77528 27.9124 8.40516 27.3778 8.13017Z" fill="#179BD7"></path>
+                      <path d="M26.0056 7.58299C25.5868 7.46183 25.1607 7.36727 24.7299 7.29986C23.8788 7.16905 23.0185 7.10629 22.1574 7.11217H14.3612C14.0645 7.11194 13.7776 7.21787 13.5521 7.41079C13.3267 7.60372 13.1778 7.87092 13.1322 8.1641L11.4737 18.6685L11.426 18.975C11.4777 18.6406 11.6473 18.3357 11.9043 18.1155C12.1612 17.8954 12.4885 17.7744 12.8268 17.7746H15.7451C21.4766 17.7746 25.9642 15.447 27.276 8.71339C27.3152 8.51403 27.3481 8.31998 27.3778 8.13017C27.0316 7.94865 26.6709 7.79648 26.2993 7.67525C26.2019 7.64293 26.104 7.61217 26.0056 7.58299Z" fill="#222D65"></path>
+                      <path d="M13.1321 8.1641C13.1773 7.87084 13.3262 7.60351 13.5517 7.41068C13.7772 7.21785 14.0644 7.11231 14.3611 7.11323H22.1573C23.0809 7.11323 23.943 7.17368 24.7298 7.30092C25.2623 7.3846 25.7874 7.50976 26.3003 7.67525C26.6874 7.80356 27.0468 7.9552 27.3787 8.13017C27.769 5.64138 27.3756 3.94685 26.0299 2.41243C24.5464 0.7232 21.8688 0 18.4427 0H8.49601C7.79614 0 7.19913 0.508997 7.09097 1.20144L2.94795 27.4625C2.92865 27.5844 2.93599 27.7091 2.96947 27.8279C3.00294 27.9467 3.06176 28.0569 3.14187 28.1508C3.22198 28.2447 3.32149 28.3202 3.43354 28.3719C3.54559 28.4237 3.66753 28.4506 3.79097 28.4508H9.93181L11.4736 18.6685L13.1321 8.1641Z" fill="#253B80"></path>
+                    </svg>
+                  </span>
+                  <span class="block at2zb m859b rbu8c c4t4j text-center">
+                    À la livraison
+                  </span>
+                </label>
+                <!-- End Checkbox -->
+
+                <!-- Checkbox -->
+                <label for="hs-pro-shpfpm3" class="abuy9 aimp4 relative flex lp3ls items-center h7z6o yymkp s6i1l mak94 x3ljb k0ser bax7d vo967 wtype cursor-pointer edpyz">
+                  <input type="radio" id="hs-pro-shpfpm3" class="hidden" value="Klarna" name="hs-pro-shpfpm">
+                  <span class="block c4t4j">
+                    <svg class="y6rh0 x215h" width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M4.592 2v20H0V2h4.592zm11.46 0c0 4.194-1.583 8.105-4.415 11.068l-.278.283L17.702 22h-5.668l-6.893-9.4 1.779-1.332c2.858-2.14 4.535-5.378 4.637-8.924L11.562 2h4.49zM21.5 17a2.5 2.5 0 110 5 2.5 2.5 0 010-5z" fill="currentColor" />
+                    </svg>
+                  </span>
+                  <span class="block at2zb m859b rbu8c c4t4j text-center">
+                    À la boutique
+                  </span>
+                </label>
+                <!-- End Checkbox -->
+              </div>
+              <!-- End Checkbox Grid -->
+            </div>
+
+            <div class="space-y-3">
+              <label class="block at2zb c4t4j">
+                Card details
+              </label>
+
+              <div class="dvh79 cti9j block w-full s6i1l x3ljb edpyz rbu8c c4t4j qnoha">
+                Chario est utilise comme passerelle de paiement afin d'offrir une experience de paiement simple, transparente et securisee. Le montant confirme lors du paiement sera considere comme le montant final de la transaction. Grace au paiement par Chario, les utilisateurs peuvent egalement generer leur facture, acceder au suivi de commande et beneficier d'un systeme concu pour faciliter la gestion des paiements entre les clients et les commercants.
+              </div>
+
+              <div id="chariow-widget" data-product-id="prd_wzkxhq" data-store-domain="uzjmzilc.mychariow.shop" data-style="tap" data-border-style="rounded" data-cta-width="xs" data-background-color="#FFFFFF" data-cta-animation="shine" data-locale="fr" data-primary-color="#ffcc00"></div>
+              <script>
+                (function() {
+                  var script = document.createElement('script');
+                  script.src = 'https://js.chariowcdn.com/v1/widget.min.js';
+                  script.async = true;
+                  document.head.appendChild(script);
+
+                  var link = document.createElement('link');
+                  link.rel = 'stylesheet';
+                  link.href = 'https://js.chariowcdn.com/v1/widget.min.css';
+                  document.head.appendChild(link);
+                })();
+              </script>
+            </div>
+          </div>
+          <!-- End Card Details -->
+
+          <!-- Billing Address -->
+          <div>
+            <div class="space-y-2">
+              <h5 class="at2zb c4t4j">
+                Billing address
+              </h5>
+
+              <!-- Checkbox -->
+              <div class="flex items-center my9gz">
+                <input type="checkbox" class="y6rh0 x215h robkw fsj2t ftf66 cirj5 s7mjk jw8en qgcqn checked:bg-primary-checked checked:border-primary-checked disabled:opacity-50 disabled:pointer-events-none" id="hs-pro-shchfbasas" checked>
+                <label for="hs-pro-shchfbasas" class="yymkp f1ztf">
+                  Use my shipping address
+                </label>
+              </div>
+              <!-- End Checkbox -->
+
+              <!-- List -->
+              <ul>
+                <li class="yymkp f1ztf"></li>
+                <li class="yymkp f1ztf"></li>
+              </ul>
+              <!-- End List -->
+            </div>
+          </div>
+          <!-- End Billing Address -->
+
+        </div>
+        <!-- End Col -->
+
+        <!-- Order Summary -->
+        <div class="before:hidden md:before:block before:absolute before:inset-y-0 before:start-1/2 before:-z-1 before:w-full before:bg-background-1">
+          <div class="szi1h lp0tv ylbo0 r4caq apc4n svuug f5ca6 p1mfc">
+            <div class="w0u0z rcllz cg7gk md:w-full u03v3 md:ms-auto">
+              <!-- Header -->
+              <div class="a3olr flex flex-wrap g86xu items-center my9gz">
+                <h5 class="at2zb c4t4j">
+                  Order summary
+                </h5>
+
+                <a class="at2zb yymkp c4t4j carpj a8v2i bz0ic focus:outline-hidden ti70c" href="./Cart.html">
+                  Edit cart
+                </a>
+              </div>
+              <!-- End Header -->
+
+              <!-- Order Summary Card -->
+              <div class="flex flex-col">
+                <div class="space-y-5">
+                  <!-- List -->
+                  <div class="space-y-2">
+                    <!-- Item -->
+                    <div class="tex4h hfud4 osjzw">
+                      <div>
+                        <span class="text-[13px] c4t4j">Subtotal</span>
+                      </div>
+
+                      <div class="qk13w">
+                        <span class="ctc9x text-[13px] c4t4j" data-order-summary-value="subtotal">$229</span>
+                      </div>
+                    </div>
+                    <!-- End Item -->
+
+                    <!-- Item -->
+                    <div>
+                      <div class="tex4h hfud4 osjzw">
+                        <div>
+                          <span class="text-[13px] c4t4j">Shipping</span>
+                        </div>
+
+                        <div class="qk13w">
+                          <span class="ctc9x text-[13px] c4t4j" data-order-summary-value="shipping">$0</span>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- End Item -->
+
+                    <!-- Item -->
+                    <div class="tex4h hfud4 osjzw">
+                      <div>
+                        <span class="text-[13px] c4t4j">Estimated Tax</span>
+                      </div>
+
+                      <div class="flex r49qf">
+                        <span class="ctc9x text-[13px] c4t4j" data-order-summary-value="estimated-tax">$0</span>
+                      </div>
+                    </div>
+                    <!-- End Item -->
+
+                    <!-- Item -->
+                    <div class="tex4h hfud4 osjzw">
+                      <div>
+                        <span class="text-[13px] c4t4j">Promo code</span>
+                      </div>
+
+                      <div class="flex r49qf">
+
+                        <!-- Promo Code Button Icon -->
+                        <div class="hs-dropdown [--auto-close:inside] [--placement:bottom-right] inline-flex">
+                          <button id="hs-pro-shospcd" type="button" class="inline-flex items-center jdzig text-[13px] f1ztf carpj a8v2i oxpaq focus:outline-hidden rjy76 disabled:opacity-50 disabled:pointer-events-none" aria-haspopup="menu" aria-expanded="false" aria-label="Dropdown">
+                            Enter code
+                          </button>
+                          <!-- End Promo Code Button Icon -->
+
+                          <!-- Promo Code Dropdown -->
+                          <div class="hs-dropdown-menu transition-[opacity,margin] duration-[0.1ms] md:duration-[150ms] hs-dropdown-open:opacity-100 opacity-0 bfnb1 hidden nnhrf khfq6 mak94 apc4n vbvcb ictpa u2pfs before:absolute before:-top-4 before:start-0 before:w-full before:h-5" role="menu" aria-orientation="vertical" aria-labelledby="hs-pro-shospcd">
+                            <div class="ltybu">
+                              <!-- Input Group -->
+                              <div>
+                                <label for="hs-pro-shchsetcpc" class="rfrdb">
+                                  Promo code
+                                </label>
+
+                                <div class="w6a1b flex flex-row items-center robkw mak94 x3ljb edpyz">
+                                  <div class="relative w-full">
+                                    <input id="hs-pro-shchsetcpc" type="text" class="k85d4 utq7k aimp4 block w-full robkw ijai8 y9dku ox2o6 c4t4j gzwp4 u13cj n6389 disabled:opacity-50 disabled:pointer-events-none" placeholder="Promo code">
+                                  </div>
+                                  <button type="button" class="k85d4 utq7k aimp4 offh6 ox2o6 at2zb s7mjk mak94 ijai8 y9dku u95cd focus:outline-hidden wkvdj disabled:opacity-50 disabled:pointer-events-none dark:text-primary-500 dark:hover:bg-primary-500/20 dark:focus:bg-primary-500/20">
+                                    Apply
+                                  </button>
+                                </div>
+                              </div>
+                              <!-- End Input Group -->
+                            </div>
+                          </div>
+                        </div>
+                        <!-- End Promo Code Dropdown -->
+                        <span class="ctc9x text-[13px] c4t4j ms-2" data-order-summary-value="promo-discount">$0</span>
+                      </div>
+                    </div>
+                    <!-- End Item -->
+
+                    <!-- Item -->
+                    <div class="tex4h hfud4 osjzw">
+                      <div>
+                        <span class="text-[13px] f1ztf">Sale</span>
+                      </div>
+
+                      <div class="qk13w">
+                        <span class="ctc9x text-[13px] c4t4j" data-order-summary-value="sale">$0</span>
+                      </div>
+                    </div>
+                    <!-- End Item -->
+
+                    <!-- Item -->
+                    <div class="tex4h hfud4 osjzw">
+                      <div>
+                        <span class="at2zb yymkp c4t4j">Total</span>
+                      </div>
+
+                      <div class="qk13w">
+                        <span class="m859b c4t4j">USD</span>
+                        <span class="ctc9x c4t4j" data-order-summary-value="total">$229</span>
+                      </div>
+                    </div>
+                    <!-- End Item -->
+                  </div>
+                  <!-- End List -->
+                </div>
+              </div>
+              <!-- End Order Summary Card -->
+
+              <div class="i2fgn xyz4m r4caq apc4n svuug hl34b o1znl aqdwg">
+                <!-- Cart Items List -->
+                <div class="space-y-5" data-checkout-cart-items="true">
+                  <!-- Item -->
+                  <div class=" flex haw2c">
+                    <div class="relative">
+                      <img class="y6rh0 cr96u aruvj fy2yn edpyz" src="/images/photo-1699595749116-33a4a869503c.jpg" alt="Product Image">
+                    </div>
+
+                    <div class="t6ue9 flex flex-col">
+                      <h4 class="yymkp c4t4j">
+                        Nike Air Force 1
+                      </h4>
+
+                      <ul class="j9itz space-y-1">
+                        <li class="m859b f1ztf">
+                          Color: White
+                        </li>
+                        <li class="m859b f1ztf">
+                          Size: M
+                        </li>
+                      </ul>
+
+                      <p class="j9itz m859b f1ztf">
+                        <span>Qty:</span>
+                        <span>1</span>
+                      </p>
+
+                      <span class="j9itz yymkp c4t4j">
+                        $150
+                      </span>
+                    </div>
+                  </div>
+                  <!-- End Item -->
+
+                  <!-- Item -->
+                  <div class=" flex haw2c">
+                    <div class="relative">
+                      <img class="y6rh0 cr96u aruvj fy2yn edpyz" src="/images/photo-1708443683334-1e41c52f33ac.jpg" alt="Product Image">
+                    </div>
+
+                    <div class="t6ue9 flex flex-col">
+                      <h4 class="yymkp c4t4j">
+                        Camo Blend Jacket
+                      </h4>
+
+                      <ul class="j9itz space-y-1">
+                        <li class="m859b f1ztf">
+                          Color: Camo
+                        </li>
+                        <li class="m859b f1ztf">
+                          Size: M
+                        </li>
+                      </ul>
+
+                      <p class="j9itz m859b f1ztf">
+                        <span>Qty:</span>
+                        <span>1</span>
+                      </p>
+                      <span class="j9itz">
+                        <span class="yymkp f1ztf">
+                          <s>$60</s>
+                        </span>
+                        <span class="yymkp pnjtm">
+                          $40
+                        </span>
+                      </span>
+                    </div>
+                  </div>
+                  <!-- End Item -->
+
+                  <!-- Item -->
+                  <div class=" flex haw2c">
+                    <div class="relative">
+                      <img class="y6rh0 cr96u aruvj fy2yn edpyz" src="/images/photo-1603218183500-7e1d62c3c679.jpg" alt="Product Image">
+                    </div>
+
+                    <div class="t6ue9 flex flex-col">
+                      <h4 class="yymkp c4t4j">
+                        Mahabis Classic
+                      </h4>
+
+                      <ul class="j9itz space-y-1">
+                        <li class="m859b f1ztf">
+                          Color: White
+                        </li>
+                        <li class="m859b f1ztf">
+                          Size: M
+                        </li>
+                      </ul>
+
+                      <p class="j9itz m859b f1ztf">
+                        <span>Qty:</span>
+                        <span>1</span>
+                      </p>
+
+                      <span class="j9itz yymkp c4t4j">
+                        $39
+                      </span>
+                    </div>
+                  </div>
+                  <!-- End Item -->
+                </div>
+                <!-- End Cart Items List -->
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- End Order Summary -->
+      </div>
+      <!-- End Grid -->
+    </div>
+
+    <!-- Footer -->
+    <div class="qyrcd o6jzh dvh79 gw9cg r4caq mjfwa">
+      <div class="w-full o3m6v cti9j gwqpr c4mnv mx-auto">
+        <!-- Grid -->
+        <div class="zml5i w74tc flex g86xu items-center oskez">
+          <div class="zg7pd h6lcm">
+            <a class="abuy9 aimp4 k3s9k inline-flex lp3ls items-center i220p at2zb yymkp c4t4j carpj a8v2i bz0ic focus:outline-hidden ti70c" href="checkout.html">
+              <svg class="y6rh0 xqxx6" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="m15 18-6-6 6-6" />
+              </svg>
+              Back
+            </a>
+          </div>
+          <!-- End Col -->
+
+          <div class="t6ue9 ed9df r9xyu">
+            <!-- Progress Grid -->
+            <div class="tex4h nt9ka items-center clqrk e378j">
+              <div>
+                <label class="rfrdb">
+                  Checkout
+                </label>
+
+                <!-- Progress -->
+                <div class="flex w-full khtwp ahypv ftf66 overflow-hidden" role="progressbar" aria-valuenow="100" aria-valuemin="100" aria-valuemax="100">
+                  <div class="flex flex-col lp3ls ftf66 overflow-hidden pm6ks m859b cncwr rm4xc offh6 a38gk uglyd" style="width: 100%"></div>
+                </div>
+                <!-- End Progress -->
+              </div>
+              <!-- End Col -->
+
+              <div>
+                <label class="rfrdb">
+                  Review and Pay
+                </label>
+
+                <!-- Progress -->
+                <div class="flex w-full khtwp ahypv ftf66 overflow-hidden" role="progressbar" aria-valuenow="100" aria-valuemin="100" aria-valuemax="100">
+                  <div class="flex flex-col lp3ls ftf66 overflow-hidden pm6ks m859b cncwr rm4xc offh6 a38gk uglyd" style="width: 100%"></div>
+                </div>
+                <!-- End Progress -->
+              </div>
+              <!-- End Col -->
+
+              <div>
+                <label class="rfrdb">
+                  Order confirmation
+                </label>
+
+                <!-- Progress -->
+                <div class="flex w-full khtwp ahypv ftf66 overflow-hidden" role="progressbar" aria-valuenow="0" aria-valuemin="100" aria-valuemax="100">
+                  <div class="flex flex-col lp3ls ftf66 overflow-hidden pm6ks m859b cncwr rm4xc offh6 a38gk uglyd" style="width: 0%"></div>
+                </div>
+                <!-- End Progress -->
+              </div>
+            </div>
+            <!-- End Progress Grid -->
+          </div>
+          <!-- End Col -->
+
+          <div class="lpw3f flex r49qf">
+            <a class="abuy9 aimp4 inline-flex lp3ls items-center jdzig yymkp at2zb edpyz z0w76 mak94 dzdw5 cncwr wqd6j disabled:opacity-50 disabled:pointer-events-none focus:outline-hidden cw5w5" href="./order-confirmation.html">
+              Continue
+              <svg class="y6rh0 xqxx6" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="m9 18 6-6-6-6" />
+              </svg>
+            </a>
+          </div>
+          <!-- End Col -->
+        </div>
+        <!-- End Grid -->
+      </div>
+      <!-- End Col -->
+    </div>
+    <!-- End Footer -->
+  </main>
+  <!-- ========== END MAIN CONTENT ========== -->
+
+  <!-- JS PLUGINS -->
+  <script src="/js/floating-ui.core.umd.min.js"></script>
+  <script src="/js/floating-ui.dom.umd.min.js"></script>
+  <!-- Required plugins -->
+  <script src="/js/index.js"></script>
+  <!-- Clipboard -->
+  <script src="/js/clipboard.min.js"></script>
+  <script src="/js/hs-copy-clipboard-helper.js"></script>
+
+  <script src="/js/hs-unavailable-color-themes.js"></script>
+  <script>
+    (function () {
+      const unavailableColorThemes = window.HS_UNAVAILABLE_COLOR_THEMES;
+
+      const pathname = window.location.pathname;
+      let reducedThemes = [];
+      let defaultTheme = "default";
+      const themesDefaults = {
+        "default": "blue",
+        "harvest": "amber",
+        "retro": "fuchsia",
+        "ocean": "cyan",
+        "autumn": "yellow",
+        "moon": "gray",
+        "bubblegum": "pink",
+        "cashmere": "mauve",
+        "olive": "avocado",
+      };
+      let defaultBrand = "blue";
+      let defaultFont = "sans";
+
+      let currentTheme = defaultTheme;
+      let currentBrand = defaultBrand;
+      let currentFont = defaultFont;
+
+      for (const [key_i, value_i] of Object.entries(unavailableColorThemes)) {
+        const { theme, excludes } = value_i;
+
+        if (pathname.includes(key_i)) {
+          defaultTheme = theme;
+
+          if (Array.isArray(excludes)) {
+            reducedThemes = excludes;
+            break;
+          } else {
+            const result = [];
+
+            if (excludes['*']) result.push(...excludes['*']);
+
+            for (const [key_j, value_j] of Object.entries(excludes)) {
+              if (key_j !== '*' && pathname.includes(key_j)) result.push(...value_j);
+            }
+
+            reducedThemes = result;
+            break;
+          }
+        }
+      }
+
+      document.addEventListener('DOMContentLoaded', () => {
+        (function () {
+          const globalColorThemeSwitchers = document.querySelectorAll('[data-hs-global-color-theme] input[type="radio"]');
+
+          if (!globalColorThemeSwitchers.length) return;
+
+          const colorTheme = localStorage.getItem('hs-clipboard-theme');
+          if (!colorTheme) localStorage.setItem("hs-clipboard-theme", defaultTheme);
+          let predefinedColorTheme = null;
+
+          globalColorThemeSwitchers.forEach((el) => {
+            if (el.value === colorTheme && !reducedThemes.includes(el.value)) predefinedColorTheme = el;
+
+            if (reducedThemes.includes(el.value)) {
+              el.disabled = true;
+              el.closest('.group').classList.add('my57n', 'rlfos');
+            }
+
+            el.addEventListener('change', (evt) => {
+              const html = document.querySelector('html');
+              const value = evt.target.value;
+
+              localStorage.setItem('hs-clipboard-theme', value);
+              html.setAttribute('data-theme', `theme-${value}`);
+
+              window.dispatchEvent(new CustomEvent('on-hs-color-theme-change', {
+                detail: {
+                  target: html,
+                  value: value,
+                },
+              }));
+
+              currentTheme = value;
+              currentBrand = themesDefaults[currentTheme];
+
+              generateVariables(currentTheme, currentBrand);
+
+
+              const themes = Array.from(document.querySelectorAll(`[data-hs-global-color-theme] input[value="${currentTheme}"]`));
+              const brands = Array.from(document.querySelectorAll(`[data-hs-global-brand] input[value="${currentBrand}"]`));
+
+              themes.filter((theme) => theme !== el).forEach((theme) => {
+                theme.checked = true;
+              });
+
+              brands.forEach((brand) => {
+                brand.checked = true;
+              });
+
+              brands[0].dispatchEvent(new Event("change", { bubbles: true }));
+            });
+          });
+
+          if (!predefinedColorTheme) {
+            predefinedColorTheme = Array.from(globalColorThemeSwitchers).find((el) => el.value === defaultTheme);
+            predefinedColorTheme.checked = true;
+          } else {
+            predefinedColorTheme.checked = true;
+          }
+
+          currentTheme = predefinedColorTheme.value;
+        })();
+
+        (function () {
+          const globalBrandSwitchers = document.querySelectorAll('[data-hs-global-brand] input[type="radio"]');
+
+          if (!globalBrandSwitchers.length) return;
+
+          let globalBrand = localStorage.getItem("hs-clipboard-brand") ?? themesDefaults[currentTheme];
+          localStorage.setItem("hs-clipboard-brand", globalBrand);
+          let predefinedBrand = null;
+
+          globalBrandSwitchers.forEach((el) => {
+            if (el.value === globalBrand) predefinedBrand = el;
+
+            el.addEventListener('change', (evt) => {
+              const html = document.querySelector('html');
+              const value = evt.target.value;
+
+              localStorage.setItem('hs-clipboard-brand', value);
+              html.setAttribute('data-brand', value);
+
+              window.dispatchEvent(new CustomEvent('on-hs-brand-change', {
+                detail: {
+                  target: html,
+                  value: value,
+                },
+              }));
+
+              currentBrand = value;
+
+              generateVariables(currentTheme, currentBrand);
+            });
+          });
+
+          if (!predefinedBrand) {
+            predefinedBrand = Array.from(globalBrandSwitchers).find((el) => {
+              console.log(el.value, globalBrand);
+
+              return el.value === globalBrand;
+            });
+            predefinedBrand.checked = true;
+          } else {
+            predefinedBrand.checked = true;
+          }
+
+          currentBrand = predefinedBrand.value;
+
+          generateVariables(currentTheme, currentBrand);
+        })();
+
+        (function () {
+          const globalFontSwitchers = document.querySelectorAll('[data-hs-global-font] input[type="radio"]');
+
+          if (!globalFontSwitchers.length) return;
+
+          let globalFont = localStorage.getItem("hs-clipboard-font") ?? defaultFont;
+          localStorage.setItem("hs-clipboard-font", globalFont);
+          let predefinedFont = null;
+
+          globalFontSwitchers.forEach((el) => {
+            if (el.value === globalFont) predefinedFont = el;
+
+            el.addEventListener('change', (evt) => {
+              const html = document.querySelector('html');
+              const value = evt.target.value;
+
+              localStorage.setItem('hs-clipboard-font', value);
+              html.setAttribute('data-font', value);
+
+              window.dispatchEvent(new CustomEvent('on-hs-font-change', {
+                detail: {
+                  target: html,
+                  value: value,
+                },
+              }));
+
+              currentFont = value;
+            });
+          });
+
+          if (!predefinedFont) {
+            predefinedFont = Array.from(globalFontSwitchers).find((el) => {
+              console.log(el.value, globalFont);
+              return el.value === globalFont;
+            });
+            predefinedFont.checked = true;
+          } else {
+            predefinedFont.checked = true;
+          }
+
+          currentFont = predefinedFont.value;
+        })();
+      });
+    })();
+  </script>
+
+  <!-- JS THIRD PARTY PLUGINS -->
+  <!-- Google Analytics. Global site b9v48 (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-B73TDMXKF5"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+  
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+  
+    gtag('js', new Date());
+    gtag('config', 'G-B73TDMXKF5');
+  </script>
+
+                <script>
+                    window.defaultVariables = {"baseUrl":"https:\/\/preline.co"};
+                </script> <script src="/js/app.js"></script><script src="/js/header-standardizer.js?v=3"></script></body>
+</html>

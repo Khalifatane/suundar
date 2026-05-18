@@ -1,0 +1,72 @@
+{
+  "steps": [
+    { "label": "Cart", "current": false },
+    { "label": "Shipping", "current": false },
+    { "label": "Review & Pay", "current": true },
+    { "label": "Confirmation", "current": false }
+  ],
+  "backLink": {
+    "label": "Back to shipping",
+    "href": "/checkout"
+  },
+  "sections": [
+    {
+      "title": "Shipping Address",
+      "type": "shippingAddress",
+      "editLink": "/checkout",
+      "address": {
+        "name": "",
+        "street": "",
+        "city": "",
+        "state": "",
+        "country": "",
+        "phone": ""
+      }
+    },
+    {
+      "title": "Shipping Method",
+      "type": "shippingMethod",
+      "editLink": "/checkout",
+      "method": {
+        "label": "Standard Shipping (3-5 business days)",
+        "price": "Free"
+      }
+    },
+    {
+      "title": "Contact Details",
+      "type": "contactDetails",
+      "editLink": "/checkout",
+      "email": ""
+    },
+    {
+      "title": "Payment",
+      "type": "payment",
+      "savedMethods": [
+        { "id": "card1", "type": "Visa", "last4": "4242", "expiry": "12/26", "selected": true }
+      ],
+      "otherMethods": [
+        { "id": "paypal", "label": "PayPal" },
+        { "id": "applepay", "label": "Apple Pay" }
+      ]
+    }
+  ],
+  "payButton": "Pay $229.00",
+  "orderSummary": {
+    "editCartLink": "/cart",
+    "promoCode": {
+      "placeholder": "Enter promo code",
+      "buttonText": "Apply"
+    },
+    "subtotal": 229,
+    "shipping": "Free",
+    "estimatedTax": "Calculated at checkout",
+    "saleDiscount": null,
+    "total": 229,
+    "currency": "USD",
+    "items": [
+      { "name": "Nike Air Force 1", "color": "White", "size": "M", "quantity": 1, "price": 149 },
+      { "name": "Camo Blend Jacket", "color": "Camo", "size": "M", "quantity": 1, "price": 40 },
+      { "name": "Mahabis Classic", "color": "White", "size": "M", "quantity": 1, "price": 40 }
+    ]
+  }
+}

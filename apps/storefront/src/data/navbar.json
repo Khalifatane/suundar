@@ -1,0 +1,82 @@
+{
+  "logo": {
+    "label": "Preline",
+    "href": "/",
+    "image": "/images/nimara-logo.svg"
+  },
+  "aboutUsMenu": [
+    {
+      "title": "About Us",
+      "links": [
+        { "label": "Our Stores", "href": "/" },
+        { "label": "Help", "href": "/" },
+        { "label": "Order Checkup", "href": "/order-checkup" }
+      ]
+    }
+  ],
+  "homeMenu": [
+    {
+      "title": "Home",
+      "links": [
+        { "label": "Home", "href": "/" },
+        { "label": "Products", "href": "/product-listing" }
+      ]
+    }
+  ],
+  "mainNav": [
+    {
+      "label": "About Us",
+      "href": "#",
+      "childrenKey": "aboutUsMenu"
+    },
+    {
+      "label": "Home",
+      "href": "#",
+      "childrenKey": "homeMenu"
+    },
+    {
+      "label": "Sales",
+      "href": "/"
+    }
+  ],
+  "rightNav": [
+    {
+      "label": "Search",
+      "icon": "Search",
+      "href": "#"
+    },
+    {
+      "label": "Favorites",
+      "icon": "Heart",
+      "href": "#",
+      "badge": 2
+    },
+    {
+      "label": "Cart",
+      "icon": "ShoppingCart",
+      "href": "#",
+      "badge": 3
+    }
+  ],
+  "favorites": [
+    {
+      "id": "1",
+      "name": "Everyday Solid Black T-Shirt",
+      "price": 40,
+      "originalPrice": 60,
+      "image": "/images/photo-1627225925683-1da7021732ea.jpg"
+    },
+    {
+      "id": "2",
+      "name": "Nike Air Force 1",
+      "price": 139,
+      "image": "/images/photo-1699595749116-33a4a869503c.jpg"
+    }
+  ],
+  "cart": {
+    "itemCount": 0,
+    "subtotal": 0,
+    "freeShippingThreshold": 50,
+    "items": []
+  }
+}

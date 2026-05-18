@@ -1,0 +1,32 @@
+{
+  "tabs": [
+    { "id": "guest", "label": "Guest Checkout", "active": true },
+    { "id": "login", "label": "Returning Customer", "active": false }
+  ],
+  "guestSection": {
+    "description": "You can check out as a guest without creating an account. Your order details will be sent to your email.",
+    "actionButton": {
+      "label": "Continue as guest",
+      "href": "/checkout"
+    }
+  },
+  "loginForm": {
+    "title": "Log in to your account",
+    "fields": [
+      { "type": "email", "name": "email", "label": "Email address", "placeholder": "Enter your email", "required": true, "showToggle": false },
+      { "type": "password", "name": "password", "label": "Password", "placeholder": "Enter your password", "required": true, "showToggle": true }
+    ],
+    "rememberMe": {
+      "label": "Remember me"
+    },
+    "forgotPasswordLink": {
+      "label": "Forgot password?",
+      "href": "/forgot-password"
+    },
+    "submitButton": "Log In",
+    "createAccountLink": {
+      "label": "Don't have an account? Create one",
+      "href": "/create-account"
+    }
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "form": {
+    "title": "Create Account",
+    "fields": [
+      { "type": "text", "name": "firstName", "label": "First name", "placeholder": "Enter your first name", "required": true, "showToggle": false },
+      { "type": "text", "name": "lastName", "label": "Last name", "placeholder": "Enter your last name", "required": true, "showToggle": false },
+      { "type": "email", "name": "email", "label": "Email address", "placeholder": "Enter your email", "required": true, "showToggle": false },
+      { "type": "password", "name": "password", "label": "Password", "placeholder": "Create a password", "required": true, "showToggle": true },
+      { "type": "password", "name": "confirmPassword", "label": "Confirm password", "placeholder": "Confirm your password", "required": true, "showToggle": true }
+    ],
+    "passwordRequirements": [
+      { "label": "At least 8 characters", "met": false },
+      { "label": "One uppercase letter", "met": false },
+      { "label": "One number", "met": false },
+      { "label": "One special character", "met": false }
+    ],
+    "dateOfBirth": {
+      "label": "Date of birth",
+      "placeholder": "DD/MM/YYYY",
+      "hint": "You must be at least 18 years old to create an account."
+    },
+    "gender": {
+      "label": "Gender",
+      "options": [
+        { "value": "male", "label": "Male" },
+        { "value": "female", "label": "Female" },
+        { "value": "other", "label": "Other" },
+        { "value": "prefer-not", "label": "Prefer not to say" }
+      ],
+      "hint": "This helps us provide more relevant product recommendations."
+    },
+    "newsletter": {
+      "title": "Newsletter",
+      "label": "Yes, I want to receive newsletters and promotional emails."
+    },
+    "terms": {
+      "label": "I agree to the",
+      "linkLabel": "Terms of Service and Privacy Policy",
+      "linkHref": "#"
+    },
+    "submitButton": "Create Account",
+    "loginLink": {
+      "label": "Already have an account? Log in",
+      "href": "/login"
+    }
+  }
+}
