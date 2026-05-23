@@ -11,6 +11,7 @@
     "dev": "powershell -ExecutionPolicy Bypass -File ./scripts/dev-soft-merged.ps1",
     "dev:storefront": "powershell -ExecutionPolicy Bypass -File ./scripts/dev-soft-merged.ps1",
     "dev:admin": "powershell -ExecutionPolicy Bypass -File ./scripts/dev-soft-merged.ps1",
+    "db:push": "npx supabase db push",
     "type-check": "turbo run type-check",
     "lint": "turbo run lint",
     "clean": "turbo run clean && rm -rf node_modules/.cache",

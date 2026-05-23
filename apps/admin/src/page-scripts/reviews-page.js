@@ -1,10 +1,14 @@
-import { getSupabase } from "@siggistore/supabase";
-import { sendMessage } from "@siggistore/services/admin";
+import {
+  createProductReviewReply,
+  deleteProductReview,
+  fetchProductReviews,
+  updateProductReviewStatus,
+} from "@siggistore/services/admin";
+import { sanityService } from "@siggistore/services/admin/sanity-service-client.ts";
 
-const PRODUCT_REVIEWS_KEY = "appProductReviews";
 const DEFAULT_AVATAR =
   "public/images.unsplash.com/photo-1541101767792-f9b2b1c4f127--q2118f8306b.bin";
-const supabase = getSupabase();
+const productCache = new Map();
 
 function escapeHtml(value) {
   return String(value ?? "")
@@ -13,96 +17,6 @@ function escapeHtml(value) {
     .replaceAll(">", "&gt;")
     .replaceAll('"', "&quot;")
     .replaceAll("'", "&#39;");
-}
-
-function readStoredReviews() {
-  try {
-    const value = localStorage.getItem(PRODUCT_REVIEWS_KEY);
-    const parsed = value ? JSON.parse(value) : {};
-    return parsed && typeof parsed === "object" ? parsed : {};
-  } catch (error) {
-    console.warn("Unable to read stored product reviews.", error);
-    return {};
-  }
-}
-
-function writeStoredReviews(value) {
-  try {
-    localStorage.setItem(PRODUCT_REVIEWS_KEY, JSON.stringify(value));
-  } catch (error) {
-    console.warn("Unable to write stored product reviews.", error);
-  }
-}
-
-function buildReviewStorageId(review) {
-  return [
-    review?.slug || "",
-    review?.title || "",
-    review?.email || "",
-    review?.headline || "",
-    review?.createdAt || "",
-  ].join("::");
-}
-
-function hashString(seed, salt) {
-  let hash = 2166136261 ^ salt;
-
-  for (let index = 0; index < seed.length; index += 1) {
-    hash ^= seed.charCodeAt(index);
-    hash = Math.imul(hash, 16777619);
-  }
-
-  return (hash >>> 0).toString(16).padStart(8, "0");
-}
-
-function buildReviewConversationId(reviewId) {
-  const seed = String(reviewId || "review-reply");
-  const hex = [
-    hashString(seed, 0),
-    hashString(seed, 1),
-    hashString(seed, 2),
-    hashString(seed, 3),
-  ].join("");
-
-  return [
-    hex.slice(0, 8),
-    hex.slice(8, 12),
-    hex.slice(12, 16),
-    hex.slice(16, 20),
-    hex.slice(20, 32),
-  ].join("-");
-}
-
-async function ensureReviewConversation(reviewId) {
-  const conversationId = buildReviewConversationId(reviewId);
-  const { error } = await supabase.from("conversations").upsert(
-    {
-      id: conversationId,
-      updated_at: new Date().toISOString(),
-    },
-    {
-      onConflict: "id",
-      ignoreDuplicates: false,
-    },
-  );
-
-  if (error) throw error;
-  return conversationId;
-}
-
-function flattenReviews(reviewsByProduct) {
-  return Object.values(reviewsByProduct)
-    .flatMap((value) => (Array.isArray(value) ? value : []))
-    .filter(Boolean)
-    .map((review) => ({
-      ...review,
-      __reviewId: buildReviewStorageId(review),
-    }))
-    .sort((left, right) => {
-      const leftTime = new Date(left.createdAt || 0).getTime();
-      const rightTime = new Date(right.createdAt || 0).getTime();
-      return rightTime - leftTime;
-    });
 }
 
 function formatReviewDate(value) {
@@ -133,35 +47,121 @@ function buildStars(rating) {
   }).join("");
 }
 
+function getStatusBadgeMarkup(status) {
+  const normalizedStatus = String(status || "pending").trim().toLowerCase();
+
+  if (normalizedStatus === "published") {
+    return `
+      <span class="dg39k u5noc qzae2 inline-flex items-center i220p m859b at2zb asrt2 pzbk0 nj29a dark:bg-teal-500/10 dark:text-teal-500">
+        <svg class="y6rh0 xqxx6" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="20 6 9 17 4 12"></polyline>
+        </svg>
+        Published
+      </span>
+    `;
+  }
+
+  if (normalizedStatus === "hidden") {
+    return `
+      <span class="dg39k u5noc qzae2 inline-flex items-center i220p m859b at2zb asrt2 pzbk0 nj29a bg-slate-100 text-slate-600">
+        Hidden
+      </span>
+    `;
+  }
+
+  return `
+    <span class="dg39k u5noc qzae2 inline-flex items-center i220p m859b at2zb asrt2 pzbk0 nj29a bg-amber-100 text-amber-700">
+      Pending
+    </span>
+  `;
+}
+
+async function resolveReviewProduct(review) {
+  const slug = String(review?.product_slug || "").trim();
+  const title = String(review?.product_title_snapshot || "").trim();
+  const cacheKey = slug || title;
+
+  if (!cacheKey) return null;
+  if (productCache.has(cacheKey)) return productCache.get(cacheKey);
+
+  try {
+    let product = null;
+
+    if (slug) {
+      product = await sanityService.fetchSanityProductById(slug);
+    }
+
+    if (!product && title) {
+      const matches = await sanityService.fetchSanityProducts({
+        query: title,
+        limit: 8,
+      });
+      const normalizedTitle = title.toLowerCase().trim();
+      product =
+        matches.find(
+          (item) => String(item?.name || "").toLowerCase().trim() === normalizedTitle,
+        ) || matches[0] || null;
+    }
+
+    productCache.set(cacheKey, product);
+    return product;
+  } catch (error) {
+    console.warn("Unable to resolve review product from Sanity.", error);
+    productCache.set(cacheKey, null);
+    return null;
+  }
+}
+
+async function enrichReviewsWithSanityProducts(reviews) {
+  return Promise.all(
+    reviews.map(async function (review) {
+      const product = await resolveReviewProduct(review);
+      if (!product) return review;
+
+      return {
+        ...review,
+        product_slug: review.product_slug || product.slug || "",
+        product_title_snapshot:
+          product.name || review.product_title_snapshot || "Product",
+        product_image_snapshot:
+          product.imageUrl || review.product_image_snapshot || "",
+      };
+    }),
+  );
+}
+
+function buildReplyMarkup(reply) {
+  if (!reply || !reply.body) return "";
+
+  return `
+    <div class="ljp3z flex my9gz" data-review-reply-block>
+      <svg class="y6rh0 x215h c4t4j" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="15 10 20 15 15 20"></polyline>
+        <path d="M4 4v7a4 4 0 0 0 4 4h12"></path>
+      </svg>
+      <div class="t6ue9">
+        <p class="at2zb yymkp c4t4j">You replied with</p>
+        <blockquote class="aimp4 z65oy fsj2t yymkp f1ztf">
+          ${escapeHtml(reply.body)}
+        </blockquote>
+      </div>
+    </div>
+  `;
+}
+
 function buildReviewRow(review, index) {
-  const productImage = escapeHtml(review.image || "");
-  const productTitle = escapeHtml(review.title || "Product");
-  const nickname = escapeHtml(review.nickname || "Guest");
-  const email = escapeHtml(review.email || "");
+  const productImage = escapeHtml(review.product_image_snapshot || "");
+  const productTitle = escapeHtml(review.product_title_snapshot || "Product");
+  const nickname = escapeHtml(review.customer_name || "Guest");
+  const email = escapeHtml(review.customer_email || "");
   const headline = escapeHtml(review.headline || "Customer review");
   const body = escapeHtml(review.body || "");
-  const dateLabel = escapeHtml(formatReviewDate(review.createdAt));
-  const detailHref = review.slug
-    ? `/Product%20Detail.html?slug=${encodeURIComponent(review.slug)}`
+  const dateLabel = escapeHtml(formatReviewDate(review.created_at));
+  const detailHref = review.product_slug
+    ? `/Product%20Detail.html?slug=${encodeURIComponent(review.product_slug)}`
     : "/Product%20Detail.html";
   const dropdownId = `hs-pro-ertmd-${index + 1}`;
-  const reviewId = escapeHtml(review.__reviewId || buildReviewStorageId(review));
-  const replyMarkup = review.reply
-    ? `
-        <div class="ljp3z flex my9gz">
-          <svg class="y6rh0 x215h c4t4j" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <polyline points="15 10 20 15 15 20"></polyline>
-            <path d="M4 4v7a4 4 0 0 0 4 4h12"></path>
-          </svg>
-          <div class="t6ue9">
-            <p class="at2zb yymkp c4t4j">You replied with</p>
-            <blockquote class="aimp4 z65oy fsj2t yymkp f1ztf">
-              ${escapeHtml(review.reply)}
-            </blockquote>
-          </div>
-        </div>
-      `
-    : "";
+  const reviewId = escapeHtml(review.id || "");
 
   return `
     <tr data-review-id="${reviewId}">
@@ -203,18 +203,13 @@ function buildReviewRow(review, index) {
         </div>
         <span class="block yymkp ctc9x c4t4j">${headline}</span>
         <span class="block yymkp f1ztf">${body}</span>
-        ${replyMarkup}
+        ${buildReplyMarkup(review.latest_reply)}
       </td>
       <td class="gmilb offh6 uilco i4hc0">
         <span class="yymkp mnod2">${dateLabel}</span>
       </td>
       <td class="gmilb offh6 uilco i4hc0">
-        <span class="dg39k u5noc qzae2 inline-flex items-center i220p m859b at2zb asrt2 pzbk0 nj29a dark:bg-teal-500/10 dark:text-teal-500">
-          <svg class="y6rh0 xqxx6" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <polyline points="20 6 9 17 4 12"></polyline>
-          </svg>
-          Published
-        </span>
+        ${getStatusBadgeMarkup(review.status)}
       </td>
       <td class="gmilb offh6 cti9j p0vwr d6bui i4hc0">
         <div class="flex r49qf items-center -space-x-px">
@@ -231,10 +226,10 @@ function buildReviewRow(review, index) {
             </button>
             <div class="hs-dropdown-menu hs-dropdown-open:opacity-100 mvv53 transition-[opacity,margin] duration opacity-0 hidden nnhrf khfq6 mak94 ocfsa ictpa p6d5j" role="menu" aria-orientation="vertical" aria-labelledby="${dropdownId}">
               <div class="i0yn8">
-                <button type="button" class="w-full flex items-center h7z6o k85d4 o8oua edpyz text-[13px] j6b7h ibg9k disabled:opacity-50 disabled:pointer-events-none focus:outline-hidden mhymu">Publish</button>
-                <button type="button" class="w-full flex items-center h7z6o k85d4 o8oua edpyz text-[13px] j6b7h ibg9k disabled:opacity-50 disabled:pointer-events-none focus:outline-hidden mhymu">Unpublish</button>
+                <button type="button" data-review-action="publish" data-review-id="${reviewId}" class="w-full flex items-center h7z6o k85d4 o8oua edpyz text-[13px] j6b7h ibg9k disabled:opacity-50 disabled:pointer-events-none focus:outline-hidden mhymu">Publish</button>
+                <button type="button" data-review-action="unpublish" data-review-id="${reviewId}" class="w-full flex items-center h7z6o k85d4 o8oua edpyz text-[13px] j6b7h ibg9k disabled:opacity-50 disabled:pointer-events-none focus:outline-hidden mhymu">Unpublish</button>
                 <div class="hs7gg r4caq qpe8j"></div>
-                <button type="button" class="w-full flex items-center h7z6o k85d4 o8oua edpyz text-[13px] j6b7h ibg9k disabled:opacity-50 disabled:pointer-events-none focus:outline-hidden mhymu">Delete</button>
+                <button type="button" data-review-action="delete" data-review-id="${reviewId}" class="w-full flex items-center h7z6o k85d4 o8oua edpyz text-[13px] j6b7h ibg9k disabled:opacity-50 disabled:pointer-events-none focus:outline-hidden mhymu">Delete</button>
               </div>
             </div>
           </div>
@@ -244,59 +239,44 @@ function buildReviewRow(review, index) {
   `;
 }
 
-function updateStoredReview(reviewId, updater) {
-  if (!reviewId || typeof updater !== "function") return;
+async function renderLatestReviewsTable() {
+  const tbody = document.querySelector("tbody.divide-y.divide-table-line");
+  if (!tbody) return;
 
-  const reviewsByProduct = readStoredReviews();
-  let didUpdate = false;
-
-  Object.keys(reviewsByProduct).forEach((key) => {
-    const reviews = Array.isArray(reviewsByProduct[key]) ? reviewsByProduct[key] : [];
-    reviewsByProduct[key] = reviews.map((review) => {
-      if (buildReviewStorageId(review) !== reviewId) {
-        return review;
-      }
-
-      didUpdate = true;
-      return updater(review);
+  try {
+    const reviews = await fetchProductReviews({
+      includeReplies: true,
+      status: "all",
+      limit: 100,
     });
-  });
 
-  if (!didUpdate) return;
+    if (!reviews.length) {
+      tbody.innerHTML = `
+        <tr>
+          <td colspan="8" class="cti9j edpyz yymkp f1ztf c4t4j">
+            No review submissions yet.
+          </td>
+        </tr>
+      `;
+      return;
+    }
 
-  writeStoredReviews(reviewsByProduct);
-}
+    const enrichedReviews = await enrichReviewsWithSanityProducts(reviews);
+    tbody.innerHTML = enrichedReviews.map(buildReviewRow).join("");
 
-function buildReplyMarkup(reply) {
-  return `
-    <div class="ljp3z flex my9gz" data-review-reply-block>
-      <svg class="y6rh0 x215h c4t4j" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <polyline points="15 10 20 15 15 20"></polyline>
-        <path d="M4 4v7a4 4 0 0 0 4 4h12"></path>
-      </svg>
-      <div class="t6ue9">
-        <p class="at2zb yymkp c4t4j">You replied with</p>
-        <blockquote class="aimp4 z65oy fsj2t yymkp f1ztf">
-          ${escapeHtml(reply)}
-        </blockquote>
-      </div>
-    </div>
-  `;
-}
-
-function upsertReplyBlock(row, reply) {
-  if (!row || !reply) return;
-
-  const detailCell = row.children[3];
-  if (!detailCell) return;
-
-  const existingReplyBlock = detailCell.querySelector("[data-review-reply-block]");
-  if (existingReplyBlock) {
-    existingReplyBlock.outerHTML = buildReplyMarkup(reply);
-    return;
+    if (window.HSStaticMethods && typeof window.HSStaticMethods.autoInit === "function") {
+      window.HSStaticMethods.autoInit();
+    }
+  } catch (error) {
+    console.error("Unable to load product reviews.", error);
+    tbody.innerHTML = `
+      <tr>
+        <td colspan="8" class="cti9j edpyz yymkp f1ztf c4t4j">
+          ${escapeHtml(error?.message || "Unable to load product reviews right now.")}
+        </td>
+      </tr>
+    `;
   }
-
-  detailCell.insertAdjacentHTML("beforeend", buildReplyMarkup(reply));
 }
 
 function bindReviewTableActions() {
@@ -305,78 +285,56 @@ function bindReviewTableActions() {
 
   tbody.dataset.reviewActionsBound = "true";
   tbody.addEventListener("click", async function (event) {
-    const replyButton = event.target.closest("button");
-    if (!replyButton) return;
+    const actionButton = event.target.closest("button[data-review-action]");
+    if (!actionButton) return;
 
-    const isReplyAction =
-      replyButton.matches("[data-review-action='reply']") ||
-      replyButton.textContent.trim().toLowerCase() === "reply";
-    if (!isReplyAction) return;
+    const action = String(actionButton.getAttribute("data-review-action") || "");
+    const reviewId = String(actionButton.getAttribute("data-review-id") || "");
+    if (!action || !reviewId) return;
 
-    const reviewId = replyButton.getAttribute("data-review-id") || "";
-    const row = replyButton.closest("tr");
-    const existingReplyNode = row ? row.querySelector("blockquote") : null;
-    const existingReply = existingReplyNode ? existingReplyNode.textContent.trim() : "";
-    const nextReply = window.prompt("Write your reply to this review:", existingReply);
-
-    if (nextReply === null) return;
-
-    const trimmedReply = nextReply.trim();
-    if (!trimmedReply) return;
-
-    if (!reviewId) {
-      upsertReplyBlock(row, trimmedReply);
-      return;
-    }
-
-    const originalLabel = replyButton.textContent;
-    replyButton.disabled = true;
-    replyButton.textContent = "Saving...";
+    const originalLabel = actionButton.textContent;
+    actionButton.disabled = true;
 
     try {
-      const conversationId = await ensureReviewConversation(reviewId);
-      const message = await sendMessage({
-        conversationId,
-        senderRole: "admin",
-        content: trimmedReply,
-      });
+      if (action === "reply") {
+        const row = actionButton.closest("tr");
+        const existingReplyNode = row ? row.querySelector("blockquote") : null;
+        const existingReply = existingReplyNode ? existingReplyNode.textContent.trim() : "";
+        const nextReply = window.prompt("Write your reply to this review:", existingReply);
+        if (nextReply === null) return;
 
-      updateStoredReview(reviewId, function (review) {
-        return {
-          ...review,
-          reply: trimmedReply,
-          repliedAt: message?.created_at || new Date().toISOString(),
-          reply_conversation_id: conversationId,
-        };
-      });
+        const trimmedReply = nextReply.trim();
+        if (!trimmedReply) return;
 
-      renderLatestReviewsTable();
+        actionButton.textContent = "Saving...";
+        await createProductReviewReply({
+          reviewId,
+          body: trimmedReply,
+        });
+      } else if (action === "publish") {
+        actionButton.textContent = "Publishing...";
+        await updateProductReviewStatus(reviewId, "published");
+      } else if (action === "unpublish") {
+        actionButton.textContent = "Updating...";
+        await updateProductReviewStatus(reviewId, "hidden");
+      } else if (action === "delete") {
+        const confirmed = window.confirm("Delete this review?");
+        if (!confirmed) return;
+
+        actionButton.textContent = "Deleting...";
+        await deleteProductReview(reviewId);
+      }
+
+      await renderLatestReviewsTable();
     } catch (error) {
-      console.error("Failed to save review reply to Supabase.", error);
-      window.alert(error?.message || "Unable to save the reply right now.");
+      console.error("Unable to update product review.", error);
+      window.alert(error?.message || "Unable to update this review right now.");
     } finally {
-      replyButton.disabled = false;
-      replyButton.textContent = originalLabel;
+      actionButton.disabled = false;
+      actionButton.textContent = originalLabel;
     }
   });
 }
 
-function renderLatestReviewsTable() {
-  const tbody = document.querySelector("tbody.divide-y.divide-table-line");
-  if (!tbody) return;
-
-  bindReviewTableActions();
-
-  const reviews = flattenReviews(readStoredReviews());
-  if (!reviews.length) return;
-
-  tbody.innerHTML = reviews.map(buildReviewRow).join("");
-
-  if (window.HSStaticMethods && typeof window.HSStaticMethods.autoInit === "function") {
-    window.HSStaticMethods.autoInit();
-  }
-
-  bindReviewTableActions();
-}
-
+bindReviewTableActions();
 renderLatestReviewsTable();

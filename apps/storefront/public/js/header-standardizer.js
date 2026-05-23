@@ -15,7 +15,6 @@
   const ordersKey = "appOrders";
   const latestOrderKey = "appLatestOrder";
   const lookupOrderKey = "appLookupOrder";
-  const productReviewsKey = "appProductReviews";
   const decodedPathname = decodeURIComponent(window.location.pathname);
   let servicesPromise = null;
   let supabasePromise = null;
@@ -193,43 +192,9 @@
     return "./write-a-product-review.html" + (query ? "?" + query : "");
   }
 
-  function normalizeReviewProductKey(value) {
-    return String(value || "")
-      .trim()
-      .toLowerCase()
-      .replace(/\s+/g, "-");
-  }
-
-  function getProductReviewKey(details) {
-    const slug = details && details.slug ? String(details.slug).trim() : "";
-    if (slug) return "slug:" + slug;
-
-    const title = details && details.title ? normalizeReviewProductKey(details.title) : "";
-    return title ? "title:" + title : "";
-  }
-
-  function getStoredProductReviews() {
-    const reviews = readJsonStorage(productReviewsKey, {});
-    return reviews && typeof reviews === "object" ? reviews : {};
-  }
-
-  function saveStoredProductReview(details, review) {
-    const key = getProductReviewKey(details);
-    if (!key || !review) return;
-
-    const reviewsByProduct = getStoredProductReviews();
-    const nextReviews = Array.isArray(reviewsByProduct[key]) ? reviewsByProduct[key].slice() : [];
-    nextReviews.unshift(review);
-    reviewsByProduct[key] = nextReviews.slice(0, 25);
-    writeJsonStorage(productReviewsKey, reviewsByProduct);
-  }
-
-  function getStoredReviewsForProduct(details) {
-    const key = getProductReviewKey(details);
-    if (!key) return [];
-
-    const reviewsByProduct = getStoredProductReviews();
-    return Array.isArray(reviewsByProduct[key]) ? reviewsByProduct[key] : [];
+  async function getReviewService() {
+    const services = await getServices();
+    return services && services.supabaseReviewService ? services.supabaseReviewService : null;
   }
 
   function formatReviewRelativeTime(value) {
@@ -274,11 +239,25 @@
   function buildStoredReviewMarkup(review) {
     const headline = escapeHtml(review.headline || "Customer review");
     const body = escapeHtml(review.body || "");
-    const nickname = escapeHtml(review.nickname || "Guest");
+    const nickname = escapeHtml(review.customer_name || review.nickname || "Guest");
     const recommendation = escapeHtml(getRecommendationLabel(review.recommendation));
-    const relativeTime = escapeHtml(formatReviewRelativeTime(review.createdAt));
-    const helpfulYes = Number(review.helpfulYes || 0);
-    const helpfulNo = Number(review.helpfulNo || 0);
+    const relativeTime = escapeHtml(formatReviewRelativeTime(review.created_at || review.createdAt));
+    const helpfulYes = Number(review.helpful_yes ?? review.helpfulYes ?? 0);
+    const helpfulNo = Number(review.helpful_no ?? review.helpfulNo ?? 0);
+    const replyMarkup =
+      review.latest_reply && review.latest_reply.body
+        ? [
+            '<div class="ljp3z flex my9gz">',
+            '<svg class="y6rh0 x215h c4t4j" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><polyline points="15 10 20 15 15 20"></polyline><path d="M4 4v7a4 4 0 0 0 4 4h12"></path></svg>',
+            '<div class="t6ue9">',
+            '<p class="at2zb yymkp c4t4j">You replied with</p>',
+            '<blockquote class="aimp4 z65oy fsj2t yymkp f1ztf">' +
+              escapeHtml(review.latest_reply.body) +
+              "</blockquote>",
+            "</div>",
+            "</div>",
+          ].join("")
+        : "";
 
     return [
       '<div class="ggktd f3bmb e1azp apc4n y8a3d v77h5 u7zb2" data-generated-review="true">',
@@ -307,6 +286,7 @@
       '<button class="text-[13px] f1ztf carpj a8v2i cihbd focus:outline-hidden hj22m" type="button">Report</button>',
       "</div>",
       "</div>",
+      replyMarkup,
       "</div>",
     ].join("");
   }
@@ -1773,7 +1753,7 @@
     if (!submitButton || submitButton.dataset.reviewSubmitBound === "true") return;
     submitButton.dataset.reviewSubmitBound = "true";
 
-    submitButton.addEventListener("click", function () {
+    submitButton.addEventListener("click", async function () {
       const params = new URLSearchParams(window.location.search);
       const slug = params.get("slug") || "";
       const title = params.get("title") || "Product Detail";
@@ -1794,40 +1774,60 @@
         ? Number(String(ratingField.id || "").replace(/[^0-9]+/g, "")) || 5
         : 5;
 
-      saveStoredProductReview(
-        {
-          slug: slug,
-          title: title,
-        },
-        {
-          slug: slug,
-          title: title,
-          image: image,
+      const reviewService = await getReviewService();
+      if (!reviewService || typeof reviewService.submitReview !== "function") {
+        showMessage(footer, "data-write-review-message", "Review service is unavailable right now.", "error");
+        return;
+      }
+
+      const currentUser = await getCurrentUser();
+      const originalLabel = submitButton.textContent;
+      submitButton.disabled = true;
+      submitButton.textContent = "Submitting...";
+
+      try {
+        const result = await reviewService.submitReview({
+          product_slug: slug,
+          product_title_snapshot: title,
+          product_image_snapshot: image,
+          customer_id: currentUser && currentUser.id ? currentUser.id : null,
+          customer_name: nickname,
+          customer_email: email,
           headline: headline,
           body: body,
-          nickname: nickname,
-          email: email,
           recommendation: recommendationField && recommendationField.id === "hs-pro-shprwrtpn" ? "no" : "yes",
           rating: rating,
-          helpfulYes: 0,
-          helpfulNo: 0,
-          createdAt: new Date().toISOString(),
-        },
-      );
+          status: "published",
+        });
 
-      showMessage(footer, "data-write-review-message", "Review submitted. Redirecting to product page...", "success");
+        if (!result || !result.success) {
+          throw new Error((result && result.error) || "Unable to submit the review right now.");
+        }
 
-      const destination = slug
-        ? "./Product Detail.html?slug=" + encodeURIComponent(slug) + "#reviews"
-        : "./Product Detail.html#reviews";
+        showMessage(footer, "data-write-review-message", "Review submitted. Redirecting to product page...", "success");
 
-      window.setTimeout(function () {
-        window.location.href = destination;
-      }, 300);
+        const destination = slug
+          ? "./Product Detail.html?slug=" + encodeURIComponent(slug) + "#reviews"
+          : "./Product Detail.html#reviews";
+
+        window.setTimeout(function () {
+          window.location.href = destination;
+        }, 300);
+      } catch (error) {
+        showMessage(
+          footer,
+          "data-write-review-message",
+          error && error.message ? error.message : "Unable to submit the review right now.",
+          "error",
+        );
+      } finally {
+        submitButton.disabled = false;
+        submitButton.textContent = originalLabel;
+      }
     });
   }
 
-  function renderProductDetailStoredReviews() {
+  async function renderProductDetailStoredReviews() {
     if (!isPage("Product Detail.html")) return;
 
     const listRoot = document.querySelector("[data-product-review-list='true']");
@@ -1840,15 +1840,26 @@
 
     const params = new URLSearchParams(window.location.search);
     const titleNode = document.getElementById("product-detail-title");
-    const reviews = getStoredReviewsForProduct({
-      slug: params.get("slug") || "",
-      title: titleNode ? titleNode.textContent.trim() : "",
-    });
+    const reviewService = await getReviewService();
+    if (!reviewService || typeof reviewService.getPublishedReviewsByProduct !== "function") {
+      return;
+    }
 
-    if (!reviews.length) return;
+    try {
+      const result = await reviewService.getPublishedReviewsByProduct({
+        slug: params.get("slug") || "",
+        title: titleNode ? titleNode.textContent.trim() : "",
+        limit: 25,
+      });
 
-    const markup = reviews.map(buildStoredReviewMarkup).join("");
-    listRoot.insertAdjacentHTML("afterbegin", markup);
+      const reviews = result && result.success && Array.isArray(result.data) ? result.data : [];
+      if (!reviews.length) return;
+
+      const markup = reviews.map(buildStoredReviewMarkup).join("");
+      listRoot.insertAdjacentHTML("afterbegin", markup);
+    } catch (error) {
+      console.warn("Unable to render Supabase product reviews.", error);
+    }
   }
 
 

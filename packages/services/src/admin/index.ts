@@ -19,6 +19,12 @@ export {
   updateOrderStatus,
   fetchDiscounts,
   createDiscount,
+  fetchProductReviews,
+  fetchProductReviewReplies,
+  createProductReview,
+  createProductReviewReply,
+  updateProductReviewStatus,
+  deleteProductReview,
   fetchProductRuntime,
   fetchProductRuntimeByIds,
   mergeProductWithRuntime,
@@ -29,6 +35,8 @@ export {
   getOrderItemUnitPrice,
   ORDER_STATUSES,
   PRODUCT_RUNTIME_TABLE,
+  PRODUCT_REVIEWS_TABLE,
+  PRODUCT_REVIEW_REPLIES_TABLE,
 } from "@siggistore/supabase/admin";
 
 // Admin-specific services

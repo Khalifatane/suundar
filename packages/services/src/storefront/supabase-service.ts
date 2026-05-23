@@ -229,9 +229,166 @@ export const supabaseCartService = {
   },
 };
 
+function isMissingReviewTableError(error: any, tableName: string) {
+  const details = [error?.message, error?.details, error?.hint]
+    .filter(Boolean)
+    .map(String)
+    .join(' ');
+
+  return (
+    error?.code === '42P01' ||
+    new RegExp(`Could not find the table ['"]?public\\.${tableName}['"]? in the schema cache`, 'i').test(details) ||
+    new RegExp(`relation ['"]?public\\.${tableName}['"]? does not exist`, 'i').test(details) ||
+    new RegExp(`relation ['"]?${tableName}['"]? does not exist`, 'i').test(details)
+  );
+}
+
+function normalizeReviewRow(row: any) {
+  if (!row) return row;
+  return {
+    ...row,
+    product_slug: row.product_slug ?? row.slug ?? '',
+    product_title_snapshot: row.product_title_snapshot ?? row.title ?? '',
+    product_image_snapshot: row.product_image_snapshot ?? row.image ?? '',
+    customer_name: row.customer_name ?? row.nickname ?? 'Guest',
+    customer_email: row.customer_email ?? row.email ?? '',
+    rating: Math.max(1, Math.min(5, Number(row.rating ?? 5) || 5)),
+    recommendation: row.recommendation === 'no' ? 'no' : 'yes',
+    helpful_yes: Number(row.helpful_yes ?? 0) || 0,
+    helpful_no: Number(row.helpful_no ?? 0) || 0,
+    status: row.status ?? 'pending',
+  };
+}
+
+function normalizeReplyRow(row: any) {
+  if (!row) return row;
+  return {
+    ...row,
+    body: row.body ?? row.content ?? '',
+  };
+}
+
+export const supabaseReviewService = {
+  async submitReview(review: any): Promise<ApiResponse<any>> {
+    try {
+      const payload = {
+        product_slug: String(review?.product_slug ?? review?.slug ?? '').trim(),
+        sanity_product_id: String(review?.sanity_product_id ?? '').trim() || null,
+        product_title_snapshot: String(
+          review?.product_title_snapshot ?? review?.title ?? review?.product_title ?? '',
+        ).trim(),
+        product_image_snapshot: String(
+          review?.product_image_snapshot ?? review?.image ?? review?.product_image ?? '',
+        ).trim(),
+        customer_id: review?.customer_id ?? null,
+        customer_name: String(review?.customer_name ?? review?.nickname ?? '').trim(),
+        customer_email: String(review?.customer_email ?? review?.email ?? '').trim(),
+        rating: Math.max(1, Math.min(5, Number(review?.rating ?? 5) || 5)),
+        recommendation:
+          String(review?.recommendation ?? 'yes').trim().toLowerCase() === 'no' ? 'no' : 'yes',
+        headline: String(review?.headline ?? '').trim(),
+        body: String(review?.body ?? '').trim(),
+        status: String(review?.status ?? 'published').trim().toLowerCase(),
+        helpful_yes: Number(review?.helpful_yes ?? 0) || 0,
+        helpful_no: Number(review?.helpful_no ?? 0) || 0,
+      };
+
+      const { data, error } = await supabase.from('product_reviews').insert(payload).select().single();
+      if (error) {
+        if (isMissingReviewTableError(error, 'product_reviews')) {
+          return {
+            success: false,
+            error:
+              'The Supabase table public.product_reviews does not exist yet. Create it before using product reviews.',
+          };
+        }
+        return { success: false, error: error.message };
+      }
+
+      return { success: true, data: normalizeReviewRow(data) };
+    } catch (error) {
+      return { success: false, error: String(error) };
+    }
+  },
+
+  async getPublishedReviewsByProduct(details: {
+    slug?: string | null;
+    title?: string | null;
+    limit?: number | null;
+  }): Promise<ApiResponse<any[]>> {
+    try {
+      const slug = String(details?.slug ?? '').trim();
+      const title = String(details?.title ?? '').trim();
+      const limit = Math.max(1, Number(details?.limit ?? 25) || 25);
+
+      let request = supabase
+        .from('product_reviews')
+        .select()
+        .eq('status', 'published')
+        .order('created_at', { ascending: false })
+        .limit(limit);
+
+      if (slug) {
+        request = request.eq('product_slug', slug);
+      } else if (title) {
+        request = request.eq('product_title_snapshot', title);
+      } else {
+        return { success: true, data: [] };
+      }
+
+      const { data, error } = await request;
+      if (error) {
+        if (isMissingReviewTableError(error, 'product_reviews')) {
+          return { success: true, data: [] };
+        }
+        return { success: false, error: error.message };
+      }
+
+      const reviews = (data || []).map(normalizeReviewRow);
+      if (!reviews.length) {
+        return { success: true, data: [] };
+      }
+
+      const reviewIds = reviews.map((review: any) => review.id).filter(Boolean);
+      const { data: replies, error: repliesError } = await supabase
+        .from('product_review_replies')
+        .select()
+        .in('review_id', reviewIds)
+        .order('created_at', { ascending: false });
+
+      if (repliesError && !isMissingReviewTableError(repliesError, 'product_review_replies')) {
+        return { success: false, error: repliesError.message };
+      }
+
+      const repliesByReviewId = (replies || []).map(normalizeReplyRow).reduce(function (map: Record<string, any[]>, reply: any) {
+        const key = String(reply.review_id || '');
+        if (!key) return map;
+        if (!Array.isArray(map[key])) map[key] = [];
+        map[key].push(reply);
+        return map;
+      }, {});
+
+      return {
+        success: true,
+        data: reviews.map(function (review: any) {
+          const reviewReplies = repliesByReviewId[String(review.id)] || [];
+          return {
+            ...review,
+            replies: reviewReplies,
+            latest_reply: reviewReplies[0] || null,
+          };
+        }),
+      };
+    } catch (error) {
+      return { success: false, error: String(error) };
+    }
+  },
+};
+
 export default {
   auth: supabaseAuthService,
   profile: supabaseProfileService,
   order: supabaseOrderService,
   cart: supabaseCartService,
+  review: supabaseReviewService,
 };

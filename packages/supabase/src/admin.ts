@@ -14,11 +14,29 @@ export const ORDER_STATUSES = [
 export const PRODUCT_RUNTIME_TABLE =
   import.meta.env?.VITE_SUPABASE_PRODUCTS_TABLE || 'products_runtime';
 
+export const PRODUCT_REVIEWS_TABLE = 'product_reviews';
+export const PRODUCT_REVIEW_REPLIES_TABLE = 'product_review_replies';
+
 function applyRange(query: any, limit?: number, offset = 0) {
   if (typeof limit !== 'number') return query;
   const from = Math.max(0, offset);
   const to = from + Math.max(0, limit) - 1;
   return query.range(from, to);
+}
+
+function isMissingTableError(error: any, tableName: string) {
+  const qualified = `public.${tableName}`;
+  const details = [error?.message, error?.details, error?.hint]
+    .filter(Boolean)
+    .map(String)
+    .join(' ');
+
+  return (
+    error?.code === '42P01' ||
+    new RegExp(`Could not find the table ['"]?${qualified}['"]? in the schema cache`, 'i').test(details) ||
+    new RegExp(`relation ['"]?${qualified}['"]? does not exist`, 'i').test(details) ||
+    new RegExp(`relation ['"]?${tableName}['"]? does not exist`, 'i').test(details)
+  );
 }
 
 function normalizeOrder(row: any): SupabaseOrder {
@@ -317,17 +335,7 @@ export async function fetchDiscounts(options: any = {}) {
 }
 
 function isMissingDiscountsTableError(error: any) {
-  const details = [error?.message, error?.details, error?.hint]
-    .filter(Boolean)
-    .map(String)
-    .join(' ');
-
-  return (
-    error?.code === '42P01' ||
-    /Could not find the table ['"]?public\.discounts['"]? in the schema cache/i.test(details) ||
-    /relation ['"]?public\.discounts['"]? does not exist/i.test(details) ||
-    /relation ['"]?discounts['"]? does not exist/i.test(details)
-  );
+  return isMissingTableError(error, 'discounts');
 }
 
 function parseMissingColumn(error: any) {
@@ -412,6 +420,241 @@ export async function createDiscount(input: any = {}) {
     triedMissingColumns.add(missingColumn);
     delete payload[missingColumn];
   }
+}
+
+// ===== PRODUCT REVIEWS =====
+
+function normalizeProductReview(row: any) {
+  if (!row) return row;
+
+  return {
+    ...row,
+    rating: Math.max(1, Math.min(5, Number(row.rating ?? 5) || 5)),
+    helpful_yes: Number(row.helpful_yes ?? 0) || 0,
+    helpful_no: Number(row.helpful_no ?? 0) || 0,
+    product_slug: row.product_slug ?? row.slug ?? '',
+    product_title_snapshot: row.product_title_snapshot ?? row.title ?? '',
+    product_image_snapshot: row.product_image_snapshot ?? row.image ?? '',
+    customer_name: row.customer_name ?? row.nickname ?? 'Guest',
+    customer_email: row.customer_email ?? row.email ?? '',
+    recommendation: row.recommendation === 'no' ? 'no' : 'yes',
+    status: row.status ?? 'pending',
+  };
+}
+
+function normalizeProductReviewReply(row: any) {
+  if (!row) return row;
+
+  return {
+    ...row,
+    body: row.body ?? row.content ?? '',
+  };
+}
+
+export async function fetchProductReviewReplies(reviewIds: string[] = []) {
+  const normalizedIds = [...new Set((reviewIds || []).filter(Boolean).map(String))];
+  if (!normalizedIds.length) return [];
+
+  const { data, error } = await supabase
+    .from(PRODUCT_REVIEW_REPLIES_TABLE)
+    .select('*')
+    .in('review_id', normalizedIds)
+    .order('created_at', { ascending: false });
+
+  if (error) {
+    if (isMissingTableError(error, PRODUCT_REVIEW_REPLIES_TABLE)) {
+      console.warn(
+        `[supabase-admin] public.${PRODUCT_REVIEW_REPLIES_TABLE} is missing; returning an empty review reply list.`,
+      );
+      return [];
+    }
+    throw error;
+  }
+
+  return (data ?? []).map(normalizeProductReviewReply);
+}
+
+export async function fetchProductReviews(options: any = {}) {
+  const {
+    limit,
+    offset,
+    status,
+    productSlug,
+    productTitle,
+    includeReplies = false,
+    query: search,
+  } = options;
+
+  let request = supabase
+    .from(PRODUCT_REVIEWS_TABLE)
+    .select('*')
+    .order('created_at', { ascending: false });
+
+  if (status && status !== 'all') {
+    request = request.eq('status', status);
+  }
+  if (productSlug) {
+    request = request.eq('product_slug', productSlug);
+  } else if (productTitle) {
+    request = request.eq('product_title_snapshot', productTitle);
+  }
+  if (search) {
+    request = request.or(
+      `headline.ilike.%${search}%,body.ilike.%${search}%,customer_name.ilike.%${search}%,customer_email.ilike.%${search}%,product_title_snapshot.ilike.%${search}%`,
+    );
+  }
+  request = applyRange(request, limit, offset);
+
+  const { data, error } = await request;
+  if (error) {
+    if (isMissingTableError(error, PRODUCT_REVIEWS_TABLE)) {
+      console.warn(
+        `[supabase-admin] public.${PRODUCT_REVIEWS_TABLE} is missing; returning an empty review list.`,
+      );
+      return [];
+    }
+    throw error;
+  }
+
+  const reviews = (data ?? []).map(normalizeProductReview);
+  if (!includeReplies || !reviews.length) return reviews;
+
+  const replies = await fetchProductReviewReplies(reviews.map((review: any) => review.id));
+  const repliesByReviewId = replies.reduce((map: Record<string, any[]>, reply: any) => {
+    const key = String(reply.review_id || '');
+    if (!key) return map;
+    if (!Array.isArray(map[key])) map[key] = [];
+    map[key].push(reply);
+    return map;
+  }, {});
+
+  return reviews.map((review: any) => {
+    const reviewReplies = repliesByReviewId[String(review.id)] || [];
+    return {
+      ...review,
+      replies: reviewReplies,
+      latest_reply: reviewReplies[0] || null,
+    };
+  });
+}
+
+export async function createProductReview(input: any = {}) {
+  const now = new Date().toISOString();
+  const rating = Math.max(1, Math.min(5, Number(input.rating ?? 5) || 5));
+  const payload = {
+    product_slug: String(input.product_slug ?? input.slug ?? '').trim(),
+    sanity_product_id: String(input.sanity_product_id ?? '').trim() || null,
+    product_title_snapshot: String(
+      input.product_title_snapshot ?? input.title ?? input.product_title ?? '',
+    ).trim(),
+    product_image_snapshot: String(
+      input.product_image_snapshot ?? input.image ?? input.product_image ?? '',
+    ).trim(),
+    customer_id: input.customer_id ?? null,
+    customer_name: String(input.customer_name ?? input.nickname ?? '').trim(),
+    customer_email: String(input.customer_email ?? input.email ?? '').trim(),
+    rating,
+    recommendation: String(input.recommendation ?? 'yes').trim().toLowerCase() === 'no' ? 'no' : 'yes',
+    headline: String(input.headline ?? '').trim(),
+    body: String(input.body ?? '').trim(),
+    status: String(input.status ?? 'pending').trim().toLowerCase(),
+    helpful_yes: Number(input.helpful_yes ?? 0) || 0,
+    helpful_no: Number(input.helpful_no ?? 0) || 0,
+    created_at: input.created_at ?? now,
+    updated_at: now,
+  };
+
+  if (!payload.product_title_snapshot) {
+    throw new Error('Review product title is required.');
+  }
+  if (!payload.customer_name) {
+    throw new Error('Reviewer name is required.');
+  }
+  if (!payload.customer_email) {
+    throw new Error('Reviewer email is required.');
+  }
+  if (!payload.headline) {
+    throw new Error('Review headline is required.');
+  }
+  if (!payload.body) {
+    throw new Error('Review body is required.');
+  }
+
+  const { data, error } = await supabase.from(PRODUCT_REVIEWS_TABLE).insert(payload).select('*').single();
+
+  if (error) {
+    if (isMissingTableError(error, PRODUCT_REVIEWS_TABLE)) {
+      throw new Error(
+        `The Supabase table public.${PRODUCT_REVIEWS_TABLE} does not exist yet. Create it before using product reviews.`,
+      );
+    }
+    throw error;
+  }
+
+  return normalizeProductReview(data);
+}
+
+export async function updateProductReviewStatus(reviewId: string, status: string) {
+  const normalizedStatus = String(status || '').trim().toLowerCase();
+  if (!reviewId) throw new Error('Review id is required.');
+  if (!normalizedStatus) throw new Error('Review status is required.');
+
+  const { data, error } = await supabase
+    .from(PRODUCT_REVIEWS_TABLE)
+    .update({
+      status: normalizedStatus,
+      updated_at: new Date().toISOString(),
+    })
+    .eq('id', reviewId)
+    .select('*')
+    .single();
+
+  if (error) throw error;
+  return normalizeProductReview(data);
+}
+
+export async function deleteProductReview(reviewId: string) {
+  if (!reviewId) throw new Error('Review id is required.');
+
+  const { error } = await supabase.from(PRODUCT_REVIEWS_TABLE).delete().eq('id', reviewId);
+  if (error) throw error;
+}
+
+export async function createProductReviewReply(input: any = {}) {
+  const payload = {
+    review_id: input.review_id ?? input.reviewId ?? null,
+    admin_id: input.admin_id ?? input.adminId ?? null,
+    body: String(input.body ?? input.content ?? '').trim(),
+  };
+
+  if (!payload.review_id) {
+    throw new Error('Review reply requires a review id.');
+  }
+  if (!payload.body) {
+    throw new Error('Reply body is required.');
+  }
+
+  const { data, error } = await supabase
+    .from(PRODUCT_REVIEW_REPLIES_TABLE)
+    .insert(payload)
+    .select('*')
+    .single();
+
+  if (error) {
+    if (isMissingTableError(error, PRODUCT_REVIEW_REPLIES_TABLE)) {
+      throw new Error(
+        `The Supabase table public.${PRODUCT_REVIEW_REPLIES_TABLE} does not exist yet. Create it before using product review replies.`,
+      );
+    }
+    throw error;
+  }
+
+  await supabase
+    .from(PRODUCT_REVIEWS_TABLE)
+    .update({ updated_at: new Date().toISOString() })
+    .eq('id', payload.review_id);
+
+  return normalizeProductReviewReply(data);
 }
 
 // ===== CONVERSATIONS =====

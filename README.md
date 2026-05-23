@@ -147,6 +147,17 @@ Both apps read the repo-root `.env.local`.
 | `VITE_SANITY_API_TOKEN` | Sanity API token when needed |
 | `VITE_SANITY_READ_TOKEN` | Sanity read token when needed |
 
+## Supabase Schema
+
+Product reviews require the Supabase tables `public.product_reviews` and `public.product_review_replies`.
+
+The schema now lives in both:
+
+- [scripts/create-product-reviews-tables.sql](D:/inchallah/scripts/create-product-reviews-tables.sql:1)
+- [supabase/migrations/202605230001_create_product_reviews.sql](D:/inchallah/supabase/migrations/202605230001_create_product_reviews.sql:1)
+
+Apply that SQL to your Supabase project before using the review flows. If you use the Supabase CLI in this repo, the checked-in migration is ready to be pushed. If you use the Supabase dashboard instead, paste the SQL script into the SQL editor and run it there.
+
 ## Technology Stack
 
 | Tool | Purpose |

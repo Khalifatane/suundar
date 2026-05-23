@@ -7,5 +7,11 @@ export { createCMSMenuService, type CMSMenuService, type Menu, type MenuItem } f
 
 // Supabase & Sanity service layers (ported from old services/)
 export { default as supabaseService } from './supabase-service';
-export { supabaseAuthService, supabaseProfileService, supabaseOrderService, supabaseCartService } from './supabase-service';
+export {
+  supabaseAuthService,
+  supabaseProfileService,
+  supabaseOrderService,
+  supabaseCartService,
+  supabaseReviewService,
+} from './supabase-service';
 export { default as sanityService } from './sanity-service';

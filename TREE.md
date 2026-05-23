@@ -126,3 +126,5 @@ D:\inchallah
 - Workspace packages are declared in `pnpm-workspace.yaml`
 - Root orchestration uses Turbo via `build`, `dev`, `type-check`, and `lint`
 - The repo uses `pnpm-lock.yaml` as the single workspace lockfile
+
+
