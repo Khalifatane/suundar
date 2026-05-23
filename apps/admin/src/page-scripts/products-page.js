@@ -48,20 +48,6 @@ function buildRuntimeLookupKey(product) {
     .map(String);
 }
 
-function buildChannelBadges(channels) {
-  const values = channels?.length ? channels : ["In store", "Online"];
-  return values
-    .slice(0, 2)
-    .map(
-      (channel) => `
-        <span class="ltybu nck10 h3ns9 m859b y9dku">
-          ${escapeHtml(channel)}
-        </span>
-      `,
-    )
-    .join("");
-}
-
 function buildStockBadgeMarkup(stockState) {
   const toneClass =
     stockState.key === "out_of_stock"
@@ -96,10 +82,9 @@ function hydrateProductRow(row, product) {
   const availabilityInput = row.querySelector('td:nth-child(4) input[type="checkbox"]');
   const skuCell = row.querySelector('td:nth-child(5) .yymkp');
   const priceCell = row.querySelector('td:nth-child(6) .yymkp');
-  const channelsCell = row.querySelector('td:nth-child(7) .flex.flex-wrap.g26qa');
-  const actionLinks = row.querySelectorAll('td:nth-child(8) a');
-  const dropdownButton = row.querySelector('td:nth-child(8) button[id]');
-  const dropdownMenu = row.querySelector('td:nth-child(8) .hs-dropdown-menu');
+  const actionLinks = row.querySelectorAll('td:nth-child(7) a');
+  const dropdownButton = row.querySelector('td:nth-child(7) button[id]');
+  const dropdownMenu = row.querySelector('td:nth-child(7) .hs-dropdown-menu');
   const stockState = getProductStockState(product);
 
   if (image) {
@@ -146,10 +131,6 @@ function hydrateProductRow(row, product) {
 
   if (priceCell) {
     priceCell.textContent = formatMoney(product.price);
-  }
-
-  if (channelsCell) {
-    channelsCell.innerHTML = buildChannelBadges(product.channels);
   }
 
   actionLinks.forEach((link) => {
@@ -440,7 +421,7 @@ async function initProductsPage() {
       if (!pageProducts.length) {
         tbody.innerHTML = `
           <tr>
-            <td colspan="8" class="cti9j edpyz yymkp f1ztf c4t4j">
+            <td colspan="7" class="cti9j edpyz yymkp f1ztf c4t4j">
               ${escapeHtml(query ? "No products match your current search." : "No products found for this tab yet.")}
             </td>
           </tr>
