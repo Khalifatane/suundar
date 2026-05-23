@@ -42,6 +42,14 @@ function updateSelectValue(select, value) {
   }
 }
 
+function getProductRuntimeErrorMessage(error, fallback) {
+  const message = String(error?.message || "");
+  if (/products_runtime|schema cache|relation .* does not exist/i.test(message)) {
+    return "Product runtime table is missing. Run scripts/create-products-runtime-table.sql in Supabase, then try again.";
+  }
+  return message ? `${fallback}: ${message}` : `${fallback}.`;
+}
+
 function getStoredDisplayEdit(product) {
   if (!product) return null;
 
@@ -54,6 +62,19 @@ function getStoredDisplayEdit(product) {
   };
 }
 
+function getVariantStock(variants) {
+  return (Array.isArray(variants) ? variants : []).reduce((sum, variant) => {
+    return sum + Math.max(0, Number(variant.quantity || 0) || 0);
+  }, 0);
+}
+
+function syncAvailabilityFromVariants() {
+  const availabilityInput = document.getElementById("hs-pro-epdas");
+  if (!availabilityInput) return;
+
+  availabilityInput.checked = getVariantStock(collectProductVariants()) > 0;
+}
+
 function collectProductVariants() {
   const wrapper = document.getElementById("hs-wrapper-for-copy");
   if (!wrapper) return [];
@@ -64,15 +85,17 @@ function collectProductVariants() {
       const sizeInput = row.querySelector('input[id^="hs-pro-epdvts"]');
       const colorInput = row.querySelector('input[id^="hs-pro-epdvtc"]');
       const quantityInput = row.querySelector('input[id^="hs-pro-epdvtq"]');
+      const size = sizeInput?.value?.trim() || "";
+      const color = colorInput?.value?.trim() || "";
       const quantity = Math.max(0, Number(quantityInput?.value || 0) || 0);
 
       return {
-        size: sizeInput?.value?.trim() || "One size",
-        color: colorInput?.value?.trim() || "Default",
+        size,
+        color,
         quantity,
       };
     })
-    .filter((variant) => variant.size || variant.color);
+    .filter((variant) => variant.size && variant.color);
 }
 
 function applyStoredDisplayEdit(product, edit) {
@@ -128,6 +151,8 @@ function applyStoredDisplayEdit(product, edit) {
       });
     }
   }
+
+  syncAvailabilityFromVariants();
 }
 
 function bindDisplayEditSave(product) {
@@ -144,15 +169,20 @@ function bindDisplayEditSave(product) {
     const categorySelect = document.getElementById("product-details-category");
     const tagsInput = document.getElementById("hs-pro-dauftg");
     const variants = collectProductVariants();
-    const stock = variants.reduce((sum, variant) => sum + variant.quantity, 0);
+    const stock = getVariantStock(variants);
+    const isAvailable = stock > 0;
     const tags = String(tagsInput?.value || "")
       .split(",")
       .map((tag) => tag.trim())
       .filter(Boolean);
 
+    if (availabilityInput) {
+      availabilityInput.checked = isAvailable;
+    }
+
     const display = {
       category: categorySelect?.value || product.category || "Uncategorized",
-      isAvailable: Boolean(availabilityInput?.checked),
+      isAvailable,
       tags,
       variants,
       stock,
@@ -170,13 +200,26 @@ function bindDisplayEditSave(product) {
       saveLink.textContent = "Saved";
     } catch (error) {
       console.error("Failed to save product display controls", error);
-      saveLink.textContent = "Save failed";
+      saveLink.textContent = "Setup required";
+      saveLink.title = getProductRuntimeErrorMessage(error, "Save failed");
     } finally {
       window.setTimeout(() => {
         saveLink.textContent = originalText || "Save changes";
+        saveLink.removeAttribute("title");
         saveLink.style.pointerEvents = "";
       }, 1200);
     }
+  });
+}
+
+function bindVariantAvailabilitySync() {
+  const wrapper = document.getElementById("hs-wrapper-for-copy");
+  if (!wrapper || wrapper.dataset.variantAvailabilitySyncBound === "true") return;
+
+  wrapper.dataset.variantAvailabilitySyncBound = "true";
+  wrapper.addEventListener("input", syncAvailabilityFromVariants);
+  wrapper.addEventListener("click", () => {
+    window.setTimeout(syncAvailabilityFromVariants, 0);
   });
 }
 
@@ -277,6 +320,8 @@ async function initProductDetailsPage() {
     });
 
     applyStoredDisplayEdit(currentProduct, storedDisplayEdit);
+    syncAvailabilityFromVariants();
+    bindVariantAvailabilitySync();
     bindDisplayEditSave(currentProduct);
 
     wireNavigation(prevButton, mergedProducts[currentIndex - 1] || null);

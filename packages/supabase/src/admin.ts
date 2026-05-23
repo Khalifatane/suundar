@@ -82,6 +82,20 @@ function splitRuntimeChannels(channels: any[] = []) {
   return { visibleChannels, displayVariants, displayMeta };
 }
 
+function normalizeDisplayVariants(variants: any[] = []) {
+  return (Array.isArray(variants) ? variants : [])
+    .map((variant) => ({
+      size: String(variant?.size || '').trim(),
+      color: String(variant?.color || '').trim(),
+      quantity: Math.max(0, Number(variant?.quantity ?? variant?.stock ?? variant?.inventory ?? 0) || 0),
+    }))
+    .filter((variant) => variant.size && variant.color);
+}
+
+function getDisplayVariantStock(variants: any[] = []) {
+  return normalizeDisplayVariants(variants).reduce((sum, variant) => sum + variant.quantity, 0);
+}
+
 function applyRange(query: any, limit?: number, offset = 0) {
   if (typeof limit !== 'number') return query;
   const from = Math.max(0, offset);
@@ -132,25 +146,34 @@ function normalizeCustomer(row: any) {
 function normalizeProductRuntime(row: any) {
   if (!row) return row;
   const { visibleChannels, displayVariants, displayMeta } = splitRuntimeChannels(row.channels);
+  const normalizedDisplayVariants = normalizeDisplayVariants(
+    Array.isArray(row.display_variants)
+      ? row.display_variants
+      : Array.isArray(row.variants)
+        ? row.variants
+        : displayVariants || [],
+  );
+  const variantStock = getDisplayVariantStock(normalizedDisplayVariants);
+  const stock = normalizedDisplayVariants.length
+    ? variantStock
+    : row.stock == null ? Number(row.inventory ?? 0) || 0 : Number(row.stock) || 0;
   return {
     ...row,
     sanity_product_id:
       row.sanity_product_id ?? row.product_id ?? row.sanity_id ?? row.slug ?? null,
     price: row.price == null ? null : Number(row.price),
     compare_at_price: row.compare_at_price == null ? null : Number(row.compare_at_price),
-    stock: row.stock == null ? Number(row.inventory ?? 0) || 0 : Number(row.stock) || 0,
+    stock,
     sales_count: Number(row.sales_count ?? 0) || 0,
     status: row.status || 'publish',
     is_available:
-      row.is_available === undefined || row.is_available === null
+      normalizedDisplayVariants.length
+        ? variantStock > 0
+        : row.is_available === undefined || row.is_available === null
         ? true
         : Boolean(row.is_available),
     channels: visibleChannels,
-    display_variants: Array.isArray(row.display_variants)
-      ? row.display_variants
-      : Array.isArray(row.variants)
-        ? row.variants
-        : displayVariants || [],
+    display_variants: normalizedDisplayVariants,
     display_category: row.display_category || displayMeta?.category || null,
   };
 }
@@ -343,12 +366,10 @@ export async function updateProductRuntimeAvailability(product: any, isAvailable
 
 export async function updateProductRuntimeDisplay(product: any, display: any = {}, options: any = {}) {
   const table = options.table || PRODUCT_RUNTIME_TABLE;
-  const variants = Array.isArray(display.variants) ? display.variants : [];
+  const variants = normalizeDisplayVariants(display.variants);
   const tags = Array.isArray(display.tags) ? display.tags.filter(Boolean).map(String) : [];
-  const nextAvailability =
-    display.isAvailable === undefined || display.isAvailable === null
-      ? Boolean(product?.isAvailable)
-      : Boolean(display.isAvailable);
+  const stock = getDisplayVariantStock(variants);
+  const nextAvailability = stock > 0;
   const identifiers = {
     sanity_product_id: product?.runtime?.sanity_product_id || product?.id || null,
     product_id: product?.runtime?.product_id || null,
@@ -357,7 +378,7 @@ export async function updateProductRuntimeDisplay(product: any, display: any = {
   };
   const payload = {
     ...identifiers,
-    stock: Math.max(0, Number(display.stock ?? product?.stock ?? 0) || 0),
+    stock,
     status: nextAvailability ? 'publish' : 'unpublish',
     is_available: nextAvailability,
     channels: [
@@ -386,6 +407,9 @@ export async function updateProductRuntimeDisplay(product: any, display: any = {
 
 export function mergeProductWithRuntime(product: any, runtime: any) {
   if (!runtime) return product;
+  const displayVariants = normalizeDisplayVariants(runtime.display_variants);
+  const variantStock = getDisplayVariantStock(displayVariants);
+  const hasDisplayVariants = displayVariants.length > 0;
   return {
     ...product,
     runtime,
@@ -395,10 +419,14 @@ export function mergeProductWithRuntime(product: any, runtime: any) {
       runtime.compare_at_price == null || Number.isNaN(runtime.compare_at_price)
         ? product.compareAtPrice
         : runtime.compare_at_price,
-    stock: runtime.stock == null || Number.isNaN(runtime.stock) ? product.stock : runtime.stock,
+    stock: hasDisplayVariants
+      ? variantStock
+      : runtime.stock == null || Number.isNaN(runtime.stock) ? product.stock : runtime.stock,
     status: runtime.status || product.status,
     isAvailable:
-      runtime.is_available === undefined || runtime.is_available === null
+      hasDisplayVariants
+        ? variantStock > 0
+        : runtime.is_available === undefined || runtime.is_available === null
         ? product.isAvailable
         : Boolean(runtime.is_available),
     channels:
@@ -406,8 +434,8 @@ export function mergeProductWithRuntime(product: any, runtime: any) {
         ? runtime.channels
         : product.channels,
     displayVariants:
-      Array.isArray(runtime.display_variants) && runtime.display_variants.length
-        ? runtime.display_variants
+      hasDisplayVariants
+        ? displayVariants
         : product.displayVariants,
     displayCategory: runtime.display_category || product.displayCategory,
     salesCount: Number(runtime.sales_count ?? product.salesCount ?? 0) || 0,

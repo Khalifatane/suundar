@@ -38,6 +38,14 @@ function formatMoney(value) {
   }).format(Number.isFinite(amount) ? amount : 0);
 }
 
+function getProductRuntimeErrorMessage(error, fallback) {
+  const message = String(error?.message || "");
+  if (/products_runtime|schema cache|relation .* does not exist/i.test(message)) {
+    return "Product runtime table is missing. Run scripts/create-products-runtime-table.sql in Supabase, then try again.";
+  }
+  return message ? `${fallback}: ${message}` : `${fallback}.`;
+}
+
 function filterProductsByTab(products, tabKey) {
   return products;
 }
@@ -373,7 +381,10 @@ async function initProductsPage() {
       } catch (runtimeError) {
         console.warn("Supabase runtime unavailable for products page", runtimeError);
         setLiveStatus(
-          "Live Sanity products loaded. Supabase runtime could not be merged.",
+          getProductRuntimeErrorMessage(
+            runtimeError,
+            "Live Sanity products loaded, but Supabase runtime could not be merged",
+          ),
           "warning",
         );
       }
@@ -521,9 +532,7 @@ async function initProductsPage() {
     } catch (error) {
       availabilityInput.checked = !nextValue;
       setLiveStatus(
-        error?.message
-          ? `Availability update failed: ${error.message}`
-          : "Availability update failed.",
+        getProductRuntimeErrorMessage(error, "Availability update failed"),
         "error",
       );
     } finally {

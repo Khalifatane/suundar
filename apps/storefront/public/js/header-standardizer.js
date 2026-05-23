@@ -1079,17 +1079,41 @@
       }
       if (channel) tags.push(String(channel));
     });
+    variants = normalizeDetailVariantRows(variants);
+    const variantStock = getDetailVariantStock(variants);
+    const stock = variants.length ? variantStock : Math.max(0, Number(row.stock ?? row.inventory ?? 0) || 0);
 
     return {
       category: row.display_category || (meta && meta.category) || "",
       isAvailable:
-        row.is_available === undefined || row.is_available === null
-          ? row.status !== "unpublish"
-          : Boolean(row.is_available),
+        variants.length
+          ? variantStock > 0
+          : row.is_available === undefined || row.is_available === null
+            ? row.status !== "unpublish"
+            : Boolean(row.is_available),
       tags: tags,
       variants: variants,
-      stock: Math.max(0, Number(row.stock ?? row.inventory ?? 0) || 0),
+      stock: stock,
     };
+  }
+
+  function normalizeDetailVariantRows(variants) {
+    return (Array.isArray(variants) ? variants : []).map(function (variant) {
+      const options = variant.options || {};
+      return {
+        size: String(variant.size || options.size || variant.title || "").trim(),
+        color: String(variant.color || options.color || "").trim(),
+        quantity: Math.max(0, Number(variant.quantity ?? variant.stock ?? variant.inventory ?? 0) || 0),
+      };
+    }).filter(function (variant) {
+      return variant.size && variant.color;
+    });
+  }
+
+  function getDetailVariantStock(variants) {
+    return normalizeDetailVariantRows(variants).reduce(function (sum, variant) {
+      return sum + Number(variant.quantity || 0);
+    }, 0);
   }
 
   async function fetchProductDisplayEdit(product, slug) {
@@ -1131,25 +1155,12 @@
   function normalizeDetailVariants(product, edit) {
     const editVariants = edit && Array.isArray(edit.variants) ? edit.variants : [];
     if (editVariants.length) {
-      return editVariants.map(function (variant) {
-        return {
-          size: variant.size || "One size",
-          color: variant.color || "Default",
-          quantity: Math.max(0, Number(variant.quantity || 0) || 0),
-        };
-      });
+      return normalizeDetailVariantRows(editVariants);
     }
 
     const productVariants = product && Array.isArray(product.variants) ? product.variants : [];
     if (productVariants.length) {
-      return productVariants.map(function (variant) {
-        const options = variant.options || {};
-        return {
-          size: variant.size || options.size || variant.title || "One size",
-          color: variant.color || options.color || "Default",
-          quantity: Math.max(0, Number(variant.inventory || variant.stock || variant.quantity || 0) || 0),
-        };
-      });
+      return normalizeDetailVariantRows(productVariants);
     }
 
     return [];
@@ -1308,16 +1319,16 @@
     const category = (edit && edit.category) || getCategoryTitle(product && product.category) || document.getElementById("product-detail-category")?.textContent.trim() || "Product";
     const price = product && typeof product.price === "number" ? product.price : parsePrice(document.getElementById("product-detail-price")?.textContent || 0);
     const variants = normalizeDetailVariants(product, edit);
-    const stock = edit && typeof edit.stock === "number"
-      ? edit.stock
-      : variants.reduce(function (sum, variant) {
-        return sum + Number(variant.quantity || 0);
-      }, Number(product && product.stock ? product.stock : 0));
-    const isAvailable = edit && typeof edit.isAvailable === "boolean"
+    const stock = variants.length
+      ? getDetailVariantStock(variants)
+      : edit && typeof edit.stock === "number"
+        ? edit.stock
+        : Math.max(0, Number(product && product.stock ? product.stock : 0) || 0);
+    const isAvailable = stock > 0 && (edit && typeof edit.isAvailable === "boolean"
       ? edit.isAvailable
       : product
         ? product.isAvailable !== false && product.status !== "unpublish"
-        : true;
+        : true);
     const href = slug ? "./Product Detail.html?slug=" + encodeURIComponent(slug) : "./Product Detail.html";
     const image = getProductImageUrl(product);
 
