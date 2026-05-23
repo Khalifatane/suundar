@@ -149,6 +149,62 @@ function buildReplyMarkup(reply) {
   `;
 }
 
+function buildReplyComposerMarkup(existingReply = "") {
+  return `
+    <div class="ljp3z flex my9gz" data-review-reply-composer>
+      <svg class="y6rh0 x215h c4t4j" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="15 10 20 15 15 20"></polyline>
+        <path d="M4 4v7a4 4 0 0 0 4 4h12"></path>
+      </svg>
+      <div class="t6ue9">
+        <p class="at2zb yymkp c4t4j">Write your reply</p>
+        <textarea data-review-reply-input class="w-full min-h-24 rounded-md border border-slate-300 bg-white px-3 py-2 text-sm text-slate-700 focus:outline-hidden focus:ring-2 focus:ring-primary-500" placeholder="Type your reply here...">${escapeHtml(existingReply)}</textarea>
+        <div class="flex items-center g26qa my9gz">
+          <button type="button" data-review-action="reply-save" class="abuy9 zqj33 inline-flex items-center i220p m859b at2zb lkbtk vomh5 s6i1l mak94 x3ljb k0ser cirj5 dduyg disabled:opacity-50 disabled:pointer-events-none focus:outline-hidden usqtq">
+            Save reply
+          </button>
+          <button type="button" data-review-action="reply-cancel" class="uev8b inline-flex lp3ls items-center my9gz pkdac k0ser disabled:opacity-50 disabled:pointer-events-none focus:outline-hidden cwz0p">
+            Cancel
+          </button>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+function closeReplyComposer(scope = document) {
+  const composer = scope.querySelector("[data-review-reply-composer]");
+  if (composer) composer.remove();
+}
+
+function openReplyComposer(row) {
+  if (!row) return;
+
+  const tbody = row.closest("tbody");
+  if (tbody) {
+    Array.from(tbody.querySelectorAll("[data-review-reply-composer]")).forEach((node) => {
+      if (!row.contains(node)) node.remove();
+    });
+  }
+
+  const contentCell = row.cells?.[3];
+  if (!contentCell) return;
+
+  const existingComposer = contentCell.querySelector("[data-review-reply-composer]");
+  const existingReplyNode = contentCell.querySelector("blockquote");
+  const existingReply = existingReplyNode ? existingReplyNode.textContent.trim() : "";
+
+  if (!existingComposer) {
+    contentCell.insertAdjacentHTML("beforeend", buildReplyComposerMarkup(existingReply));
+  }
+
+  const replyInput = contentCell.querySelector("[data-review-reply-input]");
+  if (replyInput) {
+    replyInput.focus();
+    replyInput.setSelectionRange(replyInput.value.length, replyInput.value.length);
+  }
+}
+
 function buildReviewRow(review, index) {
   const productImage = escapeHtml(review.product_image_snapshot || "");
   const productTitle = escapeHtml(review.product_title_snapshot || "Product");
@@ -289,7 +345,10 @@ function bindReviewTableActions() {
     if (!actionButton) return;
 
     const action = String(actionButton.getAttribute("data-review-action") || "");
-    const reviewId = String(actionButton.getAttribute("data-review-id") || "");
+    const parentRow = actionButton.closest("tr");
+    const reviewId = String(
+      actionButton.getAttribute("data-review-id") || parentRow?.getAttribute("data-review-id") || "",
+    );
     if (!action || !reviewId) return;
 
     const originalLabel = actionButton.textContent;
@@ -298,13 +357,18 @@ function bindReviewTableActions() {
     try {
       if (action === "reply") {
         const row = actionButton.closest("tr");
-        const existingReplyNode = row ? row.querySelector("blockquote") : null;
-        const existingReply = existingReplyNode ? existingReplyNode.textContent.trim() : "";
-        const nextReply = window.prompt("Write your reply to this review:", existingReply);
-        if (nextReply === null) return;
-
-        const trimmedReply = nextReply.trim();
-        if (!trimmedReply) return;
+        openReplyComposer(row);
+      } else if (action === "reply-cancel") {
+        const row = actionButton.closest("tr");
+        closeReplyComposer(row || document);
+      } else if (action === "reply-save") {
+        const row = actionButton.closest("tr");
+        const replyInput = row ? row.querySelector("[data-review-reply-input]") : null;
+        const trimmedReply = String(replyInput?.value || "").trim();
+        if (!trimmedReply) {
+          window.alert("Please write a reply before saving.");
+          return;
+        }
 
         actionButton.textContent = "Saving...";
         await createProductReviewReply({
