@@ -14,6 +14,7 @@ const tableState = createTableUrlState({
   defaultPageSize: PAGE_SIZE,
   statusParam: "status",
 });
+const STOREFRONT_ORDERS_KEY = "appOrders";
 const STOREFRONT_LATEST_ORDER_KEY = "appLatestOrder";
 
 function escapeHtml(value) {
@@ -143,6 +144,67 @@ function readStorefrontLatestOrder() {
   } catch (error) {
     console.warn("Unable to read latest storefront order bridge.", error);
     return null;
+  }
+}
+
+function readSharedOrders() {
+  try {
+    const raw = window.localStorage.getItem(STOREFRONT_ORDERS_KEY);
+    const parsed = raw ? JSON.parse(raw) : [];
+    return Array.isArray(parsed) ? parsed.filter((order) => order?.id) : [];
+  } catch (error) {
+    console.warn("Unable to read shared order history.", error);
+    return [];
+  }
+}
+
+function saveSharedOrders(orders) {
+  try {
+    window.localStorage.setItem(STOREFRONT_ORDERS_KEY, JSON.stringify(orders));
+  } catch (error) {
+    console.warn("Unable to save shared order history.", error);
+  }
+}
+
+function sortOrdersByNewest(orders) {
+  return [...orders].sort((left, right) => {
+    const leftTime = new Date(left?.created_at || left?.date || 0).getTime() || 0;
+    const rightTime = new Date(right?.created_at || right?.date || 0).getTime() || 0;
+    return rightTime - leftTime;
+  });
+}
+
+function mergeOrdersById(...orderGroups) {
+  const merged = new Map();
+
+  orderGroups.flat().forEach((order) => {
+    if (!order?.id) return;
+    const current = merged.get(order.id) || {};
+    merged.set(order.id, {
+      ...current,
+      ...order,
+    });
+  });
+
+  return sortOrdersByNewest(Array.from(merged.values()));
+}
+
+function isLocalOrderId(orderId) {
+  return String(orderId || "").startsWith("local-order-");
+}
+
+function removeSharedOrder(orderId) {
+  const nextOrders = readSharedOrders().filter((order) => order?.id !== orderId);
+  saveSharedOrders(nextOrders);
+
+  const latestOrder = readStorefrontLatestOrder();
+  if (latestOrder?.id === orderId) {
+    const nextLatest = nextOrders[0] || null;
+    if (nextLatest) {
+      window.localStorage.setItem(STOREFRONT_LATEST_ORDER_KEY, JSON.stringify(nextLatest));
+    } else {
+      window.localStorage.removeItem(STOREFRONT_LATEST_ORDER_KEY);
+    }
   }
 }
 
@@ -382,12 +444,13 @@ async function initOrdersPage() {
         limit: 100,
         query,
       });
+      const sharedOrders = readSharedOrders();
       const bridgeOrder = readStorefrontLatestOrder();
-      const orders = fetchedOrders.length
-        ? fetchedOrders
-        : bridgeOrder
-          ? [bridgeOrder]
-          : [];
+      const orders = mergeOrdersById(
+        fetchedOrders,
+        sharedOrders,
+        bridgeOrder ? [bridgeOrder] : [],
+      );
 
       const filteredOrders = filterOrdersByTab(orders, currentTab);
       const totalResults = filteredOrders.length;
@@ -503,7 +566,11 @@ async function initOrdersPage() {
     deleteButton.disabled = true;
 
     try {
-      await deleteOrder(orderId);
+      if (isLocalOrderId(orderId)) {
+        removeSharedOrder(orderId);
+      } else {
+        await deleteOrder(orderId);
+      }
       render();
     } catch (error) {
       console.error("Failed to delete order", error);
