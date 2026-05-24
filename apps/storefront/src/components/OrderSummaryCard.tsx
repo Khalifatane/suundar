@@ -117,20 +117,10 @@ export default function OrderSummaryCard({
           <span className="text-gray-600">Shipping</span>
           <span className={shippingLabel === 'Free' ? 'text-green-600' : ''}>{shippingLabel}</span>
         </div>
-        <div className="flex justify-between">
-          <span className="text-gray-600">Estimated Tax</span>
-          <span>{estimatedTaxLabel}</span>
-        </div>
         {promoDiscount > 0 ? (
           <div className="flex justify-between text-red-600">
             <span>Promo discount</span>
             <span>-{formattedPromoDiscount}</span>
-          </div>
-        ) : null}
-        {saleDiscount > 0 ? (
-          <div className="flex justify-between text-red-600">
-            <span>Sale discount</span>
-            <span>-{formattedSaleDiscount}</span>
           </div>
         ) : null}
         <div className="flex justify-between font-semibold text-base pt-3 border-t">

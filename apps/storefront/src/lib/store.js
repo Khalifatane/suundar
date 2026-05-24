@@ -88,7 +88,7 @@ function formatPromoValue(discount) {
   const type = String(discount?.type ?? "").toLowerCase();
 
   if (type.includes("percent")) return `${safeValue}% off`;
-  return `$${safeValue} off`;
+  return `${safeValue} FCFA off`;
 }
 
 function formatPromoEndDate(discount) {
@@ -282,7 +282,8 @@ export function parsePrice(value) {
 }
 
 export function formatPrice(value) {
-  return "$" + Number(value || 0).toFixed(2).replace(/\.00$/, "");
+  const amount = Math.round(Number(value || 0));
+  return `${amount.toLocaleString("fr-FR")} FCFA`;
 }
 
 export function getAppliedDiscount() {

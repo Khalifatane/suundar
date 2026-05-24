@@ -65,10 +65,6 @@ export default function OrderDetailsPage() {
             <div className="space-y-2 text-sm">
               <div className="flex justify-between"><span className="text-gray-600">Subtotal</span><span>${order.costs.subtotal}</span></div>
               <div className="flex justify-between"><span className="text-gray-600">Shipping</span><span className="text-green-600">{order.costs.shipping}</span></div>
-              <div className="flex justify-between"><span className="text-gray-600">Estimated Tax</span><span>{order.costs.estimatedTax}</span></div>
-              {order.costs.saleDiscount !== null && (
-                <div className="flex justify-between text-red-600"><span>Sale discount</span><span>${order.costs.saleDiscount}</span></div>
-              )}
               <div className="flex justify-between font-medium pt-2 border-t">
                 <span>Total</span>
                 <span>${order.costs.total}</span>

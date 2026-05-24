@@ -99,7 +99,6 @@ export default function OrderConfirmationPage() {
             <div className="space-y-3 text-sm mb-6">
               <div className="flex justify-between"><span className="text-gray-600">Subtotal</span><span>${orderSummary.subtotal}</span></div>
               <div className="flex justify-between"><span className="text-gray-600">Shipping</span><span className="text-green-600">{orderSummary.shipping}</span></div>
-              <div className="flex justify-between"><span className="text-gray-600">Estimated Tax</span><span>{orderSummary.estimatedTax}</span></div>
               <div className="flex justify-between font-semibold text-base pt-3 border-t">
                 <span>Total</span>
                 <span>{orderSummary.currency === 'USD' && '$'}{orderSummary.total} {orderSummary.currency}</span>

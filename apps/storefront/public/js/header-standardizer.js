@@ -170,7 +170,8 @@
     if (commerceStore && commerceStore.formatPrice) {
       return commerceStore.formatPrice(value);
     }
-    return "$" + Number(value || 0).toFixed(2).replace(/\.00$/, "");
+    const amount = Math.round(Number(value || 0));
+    return amount.toLocaleString("fr-FR") + " FCFA";
   }
 
   function getProductSlugFromHref(href) {
@@ -1999,10 +2000,8 @@
     const valueMap = {
       subtotal: formatPrice(pricing.subtotal || 0),
       shipping: formatPrice(pricing.shippingAmount || 0),
-      "estimated-tax": formatPrice(pricing.estimatedTax || 0),
       "promo-code": pricing.promoDiscount ? "-" + formatPrice(pricing.promoDiscount) : formatPrice(0),
       "promo-discount": pricing.promoDiscount ? "-" + formatPrice(pricing.promoDiscount) : formatPrice(0),
-      sale: pricing.saleDiscount ? "-" + formatPrice(pricing.saleDiscount) : formatPrice(0),
       total: formatPrice(pricing.total || 0),
     };
 
