@@ -24,85 +24,7 @@ const promoCards = [
   },
 ];
 
-const fallbackProducts = [
-  {
-    id: "slim-lyocell-trousers",
-    title: "Slim Lyocell Trousers",
-    category: "Men's Trousers",
-    price: "$50",
-    reviewCount: 1,
-  },
-  {
-    id: "camo-blend-jacket",
-    title: "Camo Blend Jacket",
-    category: "Men's Jackets",
-    originalPrice: "$60",
-    price: "$40",
-    reviewCount: 675,
-    badge: "Trending",
-  },
-  {
-    id: "cotton-tshirt",
-    title: "Cotton T-Shirt",
-    category: "Men's T-Shirts",
-    price: "$35",
-    reviewCount: 7,
-    badge: "Trending",
-  },
-  {
-    id: "embroidered-hoodie",
-    title: "Embroidered Hoodie",
-    category: "Men's Sweaters",
-    price: "$69",
-    reviewCount: 234,
-  },
-  {
-    id: "everyday-solid-white-tshirt",
-    title: "Everyday Solid White T-Shirt",
-    category: "Men's T-Shirts",
-    price: "$30",
-    reviewCount: 130,
-  },
-  {
-    id: "relaxed-tshirt-sale",
-    title: "Everyday Solid Black T-Shirt",
-    category: "Men's T-Shirts",
-    originalPrice: "$60",
-    price: "$40",
-    reviewCount: 99,
-    badge: "Trending",
-  },
-  {
-    id: "basic-cotton-relaxed",
-    title: "Basic Cotton Relaxed T-Shirt",
-    category: "Men's T-Shirts",
-    price: "$39",
-    reviewCount: 50,
-  },
-  {
-    id: "basic-cotton-relaxed-premium",
-    title: "Basic Cotton Relaxed T-Shirt",
-    category: "Men's T-Shirts",
-    price: "$89",
-    reviewCount: 0,
-    badge: "Trending",
-  },
-  {
-    id: "bowling-collar-cotton-shirt",
-    title: "Bowling Collar Cotton Shirt",
-    category: "Men's Shirts",
-    price: "$125",
-    reviewCount: 568,
-    badge: "Trending",
-  },
-  {
-    id: "flag-logo-crewneck",
-    title: "Flag Logo Crewneck Sweate",
-    category: "Men's Sweaters",
-    price: "$190",
-    reviewCount: 25,
-  },
-];
+const PRODUCT_LIMIT = 10;
 
 function formatPrice(price, currency = "USD") {
   if (typeof price !== "number" || Number.isNaN(price)) return null;
@@ -118,26 +40,25 @@ function formatPrice(price, currency = "USD") {
   }
 }
 
-function mapProductToCard(product, fallback, index) {
+function mapProductToCard(product, index) {
   return {
-    id: product?._id || fallback?.id || `product-${index + 1}`,
+    id: product?._id || `product-${index + 1}`,
     image:
       product?.image?.asset?.url ||
       product?.images?.[0]?.asset?.url ||
-      fallback?.image ||
       "",
-    title: product?.title || fallback?.title || `Product ${index + 1}`,
-    category: product?.category?.title || fallback?.category || "Product",
+    title: product?.title || `Product ${index + 1}`,
+    category: product?.category?.title || "Product",
     originalPrice:
       typeof product?.originalPrice === "number"
         ? formatPrice(product.originalPrice, product.currency)
-        : fallback?.originalPrice,
+        : null,
     price:
       typeof product?.price === "number"
         ? formatPrice(product.price, product.currency)
-        : fallback?.price || "$0",
-    reviewCount: fallback?.reviewCount || 0,
-    badge: fallback?.badge,
+        : "$0",
+    reviewCount: 0,
+    badge: null,
     href: product?.slug?.current
       ? `./Product Detail.html?slug=${encodeURIComponent(product.slug.current)}`
       : "./Product Detail.html",
@@ -249,7 +170,8 @@ function ProductCard({ product }) {
 }
 
 export default function HomepageProductGridIsland() {
-  const [products, setProducts] = useState(fallbackProducts);
+  const [products, setProducts] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
   const gridRef = useRef(null);
 
   useEffect(() => {
@@ -257,20 +179,29 @@ export default function HomepageProductGridIsland() {
 
     const loadProducts = async () => {
       try {
-        const sanityProducts = await sanityService.getProducts(fallbackProducts.length, 0);
-        if (!isMounted || !Array.isArray(sanityProducts) || sanityProducts.length === 0) {
+        const sanityProducts = await sanityService.getProducts(PRODUCT_LIMIT, 0);
+        if (!isMounted) {
           return;
         }
 
-        const nextProducts = sanityProducts
-          .slice(0, fallbackProducts.length)
-          .map((product, index) =>
-            mapProductToCard(product, fallbackProducts[index], index),
+        if (Array.isArray(sanityProducts) && sanityProducts.length > 0) {
+          setProducts(
+            sanityProducts
+              .slice(0, PRODUCT_LIMIT)
+              .map((product, index) => mapProductToCard(product, index)),
           );
-
-        setProducts(nextProducts);
+        } else {
+          setProducts([]);
+        }
       } catch (error) {
         console.warn("Unable to load homepage products from Sanity.", error);
+        if (isMounted) {
+          setProducts([]);
+        }
+      } finally {
+        if (isMounted) {
+          setIsLoading(false);
+        }
       }
     };
 
@@ -290,21 +221,27 @@ export default function HomepageProductGridIsland() {
 
   return (
     <>
-      <div className="tex4h hfud4 z27bc fgi2s rn6hf h7z6o w0vti" ref={gridRef}>
-        <PromoCard card={promoCards[0]} />
-        {products.map((product) => (
-          <ProductCard key={product.id} product={product} />
-        ))}
-        <PromoCard card={promoCards[1]} />
-      </div>
+      {products.length > 0 ? (
+        <div className="tex4h hfud4 z27bc fgi2s rn6hf h7z6o w0vti" ref={gridRef}>
+          <PromoCard card={promoCards[0]} />
+          {products.map((product) => (
+            <ProductCard key={product.id} product={product} />
+          ))}
+          <PromoCard card={promoCards[1]} />
+        </div>
+      ) : null}
       <p className="ga3ss yymkp f1ztf">
-        <span className="inline-flex items-center my9gz yymkp f1ztf">
-          <svg className="ezhux y6rh0 x215h" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
-            <path className="l74pw" d="M24 12C24 18.6274 18.6274 24 12 24C5.37258 24 0 18.6274 0 12C0 5.37258 5.37258 0 12 0C18.6274 0 24 5.37258 24 12ZM3.13375 12C3.13375 16.8967 7.10331 20.8662 12 20.8662C16.8967 20.8662 20.8662 16.8967 20.8662 12C20.8662 7.10331 16.8967 3.13375 12 3.13375C7.10331 3.13375 3.13375 7.10331 3.13375 12Z" fill="currentColor" />
-            <path className="o53xq" d="M12 0C9.62662 -2.83022e-08 7.30655 0.703788 5.33316 2.02236C3.35977 3.34094 1.8217 5.21509 0.913446 7.4078C0.00519403 9.60051 -0.232446 12.0133 0.230577 14.3411C0.693599 16.6689 1.83649 18.8071 3.51472 20.4853L5.73062 18.2694C4.49065 17.0294 3.64622 15.4496 3.30412 13.7297C2.96201 12.0098 3.13759 10.2271 3.80866 8.60703C4.47972 6.98694 5.61613 5.60222 7.07418 4.62798C8.53222 3.65375 10.2464 3.13375 12 3.13375L12 0Z" fill="currentColor" />
-          </svg>
-          Loading ...
-        </span>
+        {isLoading ? (
+          <span className="inline-flex items-center my9gz yymkp f1ztf">
+            <svg className="ezhux y6rh0 x215h" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+              <path className="l74pw" d="M24 12C24 18.6274 18.6274 24 12 24C5.37258 24 0 18.6274 0 12C0 5.37258 5.37258 0 12 0C18.6274 0 24 5.37258 24 12ZM3.13375 12C3.13375 16.8967 7.10331 20.8662 12 20.8662C16.8967 20.8662 20.8662 16.8967 20.8662 12C20.8662 7.10331 16.8967 3.13375 12 3.13375C7.10331 3.13375 3.13375 7.10331 3.13375 12Z" fill="currentColor" />
+              <path className="o53xq" d="M12 0C9.62662 -2.83022e-08 7.30655 0.703788 5.33316 2.02236C3.35977 3.34094 1.8217 5.21509 0.913446 7.4078C0.00519403 9.60051 -0.232446 12.0133 0.230577 14.3411C0.693599 16.6689 1.83649 18.8071 3.51472 20.4853L5.73062 18.2694C4.49065 17.0294 3.64622 15.4496 3.30412 13.7297C2.96201 12.0098 3.13759 10.2271 3.80866 8.60703C4.47972 6.98694 5.61613 5.60222 7.07418 4.62798C8.53222 3.65375 10.2464 3.13375 12 3.13375L12 0Z" fill="currentColor" />
+            </svg>
+            Loading ...
+          </span>
+        ) : products.length === 0 ? (
+          <span>No live products available right now.</span>
+        ) : null}
       </p>
     </>
   );

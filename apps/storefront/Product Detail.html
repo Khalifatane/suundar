@@ -1969,9 +1969,9 @@ Formatted & Cleaned HTML
 
          <li class="flex items-center">
 
-          <a class="wq0f5 qn2or flex items-center jdzig yymkp y9dku c4t4j b72le h6ry8 focus:outline-hidden" href="./Product Listing.html">
+          <a class="wq0f5 qn2or flex items-center jdzig yymkp y9dku c4t4j b72le h6ry8 focus:outline-hidden" href="./Product Listing.html" id="product-detail-breadcrumb-root">
 
-           Men
+           Shop
 
           </a>
 
@@ -1987,11 +1987,11 @@ Formatted & Cleaned HTML
 
          <li class="flex items-center truncate">
 
-          <a class="wq0f5 qn2or flex items-center truncate jdzig yymkp truncate y9dku c4t4j b72le h6ry8 focus:outline-hidden" href="./Product Listing.html">
+          <a class="wq0f5 qn2or flex items-center truncate jdzig yymkp truncate y9dku c4t4j b72le h6ry8 focus:outline-hidden" href="./Product Listing.html" id="product-detail-breadcrumb-category-link">
 
-           <span class="truncate">
+           <span class="truncate" id="product-detail-breadcrumb-category">
 
-            Slippers
+            Category
 
            </span>
 
@@ -2009,9 +2009,9 @@ Formatted & Cleaned HTML
 
          <li class="u5noc flex items-center truncate ctc9x c4t4j yymkp truncate">
 
-          <span class="truncate">
+          <span class="truncate" id="product-detail-breadcrumb-title">
 
-           Mahabis Classic
+           Product
 
           </span>
 
@@ -2277,19 +2277,19 @@ Formatted & Cleaned HTML
 
         <p class="p3x4c yymkp f1ztf" id="product-detail-category">
 
-         Men's Slippers
+         Category
 
         </p>
 
         <h1 class="ctc9x btbr3 c4t4j" id="product-detail-title">
 
-         Mahabis Classic
+         Product
 
         </h1>
 
         <p class="liwkv at2zb dxw73 c4t4j" id="product-detail-price">
 
-         $40
+         
 
         </p>
 
@@ -2341,9 +2341,9 @@ Formatted & Cleaned HTML
 
           </svg>
 
-          <span class="duiq5 m859b c4t4j">
+          <span class="duiq5 m859b c4t4j" id="product-detail-review-count">
 
-           (99)
+           
 
           </span>
 
@@ -9685,7 +9685,7 @@ Formatted & Cleaned HTML
 
     bindAddToCartButtons,
 
-    bindFavoriToggles,
+    bindFavoriteToggles,
 
     formatPrice,
 
@@ -9695,7 +9695,7 @@ Formatted & Cleaned HTML
 
 
 
-  const params = new URLRechercherParams(window.location.search);
+  const params = new URLSearchParams(window.location.search);
 
   const slug = params.get("slug");
 
@@ -9720,6 +9720,16 @@ Formatted & Cleaned HTML
   const titleNode = document.getElementById("product-detail-title");
 
   const priceNode = document.getElementById("product-detail-price");
+
+  const breadcrumbRootNode = document.getElementById("product-detail-breadcrumb-root");
+
+  const breadcrumbCategoryNode = document.getElementById("product-detail-breadcrumb-category");
+
+  const breadcrumbCategoryLink = document.getElementById("product-detail-breadcrumb-category-link");
+
+  const breadcrumbTitleNode = document.getElementById("product-detail-breadcrumb-title");
+
+  const reviewCountNode = document.getElementById("product-detail-review-count");
 
   const descriptionNode = document.getElementById("product-detail-description-copy");
 
@@ -9759,7 +9769,7 @@ Formatted & Cleaned HTML
 
     if (!fallbackTitle) return null;
 
-    const matches = await sanityService.searchProduits(fallbackTitle, 12);
+    const matches = await sanityService.searchProducts(fallbackTitle, 12);
 
     const products = Array.isArray(matches) ? matches : [];
 
@@ -9917,6 +9927,24 @@ Formatted & Cleaned HTML
 
     }
 
+    if (breadcrumbRootNode) {
+
+      breadcrumbRootNode.textContent = "Shop";
+
+    }
+
+    if (breadcrumbCategoryNode) {
+
+      breadcrumbCategoryNode.textContent = categoryTitle || "Category";
+
+    }
+
+    if (breadcrumbTitleNode) {
+
+      breadcrumbTitleNode.textContent = productTitle || "Product";
+
+    }
+
 
 
     if (titleNode && productTitle) {
@@ -9932,6 +9960,19 @@ Formatted & Cleaned HTML
     if (priceNode && typeof product?.price === "number") {
 
       priceNode.textContent = formatPrice(product.price);
+
+    } else if (priceNode) {
+
+      priceNode.textContent = "";
+
+    }
+
+    const reviewCount =
+      Number(product?.reviewCount ?? product?.reviewsCount ?? product?.ratingCount);
+
+    if (reviewCountNode) {
+
+      reviewCountNode.textContent = Number.isFinite(reviewCount) && reviewCount > 0 ? "(" + reviewCount + ")" : "";
 
     }
 
@@ -9954,7 +9995,25 @@ Formatted & Cleaned HTML
 
       : "./Product Detail.html";
 
-    const reviewParams = new URLRechercherParams();
+    if (breadcrumbCategoryLink) {
+
+      const categorySlug = product?.category?.slug?.current;
+
+      breadcrumbCategoryLink.setAttribute(
+
+        "href",
+
+        categorySlug
+
+          ? "./Product Listing.html?category=" + encodeURIComponent(categorySlug)
+
+          : "./Product Listing.html",
+
+      );
+
+    }
+
+    const reviewParams = new URLSearchParams();
 
     if (resolvedSlug) {
 
@@ -10170,11 +10229,11 @@ Formatted & Cleaned HTML
 
         ? await sanityService
 
-            .getProduitsByCategory(product.category.slug.current, relatedSlides.length + 1, 0)
+            .getProductsByCategory(product.category.slug.current, relatedSlides.length + 1, 0)
 
             .then((response) => response?.data || [])
 
-        : await sanityService.getProduits(relatedSlides.length + 1, 0);
+        : await sanityService.getProducts(relatedSlides.length + 1, 0);
 
 
 
@@ -10200,7 +10259,7 @@ Formatted & Cleaned HTML
 
       bindAddToCartButtons(document);
 
-      bindFavoriToggles(document);
+      bindFavoriteToggles(document);
 
       syncResolvedProductLinks(product?.slug?.current || slug || "");
 
