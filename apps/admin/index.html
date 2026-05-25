@@ -11,7 +11,7 @@
   <meta name="twitter:site" content="@preline">
   <meta name="twitter:creator" content="@preline">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="E-commerce: Empty States | Preline Pro">
+  <meta name="twitter:title" content="E-commerce | Preline Pro">
   <meta name="twitter:description" content="Powerful e-commerce admin pages with product &amp; order lists, referrals and more.">
   <meta name="twitter:image" content="https://preline.co/assets/img/og-image.png">
 
@@ -19,12 +19,12 @@
   <meta property="og:locale" content="en_US">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Preline">
-  <meta property="og:title" content="E-commerce: Empty States | Preline Pro">
+  <meta property="og:title" content="E-commerce | Preline Pro">
   <meta property="og:description" content="Powerful e-commerce admin pages with product &amp; order lists, referrals and more.">
   <meta property="og:image" content="https://preline.co/assets/img/og-image.png">
 
   <!-- Title -->
-  <title>E-commerce: Empty States | Preline Pro</title>
+  <title>E-commerce | Preline Pro</title>
 
   <!-- Favicon -->
   <link rel="shortcut icon" href="/preline.co/favicon.ico">
@@ -150,8 +150,8 @@
           const currentTheme = colorTheme && !reducedThemes.includes(colorTheme) ? colorTheme : defaultTheme;
           const currentBrand = brand || themesDefaults[currentTheme];
 
-          console.log("Current Theme:", currentTheme);
-          console.log("Current Brand:", brand, themesDefaults[currentTheme]);
+          console.log("Actuel Theme:", currentTheme);
+          console.log("Actuel Brand:", brand, themesDefaults[currentTheme]);
 
           html.setAttribute('data-theme', `theme-${currentTheme}`);
           html.setAttribute('data-brand', currentBrand);
@@ -219,7 +219,7 @@
             <div class="overflow-hidden overflow-y-auto max-h-[75vh] [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-none [&::-webkit-scrollbar-track]:bg-scrollbar-track [&::-webkit-scrollbar-thumb]:bg-scrollbar-thumb0">
               <div class="lg:flex lg:items-center k9lgk abuy9 djzsj space-y-1 lg:space-y-0">
                 <!-- Link -->
-                <a class="flex h7z6o myank abuy9 aimp4 w-full lg:w-auto items-center yymkp m4rra hbi2l edpyz bx00e disabled:opacity-50 disabled:pointer-events-none focus:outline-hidden hb5gy  " href="index.html">
+                <a class="flex h7z6o myank abuy9 aimp4 w-full lg:w-auto items-center yymkp m4rra hbi2l edpyz bx00e disabled:opacity-50 disabled:pointer-events-none focus:outline-hidden hb5gy bg-navbar-nav-active " href="index.html">
                   <svg class="lg:hidden y6rh0 x215h" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z" />
                     <path d="M3 6h18" />
@@ -229,34 +229,73 @@
                 </a>
                 <!-- End Link -->
 
-                
-                <!-- Link -->
-                <a class="flex h7z6o myank abuy9 aimp4 w-full lg:w-auto items-center yymkp m4rra hbi2l edpyz bx00e disabled:opacity-50 disabled:pointer-events-none focus:outline-hidden hb5gy bg-navbar-nav-active " href="products.html">
-                  <svg class="lg:hidden y6rh0 x215h" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M3 9h18v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V9Z" />
-                    <path d="m3 9 2.45-4.9A2 2 0 0 1 7.24 3h9.52a2 2 0 0 1 1.8 1.1L21 9" />
-                    <path d="M12 3v6" />
-                  </svg>
-                  Products
-                </a>
-                <!-- End Link -->
+                <!-- Dropdown Link -->
+                <div class="hs-dropdown [--strategy:static] lg:[--strategy:fixed] [--adaptive:none] lg:[--adaptive:adaptive] lg:[--trigger:hover] lg:inline-block">
+                  <!-- Link -->
+                  <button id="hs-pro-enlpd" type="button" class="hs-dropdown-toggle flex h7z6o myank abuy9 aimp4 w-full lg:w-auto items-center yymkp m4rra hbi2l edpyz bx00e disabled:opacity-50 disabled:pointer-events-none focus:outline-hidden hb5gy  " aria-haspopup="menu" aria-expanded="false" aria-label="Dropdown">
+                    <svg class="lg:hidden y6rh0 x215h" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M3 9h18v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V9Z" />
+                      <path d="m3 9 2.45-4.9A2 2 0 0 1 7.24 3h9.52a2 2 0 0 1 1.8 1.1L21 9" />
+                      <path d="M12 3v6" />
+                    </svg>
+                    Products
+                    <svg class="hs-dropdown-open:-rotate-180 lg:hs-dropdown-open:rotate-0 d5ksw ms-auto u8cp4 y6rh0 x215h" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="m6 9 6 6 6-6" />
+                    </svg>
+                  </button>
+                  <!-- End Link -->
 
-                <!-- Link -->
-                <a class="flex h7z6o myank abuy9 aimp4 w-full lg:w-auto items-center yymkp m4rra hbi2l edpyz bx00e disabled:opacity-50 disabled:pointer-events-none focus:outline-hidden hb5gy  " href="orders.html">
-                  <svg class="lg:hidden y6rh0 x215h" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M14.5 22H18a2 2 0 0 0 2-2V7.5L14.5 2H6a2 2 0 0 0-2 2v4" />
-                    <polyline points="14 2 14 8 20 8" />
-                    <path d="M2.97 13.12c-.6.36-.97 1.02-.97 1.74v3.28c0 .72.37 1.38.97 1.74l3 1.83c.63.39 1.43.39 2.06 0l3-1.83c.6-.36.97-1.02.97-1.74v-3.28c0-.72-.37-1.38-.97-1.74l-3-1.83a1.97 1.97 0 0 0-2.06 0l-3 1.83Z" />
-                    <path d="m7 17-4.74-2.85" />
-                    <path d="m7 17 4.74-2.85" />
-                    <path d="M7 17v5" />
-                  </svg>
-                  Orders <span class="wq0f5 o8oua inline-flex items-center i220p m859b at2zb m9icp cgphd nj29a dark:bg-primary-500/10 dark:text-primary-500">+1</span>
-                </a>
-                <!-- End Link -->
+                  <!-- Dropdown Menu -->
+                  <div class="hs-dropdown-menu transition-[opacity,margin] duration-[0.1ms] lg:duration-[150ms] hs-dropdown-open:opacity-100 opacity-0 relative w-full hqzfs hidden nnhrf top-full t8wsc p2as9 tflro shvck t9ba4 ifam8 cg7gk before:absolute before:-top-4 before:start-0 before:w-full before:h-5 lg:after:hidden after:absolute after:top-1 after:start-4.5 after:h-[calc(100%-4px)] after:border-s after:border-navbar-nav-list-divider" role="menu" aria-orientation="vertical" aria-labelledby="hs-pro-enlpd">
+                    <div class="i0yn8 space-y-0.5">
+                      <a class="group abuy9 aimp4 flex items-center h7z6o yymkp hbi2l bx00e focus:outline-hidden hb5gy edpyz  " href="products.html">
+                        Overview
+                      </a>
+                      <a class="group abuy9 aimp4 flex items-center h7z6o yymkp hbi2l bx00e focus:outline-hidden hb5gy edpyz  " href="product-details.html">
+                        Product Details
+                      </a>
+                    </div>
+                  </div>
+                  <!-- End Dropdown Menu -->
+                </div>
+                <!-- End Dropdown Link -->
 
-                <!-- Link -->
-                <!-- End Link -->
+                <!-- Dropdown Link -->
+                <div class="hs-dropdown [--strategy:static] lg:[--strategy:fixed] [--adaptive:none] lg:[--adaptive:adaptive] lg:[--trigger:hover] lg:inline-block">
+                  <!-- Link -->
+                  <button id="hs-pro-enlod" type="button" class="hs-dropdown-toggle flex h7z6o myank abuy9 aimp4 w-full lg:w-auto items-center yymkp m4rra hbi2l edpyz bx00e disabled:opacity-50 disabled:pointer-events-none focus:outline-hidden hb5gy  " aria-haspopup="menu" aria-expanded="false" aria-label="Dropdown">
+                    <svg class="lg:hidden y6rh0 x215h" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M14.5 22H18a2 2 0 0 0 2-2V7.5L14.5 2H6a2 2 0 0 0-2 2v4" />
+                      <polyline points="14 2 14 8 20 8" />
+                      <path d="M2.97 13.12c-.6.36-.97 1.02-.97 1.74v3.28c0 .72.37 1.38.97 1.74l3 1.83c.63.39 1.43.39 2.06 0l3-1.83c.6-.36.97-1.02.97-1.74v-3.28c0-.72-.37-1.38-.97-1.74l-3-1.83a1.97 1.97 0 0 0-2.06 0l-3 1.83Z" />
+                      <path d="m7 17-4.74-2.85" />
+                      <path d="m7 17 4.74-2.85" />
+                      <path d="M7 17v5" />
+                    </svg>
+                    Orders <span class="wq0f5 o8oua inline-flex items-center i220p m859b at2zb m9icp cgphd nj29a dark:bg-primary-500/10 dark:text-primary-500">+1</span>
+                    <svg class="hs-dropdown-open:-rotate-180 lg:hs-dropdown-open:rotate-0 d5ksw ms-auto u8cp4 y6rh0 x215h" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="m6 9 6 6 6-6" />
+                    </svg>
+                  </button>
+                  <!-- End Link -->
+
+                  <!-- Dropdown Menu -->
+                  <div class="hs-dropdown-menu transition-[opacity,margin] duration-[0.1ms] lg:duration-[150ms] hs-dropdown-open:opacity-100 opacity-0 relative w-full hqzfs hidden nnhrf top-full t8wsc p2as9 tflro shvck t9ba4 ifam8 cg7gk before:absolute before:-top-4 before:start-0 before:w-full before:h-5 lg:after:hidden after:absolute after:top-1 after:start-4.5 after:h-[calc(100%-4px)] after:border-s after:border-navbar-nav-list-divider" role="menu" aria-orientation="vertical" aria-labelledby="hs-pro-enlod">
+                    <div class="i0yn8 space-y-0.5">
+                      <a class="group abuy9 aimp4 flex items-center h7z6o yymkp hbi2l bx00e focus:outline-hidden hb5gy edpyz  " href="orders.html">
+                        Overview
+                      </a>
+                      <a class="group abuy9 aimp4 flex items-center h7z6o yymkp hbi2l bx00e focus:outline-hidden hb5gy edpyz  " href="purchase-orders.html">
+                        Purchase Orders <span class="wq0f5 o8oua inline-flex items-center i220p m859b at2zb m9icp cgphd nj29a dark:bg-primary-500/10 dark:text-primary-500">New</span>
+                      </a>
+                      <a class="group abuy9 aimp4 flex items-center h7z6o yymkp hbi2l bx00e focus:outline-hidden hb5gy edpyz  " href="order-details.html">
+                        Order Details
+                      </a>
+                    </div>
+                  </div>
+                  <!-- End Dropdown Menu -->
+                </div>
+                <!-- End Dropdown Link -->
 
                 <!-- Link -->
                 <a class="flex h7z6o myank abuy9 aimp4 w-full lg:w-auto items-center yymkp m4rra hbi2l edpyz bx00e disabled:opacity-50 disabled:pointer-events-none focus:outline-hidden hb5gy  " href="reviews.html">
@@ -287,17 +326,12 @@
                   <!-- Dropdown Menu -->
                   <div class="hs-dropdown-menu transition-[opacity,margin] duration-[0.1ms] lg:duration-[150ms] hs-dropdown-open:opacity-100 opacity-0 relative w-full hqzfs hidden nnhrf top-full t8wsc p2as9 tflro shvck t9ba4 ifam8 cg7gk before:absolute before:-top-4 before:start-0 before:w-full before:h-5 lg:after:hidden after:absolute after:top-1 after:start-4.5 after:h-[calc(100%-4px)] after:border-s after:border-navbar-nav-list-divider" role="menu" aria-orientation="vertical" aria-labelledby="hs-pro-enlst">
                     <div class="i0yn8 space-y-0.5">
-                      <!-- Link -->
                       <a class="group abuy9 aimp4 flex items-center h7z6o yymkp hbi2l bx00e focus:outline-hidden hb5gy edpyz  " href="store.html">
                         Overview
                       </a>
-                      <!-- End Link -->
-
-                      <!-- Link -->
                       <a class="group abuy9 aimp4 flex items-center h7z6o yymkp hbi2l bx00e focus:outline-hidden hb5gy edpyz  " href="payouts.html">
                         Payouts
                       </a>
-                      <!-- End Link -->
                     </div>
                   </div>
                   <!-- End Dropdown Menu -->
@@ -305,9 +339,26 @@
                 <!-- End Dropdown Link -->
 
                 <!-- Link -->
+                <a class="flex h7z6o myank abuy9 aimp4 w-full lg:w-auto items-center yymkp m4rra hbi2l edpyz bx00e disabled:opacity-50 disabled:pointer-events-none focus:outline-hidden hb5gy  " href="search.html">
+                  <svg class="lg:hidden y6rh0 x215h" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 6H3" />
+                    <path d="M10 12H3" />
+                    <path d="M10 18H3" />
+                    <circle cx="17" cy="15" r="3" />
+                    <path d="m21 19-1.9-1.9" />
+                  </svg>
+                  Search <span class="wq0f5 o8oua inline-flex items-center i220p m859b at2zb m9icp cgphd nj29a dark:bg-primary-500/10 dark:text-primary-500">New</span>
+                </a>
                 <!-- End Link -->
 
                 <!-- Link -->
+                <a class="flex h7z6o myank abuy9 aimp4 w-full lg:w-auto items-center yymkp m4rra hbi2l edpyz bx00e disabled:opacity-50 disabled:pointer-events-none focus:outline-hidden hb5gy  " href="empty-states.html">
+                  <svg class="lg:hidden y6rh0 x215h" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z" />
+                    <path d="M14 2v4a2 2 0 0 0 2 2h4" />
+                  </svg>
+                  Empty States
+                </a>
                 <!-- End Link -->
               </div>
             </div>
@@ -339,7 +390,7 @@
                     </svg>
                     <div class="t6ue9">
                       <p class="yymkp at2zb c4t4j">
-                        Gitlab_Store
+                        Gitlab_Boutique
                       </p>
                       <p class="m859b f1ztf">
                         gitlab.com
@@ -367,7 +418,7 @@
                     </svg>
                     <div class="t6ue9">
                       <p class="yymkp at2zb c4t4j">
-                        Shopify_Store
+                        Boutiqueify_Boutique
                       </p>
                       <p class="m859b f1ztf">
                         shopify.so
@@ -460,40 +511,21 @@
                   In-store sales
                 </h2>
                 <p class="dxw73 z7an8 ctc9x c4t4j">
-                  0
+                  $7,820.75
                 </p>
               </div>
             </div>
 
             <div class="liwkv flex items-center my9gz">
               <span class="yymkp tuy6i f1ztf">
-                0
+                5k orders
               </span>
-            </div>
-          </div>
-          <!-- End Card -->
-
-          <!-- Card -->
-          <div class="en2kw q638q fepth mak94 doa28 ictpa cirj5">
-            <div class="sm:flex dw3xm">
-              <svg class="r9xyu wgwtz t3zix y6rh0 ckw1y n7lpx" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="12" cy="12" r="10" />
-                <line x1="2" x2="22" y1="12" y2="12" />
-                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
-              </svg>
-              <div class="h6lcm t6ue9 space-y-1">
-                <h2 class="m9hyq yymkp f1ztf">
-                  Website sales
-                </h2>
-                <p class="dxw73 z7an8 ctc9x c4t4j">
-                  0
-                </p>
-              </div>
-            </div>
-
-            <div class="liwkv flex items-center my9gz">
-              <span class="yymkp tuy6i f1ztf">
-                0
+              <span class="inline-flex items-center jdzig m859b at2zb m5geq nj29a">
+                <svg class="y6rh0 x215h" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="22 7 13.5 15.5 8.5 10.5 2 17" />
+                  <polyline points="16 7 22 7 22 13" />
+                </svg>
+                4.3%
               </span>
             </div>
           </div>
@@ -513,44 +545,19 @@
                   Discount
                 </h2>
                 <p class="dxw73 z7an8 ctc9x c4t4j">
-                  0
+                  $15,503.00
                 </p>
               </div>
             </div>
 
             <div class="liwkv flex items-center my9gz">
               <span class="yymkp tuy6i f1ztf">
-                0
+                6k orders
               </span>
             </div>
           </div>
           <!-- End Card -->
 
-          <!-- Card -->
-          <div class="en2kw q638q fepth mak94 doa28 ictpa cirj5">
-            <div class="sm:flex dw3xm">
-              <svg class="r9xyu wgwtz t3zix y6rh0 ckw1y n7lpx" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M4 10c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h4c1.1 0 2 .9 2 2" />
-                <path d="M10 16c-1.1 0-2-.9-2-2v-4c0-1.1.9-2 2-2h4c1.1 0 2 .9 2 2" />
-                <rect width="8" height="8" x="14" y="14" rx="2" />
-              </svg>
-              <div class="h6lcm t6ue9 space-y-1">
-                <h2 class="m9hyq yymkp f1ztf">
-                  Affiliate
-                </h2>
-                <p class="dxw73 z7an8 ctc9x c4t4j">
-                  0
-                </p>
-              </div>
-            </div>
-
-            <div class="liwkv flex items-center my9gz">
-              <span class="yymkp tuy6i f1ztf">
-                0
-              </span>
-            </div>
-          </div>
-          <!-- End Card -->
         </div>
         <!-- End Stats Grid -->
 
@@ -581,7 +588,7 @@
                       <div class="tex4h ld6qx items-center h7z6o ibyh0 gjryt">
                         <!-- Prev Button -->
                         <div class="uj5nx">
-                          <button type="button" class="uev8b flex lp3ls items-center c4t4j bnjlx nj29a disabled:opacity-50 disabled:pointer-events-none focus:outline-hidden d298d" aria-label="Previous">
+                          <button type="button" class="uev8b flex lp3ls items-center c4t4j bnjlx nj29a disabled:opacity-50 disabled:pointer-events-none focus:outline-hidden d298d" aria-label="Precedent">
                             <svg class="y6rh0 x215h" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                               <path d="m15 18-6-6 6-6" />
                             </svg>
@@ -636,15 +643,15 @@
                         </div>
                         <!-- End Month / Year -->
 
-                        <!-- Next Button -->
+                        <!-- Suivant Button -->
                         <div class="uj5nx flex r49qf">
-                          <button type="button" class="opacity-0 rlfos uev8b flex lp3ls items-center c4t4j bnjlx nj29a disabled:opacity-50 disabled:pointer-events-none focus:outline-hidden d298d" aria-label="Next">
+                          <button type="button" class="opacity-0 rlfos uev8b flex lp3ls items-center c4t4j bnjlx nj29a disabled:opacity-50 disabled:pointer-events-none focus:outline-hidden d298d" aria-label="Suivant">
                             <svg class="y6rh0 x215h" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                               <path d="m9 18 6-6-6-6" />
                             </svg>
                           </button>
                         </div>
-                        <!-- End Next Button -->
+                        <!-- End Suivant Button -->
                       </div>
                       <!-- Months -->
 
@@ -921,7 +928,7 @@
                       <div class="tex4h ld6qx items-center h7z6o ibyh0 gjryt">
                         <!-- Prev Button -->
                         <div class="uj5nx">
-                          <button type="button" class="opacity-0 rlfos uev8b flex lp3ls items-center c4t4j bnjlx nj29a disabled:opacity-50 disabled:pointer-events-none focus:outline-hidden d298d" aria-label="Previous">
+                          <button type="button" class="opacity-0 rlfos uev8b flex lp3ls items-center c4t4j bnjlx nj29a disabled:opacity-50 disabled:pointer-events-none focus:outline-hidden d298d" aria-label="Precedent">
                             <svg class="y6rh0 x215h" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                               <path d="m15 18-6-6 6-6" />
                             </svg>
@@ -976,15 +983,15 @@
                         </div>
                         <!-- End Month / Year -->
 
-                        <!-- Next Button -->
+                        <!-- Suivant Button -->
                         <div class="uj5nx flex r49qf">
-                          <button type="button" class="uev8b flex lp3ls items-center c4t4j bnjlx nj29a disabled:opacity-50 disabled:pointer-events-none focus:outline-hidden d298d" aria-label="Next">
+                          <button type="button" class="uev8b flex lp3ls items-center c4t4j bnjlx nj29a disabled:opacity-50 disabled:pointer-events-none focus:outline-hidden d298d" aria-label="Suivant">
                             <svg class="y6rh0 x215h" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                               <path d="m9 18 6-6-6-6" />
                             </svg>
                           </button>
                         </div>
-                        <!-- End Next Button -->
+                        <!-- End Suivant Button -->
                       </div>
                       <!-- Months -->
 
@@ -1336,33 +1343,23 @@
           <!-- Body -->
           <div class="tex4h uty7c md:divide-x md:divide-card-divider">
             <div class="clsj7 bb704 zorzx">
+              <!-- Apex Line Chart -->
+              <div id="hs-orders-bar-chart" class="min-h-[265px] -mx-2"></div>
 
-              <div class="tj08a mx-auto nm4j1 flex flex-col lp3ls rm4xc">
-                <!-- Empty State -->
-                <div class="zorzx tj08a mx-auto nm4j1 flex flex-col lp3ls items-center rm4xc">
-                  <svg class="lbufi mx-auto" width="87" height="65" viewBox="0 0 87 65" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <rect y="35" width="6" height="30" fill="currentColor" class="x3ouv" />
-                    <rect x="9" y="20" width="6" height="45" fill="currentColor" class="x3ouv" />
-                    <rect x="18" y="25" width="6" height="40" fill="currentColor" class="x3ouv" />
-                    <rect x="27" width="6" height="65" fill="currentColor" class="x3ouv" />
-                    <rect x="36" y="5" width="6" height="60" fill="currentColor" class="x3ouv" />
-                    <rect x="45" y="40" width="6" height="25" fill="currentColor" class="x3ouv" />
-                    <rect x="54" y="25" width="6" height="40" fill="currentColor" class="x3ouv" />
-                    <rect x="63" y="12" width="6" height="53" fill="currentColor" class="x3ouv" />
-                    <rect x="72" width="6" height="65" fill="currentColor" class="x3ouv" />
-                    <rect x="81" y="44" width="6" height="21" fill="currentColor" class="x3ouv" />
-                  </svg>
-
-                  <div class="tj08a mx-auto">
-                    <p class="vbvcb at2zb c4t4j">
-                      No data
-                    </p>
-                    <p class="x57ta yymkp f1ztf">
-                      No data here yet. We will notify you when there's an update.
-                    </p>
-                  </div>
+              <!-- Legen Indicator -->
+              <div class="flex lp3ls items-center qsqz9">
+                <div class="inline-flex items-center">
+                  <span class="k8mfo inline-block z4l7b wnuda uuoi7"></span>
+                  <span class="text-[13px] mnod2">
+                    In-store
+                  </span>
                 </div>
-                <!-- End Empty State -->
+                <div class="inline-flex items-center">
+                  <span class="k8mfo inline-block bben9 wnuda uuoi7"></span>
+                  <span class="text-[13px] mnod2">
+                    Online
+                  </span>
+                </div>
               </div>
             </div>
             <!-- End Col -->
@@ -1387,31 +1384,31 @@
                     <div id="hs-pro-tabs-dtsch-orders" role="tabpanel" aria-labelledby="hs-pro-tabs-dtsch-item-orders">
                       <div class="xxt8a">
                         <h4 class="ctc9x taweu nhzx2 c4t4j">
-                          0
+                          125,090
                         </h4>
 
                         <!-- Progress -->
                         <div class="relative ljp3z">
-                          <div class="flex w-full uyp7t ahypv ftf66 overflow-hidden" role="progressbar" aria-valuenow="2" aria-valuemin="0" aria-valuemax="100">
-                            <div class="flex flex-col lp3ls ftf66 overflow-hidden z0w76 m859b cncwr rm4xc offh6 a38gk uglyd" style="width: 2%"></div>
+                          <div class="flex w-full uyp7t ahypv ftf66 overflow-hidden" role="progressbar" aria-valuenow="72" aria-valuemin="0" aria-valuemax="100">
+                            <div class="flex flex-col lp3ls ftf66 overflow-hidden z0w76 m859b cncwr rm4xc offh6 a38gk uglyd" style="width: 72%"></div>
                           </div>
-                          <div class="absolute ue5ra start-[1%] x990p u2lz3 z0w76 yzss1 uucnh ftf66 l8hgh -translate-y-1/2"></div>
+                          <div class="absolute ue5ra start-[71%] x990p u2lz3 z0w76 yzss1 uucnh ftf66 l8hgh -translate-y-1/2"></div>
                         </div>
                         <!-- End Progress -->
 
-                        <!-- Progress Status -->
+                        <!-- Progress Statut -->
                         <div class="ljp3z flex g86xu items-center">
                           <span class="m859b c4t4j">
                             0.00
                           </span>
                           <span class="m859b c4t4j">
-                            10
+                            200,000
                           </span>
                         </div>
-                        <!-- End Progress Status -->
+                        <!-- End Progress Statut -->
 
                         <p class="kohus yymkp mnod2">
-                          A project-wise breakdown of total orders complemented by detailed insights.
+                          A project-wise breakdown on total orders complemented by detailed insights.
                         </p>
                       </div>
                     </div>
@@ -1421,31 +1418,31 @@
                     <div id="hs-pro-tabs-dtsch-sales" class="hidden" role="tabpanel" aria-labelledby="hs-pro-tabs-dtsch-item-sales">
                       <div class="xxt8a">
                         <h4 class="ctc9x taweu nhzx2 c4t4j">
-                          0
+                          $993,758.20
                         </h4>
 
                         <!-- Progress -->
                         <div class="relative ljp3z">
-                          <div class="flex w-full uyp7t ahypv ftf66 overflow-hidden" role="progressbar" aria-valuenow="2" aria-valuemin="0" aria-valuemax="100">
-                            <div class="flex flex-col lp3ls ftf66 overflow-hidden z0w76 m859b cncwr rm4xc offh6 a38gk uglyd" style="width: 2%"></div>
+                          <div class="flex w-full uyp7t ahypv ftf66 overflow-hidden" role="progressbar" aria-valuenow="47" aria-valuemin="0" aria-valuemax="100">
+                            <div class="flex flex-col lp3ls ftf66 overflow-hidden z0w76 m859b cncwr rm4xc offh6 a38gk uglyd" style="width: 47%"></div>
                           </div>
-                          <div class="absolute ue5ra start-[1%] x990p u2lz3 z0w76 yzss1 uucnh ftf66 l8hgh -translate-y-1/2"></div>
+                          <div class="absolute ue5ra start-[46%] x990p u2lz3 z0w76 yzss1 uucnh ftf66 l8hgh -translate-y-1/2"></div>
                         </div>
                         <!-- End Progress -->
 
-                        <!-- Progress Status -->
+                        <!-- Progress Statut -->
                         <div class="ljp3z flex g86xu items-center">
                           <span class="m859b c4t4j">
                             0.00
                           </span>
                           <span class="m859b c4t4j">
-                            $1k
+                            $2mln
                           </span>
                         </div>
-                        <!-- End Progress Status -->
+                        <!-- End Progress Statut -->
 
                         <p class="kohus yymkp mnod2">
-                          A project-wise breakdown of total orders complemented by detailed insights.
+                          A project-wise breakdown on total orders complemented by detailed insights.
                         </p>
                       </div>
                     </div>
@@ -1500,107 +1497,6 @@
 
         <!-- Products Table Card -->
         <div class="zorzx flex flex-col fepth mak94 doa28 cirj5 ictpa">
-          <!-- Card Grid -->
-          <div class="a3olr h4905 flex flex-row g86xu omqth overflow-x-auto [&::-webkit-scrollbar]:h-2 [&::-webkit-scrollbar-thumb]:rounded-none [&::-webkit-scrollbar-track]:bg-scrollbar-track [&::-webkit-scrollbar-thumb]:bg-scrollbar-thumb">
-            <!-- Card -->
-            <a class="ksipw ikr16 group en2kw inline-flex flex-col lp3ls items-center rm4xc s6i1l mak94 x3ljb ictpa cirj5 gl01t focus:outline-hidden r9qmy a38gk" href="#">
-              <svg class="emwts f1ztf" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
-                <path d="m3 11 18-5v12L3 14v-3z" />
-                <path d="M11.6 16.8a3 3 0 1 1-5.8-1.6" />
-              </svg>
-              <div class="ljp3z">
-                <h3 class="yymkp ctc9x c4t4j group-hover:text-primary group-focus:text-primary">
-                  Product
-                </h3>
-                <p class="text-[13px] f1ztf">
-                  We can help to turn your great idea into a rx9v9
-                </p>
-              </div>
-            </a>
-            <!-- End Card -->
-
-            <!-- Card -->
-            <a class="ksipw ikr16 group en2kw inline-flex flex-col lp3ls items-center rm4xc s6i1l mak94 x3ljb ictpa cirj5 gl01t focus:outline-hidden r9qmy a38gk" href="#">
-              <svg class="emwts f1ztf" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z" />
-                <path d="m15 9-6 6" />
-                <path d="M9 9h.01" />
-                <path d="M15 15h.01" />
-              </svg>
-              <div class="ljp3z">
-                <h3 class="yymkp ctc9x c4t4j group-hover:text-primary group-focus:text-primary">
-                  Discount
-                </h3>
-                <p class="text-[13px] f1ztf">
-                  Attract new customers or reward loyal customers
-                </p>
-              </div>
-            </a>
-            <!-- End Card -->
-
-            <!-- Card -->
-            <a class="ksipw ikr16 group en2kw inline-flex flex-col lp3ls items-center rm4xc s6i1l mak94 x3ljb ictpa cirj5 gl01t focus:outline-hidden r9qmy a38gk" href="#">
-              <svg class="emwts f1ztf" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M2.97 12.92A2 2 0 0 0 2 14.63v3.24a2 2 0 0 0 .97 1.71l3 1.8a2 2 0 0 0 2.06 0L12 19v-5.5l-5-3-4.03 2.42Z" />
-                <path d="m7 16.5-4.74-2.85" />
-                <path d="m7 16.5 5-3" />
-                <path d="M7 16.5v5.17" />
-                <path d="M12 13.5V19l3.97 2.38a2 2 0 0 0 2.06 0l3-1.8a2 2 0 0 0 .97-1.71v-3.24a2 2 0 0 0-.97-1.71L17 10.5l-5 3Z" />
-                <path d="m17 16.5-5-3" />
-                <path d="m17 16.5 4.74-2.85" />
-                <path d="M17 16.5v5.17" />
-                <path d="M7.97 4.42A2 2 0 0 0 7 6.13v4.37l5 3 5-3V6.13a2 2 0 0 0-.97-1.71l-3-1.8a2 2 0 0 0-2.06 0l-3 1.8Z" />
-                <path d="M12 8 7.26 5.15" />
-                <path d="m12 8 4.74-2.85" />
-              </svg>
-              <div class="ljp3z">
-                <h3 class="yymkp ctc9x c4t4j group-hover:text-primary group-focus:text-primary">
-                  Collection
-                </h3>
-                <p class="text-[13px] f1ztf">
-                  Create a new collection of products
-                </p>
-              </div>
-            </a>
-            <!-- End Card -->
-
-            <!-- Card -->
-            <a class="ksipw ikr16 group en2kw inline-flex flex-col lp3ls items-center rm4xc s6i1l mak94 x3ljb ictpa cirj5 gl01t focus:outline-hidden r9qmy a38gk" href="#">
-              <svg class="emwts f1ztf" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
-                <rect width="20" height="14" x="2" y="5" rx="2" />
-                <line x1="2" x2="22" y1="10" y2="10" />
-              </svg>
-              <div class="ljp3z">
-                <h3 class="yymkp ctc9x c4t4j group-hover:text-primary group-focus:text-primary">
-                  Get paid
-                </h3>
-                <p class="text-[13px] f1ztf">
-                  Receive money with Preline's fast and secure payment
-                </p>
-              </div>
-            </a>
-            <!-- End Card -->
-
-            <!-- Card -->
-            <a class="ksipw ikr16 group en2kw inline-flex flex-col lp3ls items-center rm4xc s6i1l mak94 x3ljb ictpa cirj5 gl01t focus:outline-hidden r9qmy a38gk" href="#">
-              <svg class="emwts f1ztf" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
-                <rect x="3" y="8" width="18" height="4" rx="1" />
-                <path d="M12 8v13" />
-                <path d="M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7" />
-                <path d="M7.5 8a2.5 2.5 0 0 1 0-5A4.8 8 0 0 1 12 8a4.8 8 0 0 1 4.5-5 2.5 2.5 0 0 1 0 5" />
-              </svg>
-              <div class="ljp3z">
-                <h3 class="yymkp ctc9x c4t4j group-hover:text-primary group-focus:text-primary">
-                  Preline products
-                </h3>
-                <p class="text-[13px] f1ztf">
-                  A collection of 100+ Preline products and more
-                </p>
-              </div>
-            </a>
-            <!-- End Card -->
-          </div>
-
           <!-- Filter Group -->
           <div class="gfxdj flex g86xu items-center flex-wrap osjzw jgd2q e1azp c62ef">
             <div>
@@ -1608,7 +1504,6 @@
                 Top products
               </h2>
             </div>
-            <!-- End Col -->
 
             <div>
               <!-- Search Input -->
@@ -1633,56 +1528,220 @@
               </div>
               <!-- End Search Input -->
             </div>
-            <!-- End Col -->
           </div>
           <!-- End Filter Group -->
 
+          <div class="overflow-x-auto [&::-webkit-scrollbar]:h-2 [&::-webkit-scrollbar-thumb]:rounded-none [&::-webkit-scrollbar-track]:bg-scrollbar-track [&::-webkit-scrollbar-thumb]:bg-scrollbar-thumb">
+            <div class="min-w-full inline-block wh1lz">
+              <!-- Table -->
+              <table class="min-w-full divide-y divide-table-line">
+                <thead>
+                  <tr>
+                    <th scope="col" class="q1fho m4rra">
+                      <input type="checkbox" class="y6rh0 x215h robkw fsj2t ftf66 cirj5 s7mjk jw8en qgcqn checked:bg-primary-checked checked:border-primary-checked disabled:opacity-50 disabled:pointer-events-none">
+                    </th>
+
+                    <th scope="col" class="p2mgr qsbxy">
+                      <div class="hs-dropdown relative inline-flex w-full cursor-pointer">
+                        <button id="hs-pro-eptits" type="button" class="kize3 rjeqd m4rra w-full flex items-center jdzig yymkp sqexa offh6 l7z7k f1ztf focus:outline-hidden fsj1x" aria-haspopup="menu" aria-expanded="false" aria-label="Dropdown">
+                          Item
+                          <svg class="y6rh0 xqxx6" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="m7 15 5 5 5-5" />
+                            <path d="m7 9 5-5 5 5" />
+                          </svg>
+                        </button>
+
+                        <div class="hs-dropdown-menu hs-dropdown-open:opacity-100 wqkos transition-[opacity,margin] duration opacity-0 hidden nnhrf khfq6 mak94 ocfsa ictpa p6d5j" role="menu" aria-orientation="vertical" aria-labelledby="hs-pro-eptits">
+                          <div class="i0yn8">
+                            <button type="button" class="w-full flex items-center h7z6o k85d4 o8oua edpyz text-[13px] l7z7k j6b7h ibg9k disabled:opacity-50 disabled:pointer-events-none focus:outline-hidden mhymu">
+                              <svg class="y6rh0 xqxx6" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="m5 12 7-7 7 7" />
+                                <path d="M12 19V5" />
+                              </svg>
+                              Sort ascending
+                            </button>
+                            <button type="button" class="w-full flex items-center h7z6o k85d4 o8oua edpyz text-[13px] l7z7k j6b7h ibg9k disabled:opacity-50 disabled:pointer-events-none focus:outline-hidden mhymu">
+                              <svg class="y6rh0 xqxx6" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M12 5v14" />
+                                <path d="m19 12-7 7-7-7" />
+                              </svg>
+                              Sort descending
+                            </button>
+                            <button type="button" class="w-full flex items-center h7z6o k85d4 o8oua edpyz text-[13px] l7z7k j6b7h ibg9k disabled:opacity-50 disabled:pointer-events-none focus:outline-hidden mhymu">
+                              <svg class="y6rh0 xqxx6" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="m12 19-7-7 7-7" />
+                                <path d="M19 12H5" />
+                              </svg>
+                              Move left
+                            </button>
+                            <button type="button" class="w-full flex items-center h7z6o k85d4 o8oua edpyz text-[13px] l7z7k j6b7h ibg9k disabled:opacity-50 disabled:pointer-events-none focus:outline-hidden mhymu">
+                              <svg class="y6rh0 xqxx6" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M5 12h14" />
+                                <path d="m12 5 7 7-7 7" />
+                              </svg>
+                              Move right
+                            </button>
+
+                            <div class="hs7gg r4caq ocfsa"></div>
+
+                            <button type="button" class="w-full flex items-center h7z6o k85d4 o8oua edpyz text-[13px] l7z7k j6b7h ibg9k disabled:opacity-50 disabled:pointer-events-none focus:outline-hidden mhymu">
+                              <svg class="y6rh0 xqxx6" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M9.88 9.88a3 3 0 1 0 4.24 4.24" />
+                                <path d="M10.73 5.08A10.43 10.43 0 0 1 12 5c7 0 10 7 10 7a13.16 13.16 0 0 1-1.67 2.68" />
+                                <path d="M6.61 6.61A13.526 13.526 0 0 0 2 12s3 7 10 7a9.74 9.74 0 0 0 5.39-1.61" />
+                                <line x1="2" x2="22" y1="2" y2="22" />
+                              </svg>
+                              Hide in view
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </th>
+
+                    <th scope="col">
+                      <div class="hs-dropdown relative inline-flex w-full cursor-pointer">
+                        <button id="hs-pro-eptchs" type="button" class="kize3 rjeqd m4rra w-full flex items-center jdzig yymkp sqexa offh6 l7z7k f1ztf focus:outline-hidden fsj1x" aria-haspopup="menu" aria-expanded="false" aria-label="Dropdown">
+                          Change
+                          <svg class="y6rh0 xqxx6" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="m7 15 5 5 5-5" />
+                            <path d="m7 9 5-5 5 5" />
+                          </svg>
+                        </button>
+                      </div>
+                    </th>
+
+                    <th scope="col">
+                      <div class="hs-dropdown relative inline-flex w-full cursor-pointer">
+                        <button id="hs-pro-eptprs" type="button" class="kize3 rjeqd m4rra w-full flex items-center jdzig yymkp sqexa offh6 l7z7k f1ztf focus:outline-hidden fsj1x" aria-haspopup="menu" aria-expanded="false" aria-label="Dropdown">
+                          Price
+                          <svg class="y6rh0 xqxx6" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="m7 15 5 5 5-5" />
+                            <path d="m7 9 5-5 5 5" />
+                          </svg>
+                        </button>
+                      </div>
+                    </th>
+
+                    <th scope="col">
+                      <div class="hs-dropdown relative inline-flex w-full cursor-pointer">
+                        <button id="hs-pro-eptsls" type="button" class="kize3 rjeqd m4rra w-full flex items-center jdzig yymkp sqexa offh6 l7z7k f1ztf focus:outline-hidden fsj1x" aria-haspopup="menu" aria-expanded="false" aria-label="Dropdown">
+                          Sold
+                          <svg class="y6rh0 xqxx6" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="m7 15 5 5 5-5" />
+                            <path d="m7 9 5-5 5 5" />
+                          </svg>
+                        </button>
+                      </div>
+                    </th>
+
+                    <th scope="col">
+                      <div class="hs-dropdown relative inline-flex w-full cursor-pointer">
+                        <button id="hs-pro-eptvls" type="button" class="kize3 rjeqd m4rra w-full flex items-center jdzig yymkp sqexa offh6 l7z7k f1ztf focus:outline-hidden fsj1x" aria-haspopup="menu" aria-expanded="false" aria-label="Dropdown">
+                          Value
+                          <svg class="y6rh0 xqxx6" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="m7 15 5 5 5-5" />
+                            <path d="m7 9 5-5 5 5" />
+                          </svg>
+                        </button>
+                      </div>
+                    </th>
+                  </tr>
+                </thead>
+
+                <tbody class="divide-y divide-table-line">
+                  <tr class="qrd3x cursor-pointer">
+                    <td class="gmilb offh6 q1fho dvh79 i4hc0"><input type="checkbox" class="y6rh0 x215h robkw fsj2t ftf66 cirj5 s7mjk jw8en qgcqn checked:bg-primary-checked checked:border-primary-checked disabled:opacity-50 disabled:pointer-events-none"></td>
+                    <td class="gmilb dvh79 kize3 relative"><a class="before:z-9 before:absolute before:inset-0" href="#"></a><div class="w-full flex items-center h7z6o"><img class="y6rh0 jxr7s y9dku" src="public/images.unsplash.com/photo-1528310385748-dba09bf1657a--qa8d247d7c6.jpg" alt="Product Image"><div class="t6ue9"><span class="yymkp at2zb c4t4j">Derek Rose Men's socks</span></div></div></td>
+                    <td class="gmilb offh6 dvh79 kize3"><span class="yymkp mnod2">17% <span class="inline-block m5geq">12.5% <svg class="inline-block wh1lz x215h m5geq" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"></polyline><polyline points="16 7 22 7 22 13"></polyline></svg></span></span></td>
+                    <td class="gmilb offh6 dvh79 kize3"><span class="yymkp mnod2">$14</span></td>
+                    <td class="gmilb offh6 dvh79 kize3"><span class="yymkp mnod2">7,695</span></td>
+                    <td class="gmilb offh6 dvh79 kize3"><span class="ctc9x yymkp c4t4j">$15,302.00</span></td>
+                  </tr>
+                  <tr class="qrd3x cursor-pointer">
+                    <td class="gmilb offh6 q1fho dvh79 i4hc0"><input type="checkbox" class="y6rh0 x215h robkw fsj2t ftf66 cirj5 s7mjk jw8en qgcqn checked:bg-primary-checked checked:border-primary-checked disabled:opacity-50 disabled:pointer-events-none"></td>
+                    <td class="gmilb dvh79 kize3 relative"><a class="before:z-9 before:absolute before:inset-0" href="#"></a><div class="w-full flex items-center h7z6o"><img class="y6rh0 jxr7s y9dku" src="public/images.unsplash.com/photo-1613852348851-df1739db8201--qa8d247d7c6.jpg" alt="Product Image"><div class="t6ue9"><span class="yymkp at2zb c4t4j">Calvin Klein T-shirts</span></div></div></td>
+                    <td class="gmilb offh6 dvh79 kize3"><span class="yymkp mnod2">50% <span class="inline-block m5geq">47% <svg class="inline-block wh1lz x215h m5geq" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"></polyline><polyline points="16 7 22 7 22 13"></polyline></svg></span></span></td>
+                    <td class="gmilb offh6 dvh79 kize3"><span class="yymkp mnod2">$89</span></td>
+                    <td class="gmilb offh6 dvh79 kize3"><span class="yymkp mnod2">4,714</span></td>
+                    <td class="gmilb offh6 dvh79 kize3"><span class="ctc9x yymkp c4t4j">$8,466.02</span></td>
+                  </tr>
+                  <tr class="qrd3x cursor-pointer">
+                    <td class="gmilb offh6 q1fho dvh79 i4hc0"><input type="checkbox" class="y6rh0 x215h robkw fsj2t ftf66 cirj5 s7mjk jw8en qgcqn checked:bg-primary-checked checked:border-primary-checked disabled:opacity-50 disabled:pointer-events-none"></td>
+                    <td class="gmilb dvh79 kize3 relative"><a class="before:z-9 before:absolute before:inset-0" href="#"></a><div class="w-full flex items-center h7z6o"><img class="y6rh0 jxr7s y9dku" src="public/images.unsplash.com/photo-1572635196237-14b3f281503f--qa8d247d7c6.jpg" alt="Product Image"><div class="t6ue9"><span class="yymkp at2zb c4t4j">RayBan black sunglasses</span></div></div></td>
+                    <td class="gmilb offh6 dvh79 kize3"><span class="yymkp mnod2">65% <span class="inline-block pnjtm">0.9% <svg class="inline-block wh1lz x215h pnjtm" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 17 13.5 8.5 8.5 13.5 2 7"></polyline><polyline points="16 17 22 17 22 11"></polyline></svg></span></span></td>
+                    <td class="gmilb offh6 dvh79 kize3"><span class="yymkp mnod2">$37</span></td>
+                    <td class="gmilb offh6 dvh79 kize3"><span class="yymkp mnod2">5,951</span></td>
+                    <td class="gmilb offh6 dvh79 kize3"><span class="ctc9x yymkp c4t4j">$10,351.71</span></td>
+                  </tr>
+                  <tr class="qrd3x cursor-pointer">
+                    <td class="gmilb offh6 q1fho dvh79 i4hc0"><input type="checkbox" class="y6rh0 x215h robkw fsj2t ftf66 cirj5 s7mjk jw8en qgcqn checked:bg-primary-checked checked:border-primary-checked disabled:opacity-50 disabled:pointer-events-none"></td>
+                    <td class="gmilb dvh79 kize3 relative"><a class="before:z-9 before:absolute before:inset-0" href="#"></a><div class="w-full flex items-center h7z6o"><img class="y6rh0 jxr7s y9dku" src="public/images.unsplash.com/photo-1610398752800-146f269dfcc8--qa8d247d7c6.jpg" alt="Product Image"><div class="t6ue9"><span class="yymkp at2zb c4t4j">Mango Women's shoe</span></div></div></td>
+                    <td class="gmilb offh6 dvh79 kize3"><span class="yymkp mnod2">53% <span class="inline-block pnjtm">0.1% <svg class="inline-block wh1lz x215h pnjtm" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 17 13.5 8.5 8.5 13.5 2 7"></polyline><polyline points="16 17 22 17 22 11"></polyline></svg></span></span></td>
+                    <td class="gmilb offh6 dvh79 kize3"><span class="yymkp mnod2">$65</span></td>
+                    <td class="gmilb offh6 dvh79 kize3"><span class="yymkp mnod2">5,002</span></td>
+                    <td class="gmilb offh6 dvh79 kize3"><span class="ctc9x yymkp c4t4j">$9,917.45</span></td>
+                  </tr>
+                  <tr class="qrd3x cursor-pointer">
+                    <td class="gmilb offh6 q1fho dvh79 i4hc0"><input type="checkbox" class="y6rh0 x215h robkw fsj2t ftf66 cirj5 s7mjk jw8en qgcqn checked:bg-primary-checked checked:border-primary-checked disabled:opacity-50 disabled:pointer-events-none"></td>
+                    <td class="gmilb dvh79 kize3 relative"><a class="before:z-9 before:absolute before:inset-0" href="#"></a><div class="w-full flex items-center h7z6o"><img class="y6rh0 jxr7s y9dku" src="public/images.unsplash.com/photo-1620799140408-edc6dcb6d633--qa8d247d7c6.jpg" alt="Product Image"><div class="t6ue9"><span class="yymkp at2zb c4t4j">Plain white sweater</span></div></div></td>
+                    <td class="gmilb offh6 dvh79 kize3"><span class="yymkp mnod2">69% <span class="inline-block m5geq">14.2% <svg class="inline-block wh1lz x215h m5geq" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"></polyline><polyline points="16 7 22 7 22 13"></polyline></svg></span></span></td>
+                    <td class="gmilb offh6 dvh79 kize3"><span class="yymkp mnod2">$21</span></td>
+                    <td class="gmilb offh6 dvh79 kize3"><span class="yymkp mnod2">6,643</span></td>
+                    <td class="gmilb offh6 dvh79 kize3"><span class="ctc9x yymkp c4t4j">$12,492.21</span></td>
+                  </tr>
+                  <tr class="qrd3x cursor-pointer">
+                    <td class="gmilb offh6 q1fho dvh79 i4hc0"><input type="checkbox" class="y6rh0 x215h robkw fsj2t ftf66 cirj5 s7mjk jw8en qgcqn checked:bg-primary-checked checked:border-primary-checked disabled:opacity-50 disabled:pointer-events-none"></td>
+                    <td class="gmilb dvh79 kize3 relative"><a class="before:z-9 before:absolute before:inset-0" href="#"></a><div class="w-full flex items-center h7z6o"><img class="y6rh0 jxr7s y9dku" src="public/images.unsplash.com/photo-1611911813383-67769b37a149--qa8d247d7c6.jpg" alt="Product Image"><div class="t6ue9"><span class="yymkp at2zb c4t4j">Pattern Winter Sweater</span></div></div></td>
+                    <td class="gmilb offh6 dvh79 kize3"><span class="yymkp mnod2">42% <span class="inline-block m5geq">8.1% <svg class="inline-block wh1lz x215h m5geq" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"></polyline><polyline points="16 7 22 7 22 13"></polyline></svg></span></span></td>
+                    <td class="gmilb offh6 dvh79 kize3"><span class="yymkp mnod2">$47</span></td>
+                    <td class="gmilb offh6 dvh79 kize3"><span class="yymkp mnod2">3,391</span></td>
+                    <td class="gmilb offh6 dvh79 kize3"><span class="ctc9x yymkp c4t4j">$7,089.10</span></td>
+                  </tr>
+                  <tr class="qrd3x cursor-pointer">
+                    <td class="gmilb offh6 q1fho dvh79 i4hc0"><input type="checkbox" class="y6rh0 x215h robkw fsj2t ftf66 cirj5 s7mjk jw8en qgcqn checked:bg-primary-checked checked:border-primary-checked disabled:opacity-50 disabled:pointer-events-none"></td>
+                    <td class="gmilb dvh79 kize3 relative"><a class="before:z-9 before:absolute before:inset-0" href="#"></a><div class="w-full flex items-center h7z6o"><img class="y6rh0 jxr7s y9dku" src="public/images.unsplash.com/photo-1616969899621-0ea269426a21--qa8d247d7c6.jpg" alt="Product Image"><div class="t6ue9"><span class="yymkp at2zb c4t4j">White Blazer by Armani</span></div></div></td>
+                    <td class="gmilb offh6 dvh79 kize3"><span class="yymkp mnod2">11% <span class="inline-block pnjtm">0.3% <svg class="inline-block wh1lz x215h pnjtm" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 17 13.5 8.5 8.5 13.5 2 7"></polyline><polyline points="16 17 22 17 22 11"></polyline></svg></span></span></td>
+                    <td class="gmilb offh6 dvh79 kize3"><span class="yymkp mnod2">$17</span></td>
+                    <td class="gmilb offh6 dvh79 kize3"><span class="yymkp mnod2">4,191</span></td>
+                    <td class="gmilb offh6 dvh79 kize3"><span class="ctc9x yymkp c4t4j">$8,610</span></td>
+                  </tr>
+                </tbody>
+              </table>
+              <!-- End Table -->
+            </div>
+          </div>
+
           <!-- Footer -->
           <div class="fkl1d">
-            <!-- Empty State -->
-            <div class="zorzx hyse1 flex flex-col lp3ls items-center rm4xc">
-              <svg class="lbufi mx-auto xsmwa" width="178" height="90" viewBox="0 0 178 90" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect x="27" y="50.5" width="124" height="39" rx="7.5" fill="currentColor" class="m7x7r pkoz1" />
-                <rect x="27" y="50.5" width="124" height="39" rx="7.5" stroke="currentColor" class="u2wsf pkoz1" />
-                <rect x="34.5" y="58" width="24" height="24" rx="4" fill="currentColor" class="hbsxh pkoz1" />
-                <rect x="66.5" y="61" width="60" height="6" rx="3" fill="currentColor" class="hbsxh pkoz1" />
-                <rect x="66.5" y="73" width="77" height="6" rx="3" fill="currentColor" class="hbsxh pkoz1" />
-                <rect x="19.5" y="28.5" width="139" height="39" rx="7.5" fill="currentColor" class="m7x7r" />
-                <rect x="19.5" y="28.5" width="139" height="39" rx="7.5" stroke="currentColor" class="u2wsf" />
-                <rect x="27" y="36" width="24" height="24" rx="4" fill="currentColor" class="hbsxh" />
-                <rect x="59" y="39" width="60" height="6" rx="3" fill="currentColor" class="hbsxh" />
-                <rect x="59" y="51" width="92" height="6" rx="3" fill="currentColor" class="hbsxh" />
-                <g filter="url(#filter1)">
-                  <rect x="12" y="6" width="154" height="40" rx="8" fill="currentColor" class="m7x7r" shape-rendering="crispEdges" />
-                  <rect x="12.5" y="6.5" width="153" height="39" rx="7.5" stroke="currentColor" class="u2wsf" shape-rendering="crispEdges" />
-                  <rect x="20" y="14" width="24" height="24" rx="4" fill="currentColor" class="hbsxh" />
-                  <rect x="52" y="17" width="60" height="6" rx="3" fill="currentColor" class="hbsxh" />
-                  <rect x="52" y="29" width="106" height="6" rx="3" fill="currentColor" class="hbsxh" />
-                </g>
-                <defs>
-                  <filter id="filter1" x="0" y="0" width="178" height="64" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-                    <feFlood flood-opacity="0" result="BackgroundImageFix" />
-                    <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" />
-                    <feOffset dy="6" />
-                    <feGaussianBlur stdDeviation="6" />
-                    <feComposite in2="hardAlpha" operator="out" />
-                    <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.03 0" />
-                    <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_1187_14810" />
-                    <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_1187_14810" result="shape" />
-                  </filter>
-                </defs>
-              </svg>
-
-              <div class="tj08a mx-auto">
-                <p class="vbvcb at2zb c4t4j">
-                  No products
-                </p>
-                <p class="x57ta yymkp f1ztf">
-                  No data here yet. We will notify you when there's an update.
-                </p>
+            <div class="flex flex-wrap g86xu items-center osjzw">
+              <div class="relative inline-block">
+                <select data-hs-select='{
+                    "placeholder": "Select option...",
+                    "toggleTag": "<button type=\"button\" aria-expanded=\"false\"></button>",
+                    "toggleClasses": "hs-select-disabled:pointer-events-none hs-select-disabled:opacity-50 relative abuy9 q1fho nhp2m flex my9gz sqexa w-full cursor-pointer s6i1l mak94 x3ljb k0ser edpyz m4rra yymkp focus:outline-hidden ajd3x v02ii jobdj",
+                    "dropdownClasses": "vbvcb hh3zb n6go9 hripi i0yn8 space-y-0.5 overflow-hidden overflow-y-auto mbl39 mak94 bdwjq ictpa p6d5j [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-none [&::-webkit-scrollbar-track]:bg-scrollbar-track [&::-webkit-scrollbar-thumb]:bg-scrollbar-thumb",
+                    "optionClasses": "hs-selected:bg-select-item-active k85d4 o8oua w-full text-[13px] l8tbu cursor-pointer o6yko edpyz focus:outline-hidden rpqlg",
+                    "optionTemplate": "<div class=\"flex g86xu items-center w-full \"><span data-title></span><span class=\"hidden hs-selected:block \"><svg class=\"y6rh0 xqxx6 c4t4j \" xmlns=\"http:.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><polyline points=\"20 6 9 17 4 12\"/></svg></span></div>",
+                    "extraMarkup": "<div class=\"absolute ue5ra u7uug cursor-pointer -translate-y-1/2 \"><svg class=\"y6rh0 x215h f1ztf \" xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"m7 15 5 5 5-5\"/><path d=\"m7 9 5-5 5 5\"/></svg></div>"
+                  }' class="hidden">
+                  <option value="">Choose</option>
+                  <option>1</option>
+                  <option>2</option>
+                  <option>3</option>
+                  <option>4</option>
+                  <option selected>5</option>
+                  <option>6</option>
+                  <option>7</option>
+                </select>
               </div>
+
+              <a class="inline-flex items-center jdzig yymkp s7mjk qiza1 lpc02 focus:outline-hidden jnkmc" href="#">
+                All top products
+                <svg class="y6rh0 x215h" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="m9 18 6-6-6-6"></path>
+                </svg>
+              </a>
             </div>
-            <!-- End Empty State -->
           </div>
           <!-- End Footer -->
         </div>
@@ -1701,6 +1760,13 @@
               <div>
                 <h4 class="dxw73 c4t4j">
                   0
+                  <span class="inline-flex items-center jdzig yymkp m5geq">
+                    <svg class="y6rh0 x215h" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <polyline points="22 7 13.5 15.5 8.5 10.5 2 17" />
+                      <polyline points="16 7 22 7 22 13" />
+                    </svg>
+                    35.8%
+                  </span>
                 </h4>
               </div>
 
@@ -1745,6 +1811,13 @@
               <div>
                 <h4 class="dxw73 c4t4j">
                   0
+                  <span class="inline-flex items-center jdzig yymkp pnjtm">
+                    <svg class="y6rh0 x215h" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <polyline points="22 17 13.5 8.5 8.5 13.5 2 7" />
+                      <polyline points="16 17 22 17 22 11" />
+                    </svg>
+                    18%
+                  </span>
                 </h4>
               </div>
 
@@ -1789,6 +1862,13 @@
               <div>
                 <h4 class="dxw73 c4t4j">
                   0
+                  <span class="inline-flex items-center jdzig yymkp m5geq">
+                    <svg class="y6rh0 x215h" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <polyline points="22 7 13.5 15.5 8.5 10.5 2 17" />
+                      <polyline points="16 7 22 7 22 13" />
+                    </svg>
+                    4.7%
+                  </span>
                 </h4>
               </div>
 
@@ -1833,6 +1913,13 @@
               <div>
                 <h4 class="dxw73 c4t4j">
                   0
+                  <span class="inline-flex items-center jdzig yymkp m5geq">
+                    <svg class="y6rh0 x215h" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <polyline points="22 7 13.5 15.5 8.5 10.5 2 17" />
+                      <polyline points="16 7 22 7 22 13" />
+                    </svg>
+                    11%
+                  </span>
                 </h4>
               </div>
 
@@ -1932,11 +2019,11 @@
               <defs>
                 <filter id="filter2" x="0" y="0" width="178" height="64" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
                   <feFlood flood-opacity="0" result="BackgroundImageFix" />
-                  <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" />
+                  <feCouleurMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" />
                   <feOffset dy="6" />
                   <feGaussianBlur stdDeviation="6" />
                   <feComposite in2="hardAlpha" operator="out" />
-                  <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.03 0" />
+                  <feCouleurMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.03 0" />
                   <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_1187_14810" />
                   <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_1187_14810" result="shape" />
                 </filter>
@@ -1948,7 +2035,7 @@
                 Looking for something?
               </p>
               <p class="x57ta yymkp f1ztf">
-                Type a uccd3 and weÃ¢â‚¬â„¢ll search through files, folders, #tags, and transcripts
+                Type a keyword and we'll search through files, folders, #tags, and transcripts
               </p>
             </div>
           </div>
@@ -2438,7 +2525,7 @@
 
   <!-- Apexcharts -->
   <script src="/preline.co/assets/vendor/lodash/lodash.min.js"></script>
-  <script src="/preline.co/assets/vendor/apexcharts/dist/apexcharts.min.js"></script>
+  <script src="https://preline.co/assets/vendor/apexcharts/dist/apexcharts.min.js"></script>
 
   <script src="/cdn.jsdelivr.net/npm/culori@4.0.2/bundled/culori.umd.min.js"></script>
 
@@ -2452,7 +2539,7 @@
       return formatHex(safe);
     }
   
-    function varToColor(
+    function varToCouleur(
     	name,
     	forceHex = false,
     	scope = document.documentElement,
@@ -2466,7 +2553,7 @@
   </script>
 
   <!--<script>
-    function varToColor(
+    function varToCouleur(
       name,
       forceHex = false,
       scope = document.documentElement,
@@ -2482,11 +2569,11 @@
       const probe = document.createElement("div");
       probe.style.position = "fixed";
       probe.style.left = "-9999px";
-      probe.style.backgroundColor = raw.replace(/\s*!important\s*$/i, "");
+      probe.style.backgroundCouleur = raw.replace(/\s*!important\s*$/i, "");
 
       document.body.appendChild(probe);
 
-      const computed = getComputedStyle(probe).backgroundColor;
+      const computed = getComputedStyle(probe).backgroundCouleur;
       probe.remove();
 
       if (!computed) return null;
@@ -2494,11 +2581,11 @@
       if (computed.startsWith("rgb(")) return `rgba(${computed.slice(4, -1)}, 1)`;
 
       window.addEventListener("on-hs-color-theme-change", () => {
-        return varToColor(name, forceHex, scope);
+        return varToCouleur(name, forceHex, scope);
       });
 
       window.addEventListener("on-hs-brand-change", () => {
-        return varToColor(name, forceHex, scope);
+        return varToCouleur(name, forceHex, scope);
       });
 
       return null;
@@ -2847,7 +2934,7 @@
   
     function buildTooltipForDonut(
     	{ series, seriesIndex, w },
-    	textColor,
+    	textCouleur,
     ) {
     	const { globals } = w;
     	const { colors } = globals;
@@ -2857,7 +2944,7 @@
     	}; display: block;">
         <div class="apexcharts-tooltip-text" style="font-family: Helvetica, Arial, sans-serif; font-size: 12px;">
           <div class="apexcharts-tooltip-y-group" style="color: ${
-    				textColor[seriesIndex]
+    				textCouleur[seriesIndex]
     			}">
             <span class="apexcharts-tooltip-text-y-label">${
     					globals.labels[seriesIndex]
@@ -2866,7 +2953,7 @@
     					series[seriesIndex]
     				}</span>
           <div class="apexcharts-tooltip-y-group" style="color: ${
-    				textColor[seriesIndex]
+    				textCouleur[seriesIndex]
     			}">
             <span class="apexcharts-tooltip-text-y-label">${
     					globals.labels[seriesIndex]
@@ -3129,10 +3216,10 @@
           series: [
             {
               name: 'In-store',
-  	          data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+  	          data: [200, 300, 290, 350, 150, 350, 300, 100, 125, 220, 200, 300]
   	        }, {
   	          name: 'Online',
-  	          data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+  	          data: [150, 230, 382, 204, 169, 290, 300, 100, 300, 225, 120, 150]
             }
           ],
           plotOptions: {
@@ -3179,8 +3266,8 @@
             },
             labels: {
               style: {
-                colors: varToColor('--chart-colors-xaxis-labels'),
-                fontSize: '13px',
+                colors: varToCouleur('--chart-colors-xaxis-labels'),
+                fontTaille: '13px',
                 fontFamily: cssVarToValue('--font-sans'),
                 fontWeight: 400
               },
@@ -3194,8 +3281,8 @@
               minWidth: 0,
               maxWidth: 140,
               style: {
-                colors: varToColor('--chart-colors-yaxis-labels'),
-                fontSize: '13px',
+                colors: varToCouleur('--chart-colors-yaxis-labels'),
+                fontTaille: '13px',
                 fontFamily: cssVarToValue('--font-sans'),
                 fontWeight: 400
               },
@@ -3258,8 +3345,8 @@
                   },
                   labels: {
                     style: {
-                      colors: varToColor('--chart-colors-labels'),
-                      fontSize: '11px',
+                      colors: varToCouleur('--chart-colors-labels'),
+                      fontTaille: '11px',
                       fontFamily: cssVarToValue('--font-sans'),
                       fontWeight: 400
                     },
@@ -3272,8 +3359,8 @@
                       minWidth: 0,
                       maxWidth: 140,
                       style: {
-                        colors: varToColor('--chart-colors-yaxis-labels'),
-                        fontSize: '11px',
+                        colors: varToCouleur('--chart-colors-yaxis-labels'),
+                        fontTaille: '11px',
                         fontFamily: cssVarToValue('--font-sans'),
                         fontWeight: 400
                       },
@@ -3285,40 +3372,40 @@
             },
           }]
         }), () => ({
-          colors: [varToColor('--chart-colors-primary'), varToColor('--chart-colors-chart-10')],
+          colors: [varToCouleur('--chart-colors-primary'), varToCouleur('--chart-colors-chart-10')],
           grid: {
-            borderColor: varToColor('--chart-colors-grid-border')
+            borderCouleur: varToCouleur('--chart-colors-grid-border')
           },
           xaxis: {
             labels: {
               style: {
-                colors: varToColor('--chart-colors-xaxis-labels'),
+                colors: varToCouleur('--chart-colors-xaxis-labels'),
               }
             }
           },
           yaxis: {
             labels: {
               style: {
-                colors: varToColor('--chart-colors-yaxis-labels'),
+                colors: varToCouleur('--chart-colors-yaxis-labels'),
               }
             }
           }
         }), () => ({
-          colors: [varToColor('--chart-colors-primary-inverse'), varToColor('--chart-colors-chart-10-inverse')],
+          colors: [varToCouleur('--chart-colors-primary-inverse'), varToCouleur('--chart-colors-chart-10-inverse')],
           grid: {
-            borderColor: varToColor('--chart-colors-grid-border-inverse')
+            borderCouleur: varToCouleur('--chart-colors-grid-border-inverse')
           },
           xaxis: {
             labels: {
               style: {
-                colors: varToColor('--chart-colors-xaxis-labels-inverse'),
+                colors: varToCouleur('--chart-colors-xaxis-labels-inverse'),
               }
             }
           },
           yaxis: {
             labels: {
               style: {
-                colors: varToColor('--chart-colors-yaxis-labels-inverse'),
+                colors: varToCouleur('--chart-colors-yaxis-labels-inverse'),
               }
             }
           }
@@ -3345,11 +3432,11 @@
   	      series: [
   	        {
   	          name: 'This month',
-  	          data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+  	          data: [200, 200, 240, 350, 200, 350, 200, 250, 285, 220]
   	        },
   	        {
   	          name: 'Last month',
-  	          data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+  	          data: [150, 230, 382, 204, 269, 290, 200, 250, 200, 225]
   	        }
   	      ],
   	      dataLabels: {
@@ -3411,8 +3498,8 @@
   	          minWidth: 0,
   	          maxWidth: 140,
   	          style: {
-  	            colors: varToColor('--chart-colors-yaxis-labels'),
-  	            fontSize: '12px',
+  	            colors: varToCouleur('--chart-colors-yaxis-labels'),
+  	            fontTaille: '12px',
   	            fontFamily: cssVarToValue('--font-sans'),
   	            fontWeight: 400
   	          },
@@ -3440,8 +3527,8 @@
   	          },
   	          labels: {
   	            style: {
-  	              colors: varToColor('--chart-colors-labels'),
-  	              fontSize: '11px',
+  	              colors: varToCouleur('--chart-colors-labels'),
+  	              fontTaille: '11px',
   	              fontFamily: cssVarToValue('--font-sans'),
   	              fontWeight: 400
   	            },
@@ -3454,8 +3541,8 @@
   	              minWidth: 0,
   	              maxWidth: 140,
   	              style: {
-  	                colors: varToColor('--chart-colors-yaxis-labels'),
-  	                fontSize: '11px',
+  	                colors: varToCouleur('--chart-colors-yaxis-labels'),
+  	                fontTaille: '11px',
   	                fontFamily: cssVarToValue('--font-sans'),
   	                fontWeight: 400
   	              },
@@ -3465,40 +3552,40 @@
   	        },
   	      }]
   	    }), () => ({
-  	      colors: [varToColor('--chart-colors-primary'), varToColor('--chart-colors-chart-9')],
+  	      colors: [varToCouleur('--chart-colors-primary'), varToCouleur('--chart-colors-chart-9')],
   	      grid: {
-  	        borderColor: varToColor('--chart-colors-grid-border')
+  	        borderCouleur: varToCouleur('--chart-colors-grid-border')
   	      },
   	      xaxis: {
   	        labels: {
   	          style: {
-  	            colors: varToColor('--chart-colors-xaxis-labels'),
+  	            colors: varToCouleur('--chart-colors-xaxis-labels'),
   	          }
   	        }
   	      },
   	      yaxis: {
   	        labels: {
   	          style: {
-  	            colors: varToColor('--chart-colors-yaxis-labels'),
+  	            colors: varToCouleur('--chart-colors-yaxis-labels'),
   	          }
   	        }
   	      }
   	    }), () => ({
-  	      colors: [varToColor('--chart-colors-primary-inverse'), varToColor('--chart-colors-chart-9-inverse')],
+  	      colors: [varToCouleur('--chart-colors-primary-inverse'), varToCouleur('--chart-colors-chart-9-inverse')],
   	      grid: {
-  	        borderColor: varToColor('--chart-colors-grid-border-inverse')
+  	        borderCouleur: varToCouleur('--chart-colors-grid-border-inverse')
   	      },
   	      xaxis: {
   	        labels: {
   	          style: {
-  	            colors: varToColor('--chart-colors-xaxis-labels-inverse'),
+  	            colors: varToCouleur('--chart-colors-xaxis-labels-inverse'),
   	          }
   	        }
   	      },
   	      yaxis: {
   	        labels: {
   	          style: {
-  	            colors: varToColor('--chart-colors-yaxis-labels-inverse'),
+  	            colors: varToCouleur('--chart-colors-yaxis-labels-inverse'),
   	          }
   	        }
   	      }
@@ -3525,11 +3612,11 @@
   	      series: [
   	        {
   	          name: 'This month',
-  	          data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+  	          data: [20, 20, 24, 15, 30, 35, 20, 28, 18, 16]
   	        },
   	        {
   	          name: 'Last month',
-  	          data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+  	          data: [15, 23, 18, 20, 36, 29, 20, 22, 20, 22]
   	        }
   	      ],
   	      dataLabels: {
@@ -3591,8 +3678,8 @@
   	          minWidth: 0,
   	          maxWidth: 140,
   	          style: {
-  	            colors: varToColor('--chart-colors-yaxis-labels'),
-  	            fontSize: '12px',
+  	            colors: varToCouleur('--chart-colors-yaxis-labels'),
+  	            fontTaille: '12px',
   	            fontFamily: cssVarToValue('--font-sans'),
   	            fontWeight: 400
   	          },
@@ -3620,8 +3707,8 @@
   	          },
   	          labels: {
   	            style: {
-  	              colors: varToColor('--chart-colors-labels'),
-  	              fontSize: '11px',
+  	              colors: varToCouleur('--chart-colors-labels'),
+  	              fontTaille: '11px',
   	              fontFamily: cssVarToValue('--font-sans'),
   	              fontWeight: 400
   	            },
@@ -3634,8 +3721,8 @@
   	              minWidth: 0,
   	              maxWidth: 140,
   	              style: {
-  	                colors: varToColor('--chart-colors-yaxis-labels'),
-  	                fontSize: '11px',
+  	                colors: varToCouleur('--chart-colors-yaxis-labels'),
+  	                fontTaille: '11px',
   	                fontFamily: cssVarToValue('--font-sans'),
   	                fontWeight: 400
   	              },
@@ -3645,40 +3732,40 @@
   	        },
   	      }]
   	    }), () => ({
-  	      colors: [varToColor('--chart-colors-primary'), varToColor('--chart-colors-chart-9')],
+  	      colors: [varToCouleur('--chart-colors-primary'), varToCouleur('--chart-colors-chart-9')],
   	      grid: {
-  	        borderColor: varToColor('--chart-colors-grid-border')
+  	        borderCouleur: varToCouleur('--chart-colors-grid-border')
   	      },
   	      xaxis: {
   	        labels: {
   	          style: {
-  	            colors: varToColor('--chart-colors-xaxis-labels'),
+  	            colors: varToCouleur('--chart-colors-xaxis-labels'),
   	          }
   	        }
   	      },
   	      yaxis: {
   	        labels: {
   	          style: {
-  	            colors: varToColor('--chart-colors-yaxis-labels'),
+  	            colors: varToCouleur('--chart-colors-yaxis-labels'),
   	          }
   	        }
   	      }
   	    }), () => ({
-  	      colors: [varToColor('--chart-colors-primary-inverse'), varToColor('--chart-colors-chart-9-inverse')],
+  	      colors: [varToCouleur('--chart-colors-primary-inverse'), varToCouleur('--chart-colors-chart-9-inverse')],
   	      grid: {
-  	        borderColor: varToColor('--chart-colors-grid-border-inverse')
+  	        borderCouleur: varToCouleur('--chart-colors-grid-border-inverse')
   	      },
   	      xaxis: {
   	        labels: {
   	          style: {
-  	            colors: varToColor('--chart-colors-xaxis-labels-inverse'),
+  	            colors: varToCouleur('--chart-colors-xaxis-labels-inverse'),
   	          }
   	        }
   	      },
   	      yaxis: {
   	        labels: {
   	          style: {
-  	            colors: varToColor('--chart-colors-yaxis-labels-inverse'),
+  	            colors: varToCouleur('--chart-colors-yaxis-labels-inverse'),
   	          }
   	        }
   	      }
@@ -3705,11 +3792,11 @@
   	      series: [
   	        {
   	          name: 'This month',
-  	          data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+  	          data: [15, 26, 29, 20, 23, 38, 20, 30, 20, 22]
   	        },
   	        {
   	          name: 'Last month',
-  	          data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+  	          data: [20, 20, 15, 18, 20, 24, 35, 20, 35, 22]
   	        }
   	      ],
   	      dataLabels: {
@@ -3771,8 +3858,8 @@
   	          minWidth: 0,
   	          maxWidth: 140,
   	          style: {
-  	            colors: varToColor('--chart-colors-yaxis-labels'),
-  	            fontSize: '12px',
+  	            colors: varToCouleur('--chart-colors-yaxis-labels'),
+  	            fontTaille: '12px',
   	            fontFamily: cssVarToValue('--font-sans'),
   	            fontWeight: 400
   	          },
@@ -3800,8 +3887,8 @@
   	          },
   	          labels: {
   	            style: {
-  	              colors: varToColor('--chart-colors-labels'),
-  	              fontSize: '11px',
+  	              colors: varToCouleur('--chart-colors-labels'),
+  	              fontTaille: '11px',
   	              fontFamily: cssVarToValue('--font-sans'),
   	              fontWeight: 400
   	            },
@@ -3814,8 +3901,8 @@
   	              minWidth: 0,
   	              maxWidth: 140,
   	              style: {
-  	                colors: varToColor('--chart-colors-yaxis-labels'),
-  	                fontSize: '11px',
+  	                colors: varToCouleur('--chart-colors-yaxis-labels'),
+  	                fontTaille: '11px',
   	                fontFamily: cssVarToValue('--font-sans'),
   	                fontWeight: 400
   	              },
@@ -3825,40 +3912,40 @@
   	        },
   	      }]
   	    }), () => ({
-  	      colors: [varToColor('--chart-colors-primary'), varToColor('--chart-colors-chart-9')],
+  	      colors: [varToCouleur('--chart-colors-primary'), varToCouleur('--chart-colors-chart-9')],
   	      grid: {
-  	        borderColor: varToColor('--chart-colors-grid-border')
+  	        borderCouleur: varToCouleur('--chart-colors-grid-border')
   	      },
   	      xaxis: {
   	        labels: {
   	          style: {
-  	            colors: varToColor('--chart-colors-xaxis-labels'),
+  	            colors: varToCouleur('--chart-colors-xaxis-labels'),
   	          }
   	        }
   	      },
   	      yaxis: {
   	        labels: {
   	          style: {
-  	            colors: varToColor('--chart-colors-yaxis-labels'),
+  	            colors: varToCouleur('--chart-colors-yaxis-labels'),
   	          }
   	        }
   	      }
   	    }), () => ({
-  	      colors: [varToColor('--chart-colors-primary-inverse'), varToColor('--chart-colors-chart-9-inverse')],
+  	      colors: [varToCouleur('--chart-colors-primary-inverse'), varToCouleur('--chart-colors-chart-9-inverse')],
   	      grid: {
-  	        borderColor: varToColor('--chart-colors-grid-border-inverse')
+  	        borderCouleur: varToCouleur('--chart-colors-grid-border-inverse')
   	      },
   	      xaxis: {
   	        labels: {
   	          style: {
-  	            colors: varToColor('--chart-colors-xaxis-labels-inverse'),
+  	            colors: varToCouleur('--chart-colors-xaxis-labels-inverse'),
   	          }
   	        }
   	      },
   	      yaxis: {
   	        labels: {
   	          style: {
-  	            colors: varToColor('--chart-colors-yaxis-labels-inverse'),
+  	            colors: varToCouleur('--chart-colors-yaxis-labels-inverse'),
   	          }
   	        }
   	      }
@@ -3885,11 +3972,11 @@
   	      series: [
   	        {
   	          name: 'This month',
-  	          data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+  	          data: [0, 20, 22, 15, 20, 15, 20, 19, 14, 15]
   	        },
   	        {
   	          name: 'Last month',
-  	          data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+  	          data: [15, 13, 18, 10, 16, 19, 15, 14, 10, 26]
   	        }
   	      ],
   	      dataLabels: {
@@ -3951,8 +4038,8 @@
   	          minWidth: 0,
   	          maxWidth: 140,
   	          style: {
-  	            colors: varToColor('--chart-colors-yaxis-labels'),
-  	            fontSize: '12px',
+  	            colors: varToCouleur('--chart-colors-yaxis-labels'),
+  	            fontTaille: '12px',
   	            fontFamily: cssVarToValue('--font-sans'),
   	            fontWeight: 400
   	          },
@@ -3980,8 +4067,8 @@
   	          },
   	          labels: {
   	            style: {
-  	              colors: varToColor('--chart-colors-labels'),
-  	              fontSize: '11px',
+  	              colors: varToCouleur('--chart-colors-labels'),
+  	              fontTaille: '11px',
   	              fontFamily: cssVarToValue('--font-sans'),
   	              fontWeight: 400
   	            },
@@ -3994,8 +4081,8 @@
   	              minWidth: 0,
   	              maxWidth: 140,
   	              style: {
-  	                colors: varToColor('--chart-colors-yaxis-labels'),
-  	                fontSize: '11px',
+  	                colors: varToCouleur('--chart-colors-yaxis-labels'),
+  	                fontTaille: '11px',
   	                fontFamily: cssVarToValue('--font-sans'),
   	                fontWeight: 400
   	              },
@@ -4005,40 +4092,40 @@
   	        },
   	      }]
   	    }), () => ({
-  	      colors: [varToColor('--chart-colors-primary'), varToColor('--chart-colors-chart-9')],
+  	      colors: [varToCouleur('--chart-colors-primary'), varToCouleur('--chart-colors-chart-9')],
   	      grid: {
-  	        borderColor: varToColor('--chart-colors-grid-border')
+  	        borderCouleur: varToCouleur('--chart-colors-grid-border')
   	      },
   	      xaxis: {
   	        labels: {
   	          style: {
-  	            colors: varToColor('--chart-colors-xaxis-labels'),
+  	            colors: varToCouleur('--chart-colors-xaxis-labels'),
   	          }
   	        }
   	      },
   	      yaxis: {
   	        labels: {
   	          style: {
-  	            colors: varToColor('--chart-colors-yaxis-labels'),
+  	            colors: varToCouleur('--chart-colors-yaxis-labels'),
   	          }
   	        }
   	      }
   	    }), () => ({
-  	      colors: [varToColor('--chart-colors-primary-inverse'), varToColor('--chart-colors-chart-9-inverse')],
+  	      colors: [varToCouleur('--chart-colors-primary-inverse'), varToCouleur('--chart-colors-chart-9-inverse')],
   	      grid: {
-  	        borderColor: varToColor('--chart-colors-grid-border-inverse')
+  	        borderCouleur: varToCouleur('--chart-colors-grid-border-inverse')
   	      },
   	      xaxis: {
   	        labels: {
   	          style: {
-  	            colors: varToColor('--chart-colors-xaxis-labels-inverse'),
+  	            colors: varToCouleur('--chart-colors-xaxis-labels-inverse'),
   	          }
   	        }
   	      },
   	      yaxis: {
   	        labels: {
   	          style: {
-  	            colors: varToColor('--chart-colors-yaxis-labels-inverse'),
+  	            colors: varToCouleur('--chart-colors-yaxis-labels-inverse'),
   	          }
   	        }
   	      }

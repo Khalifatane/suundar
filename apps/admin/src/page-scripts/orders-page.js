@@ -384,13 +384,19 @@ async function initOrdersPage() {
   if (!activePanel) return;
 
   const tableBody = activePanel.querySelector("tbody.divide-y.divide-table-line");
-  const searchInput = document.querySelector('input[placeholder="Search orders"]');
+  const searchInput =
+    document.querySelector("[data-orders-search='true']") ||
+    document.querySelector('input[placeholder="Search orders"]');
   const title = document.querySelector("h1.dxw73");
   const pagination = activePanel.querySelector('nav[aria-label="Pagination"]');
   const footer = pagination?.closest("div.flex.flex-wrap.g86xu.items-center.osjzw");
   const count = footer?.querySelector("p .at2zb");
-  const previousButton = pagination?.querySelector('button[aria-label="Previous"]');
-  const nextButton = pagination?.querySelector('button[aria-label="Next"]');
+  const previousButton =
+    pagination?.querySelector("[data-orders-pagination-previous='true']") ||
+    pagination?.querySelector('button[aria-label="Previous"]');
+  const nextButton =
+    pagination?.querySelector("[data-orders-pagination-next='true']") ||
+    pagination?.querySelector('button[aria-label="Next"]');
   const pageIndicators = pagination?.querySelectorAll("span");
   const tabButtons = Array.from(
     document.querySelectorAll('[id^="hs-pro-tabs-dut-item-"][role="tab"]'),

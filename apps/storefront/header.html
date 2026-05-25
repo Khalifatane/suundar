@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!-- HTML5 Declaration - tells browser this is HTML5 -->
 <!-- saved from url=(0038)https://preline.co/pro/shop/index.html -->
-<!-- This is a Preline Pro Shop template - formatted version -->
+<!-- This is a Preline Pro Boutique template - formatted version -->
 <!-- Data attributes: theme system for styling, language setting for accessibility -->
 <html class="relative iidaq light" data-brand="avocado" data-font="sans" data-theme="theme-olive" lang="en">
  <head>
@@ -12,10 +12,10 @@
   <style id="stndz-custom-css">
   </style>
   <!-- Required Meta Tags Always Come First for browser compatibility -->
-  <!-- Title - appears in browser tab and search results -->
+  <!-- Title - appears in browser tab and search resultats -->
   <title>
-   <!-- TITLE: Appears in browser tab and search engine results -->
-   Shop | Preline Pro
+   <!-- TITLE: Appears in browser tab and search engine resultats -->
+   Boutique | Preline Pro
   </title>
   <!-- Favicon -->
   <!-- FAVICON: Small icon shown in browser tab, links to external icon file -->
@@ -27,19 +27,19 @@
   <!-- MAIN STYLESHEET: Contains all the styling for the Preline theme (Tailwind CSS + custom styles) -->
   <link href="/css/obfuscated.min.css" rel="stylesheet"/>
   <!-- Theme Check and Update -->
-  <!-- THEME SCRIPT: Loads theme color configuration from external file -->  <!-- This is part of HSPreline component library that manages themes dynamically -->
+  <!-- THEME SCRIPT: Loads theme color configuration from external file -->  <!-- This is part sur HSPreline component library that manages themes dynamically -->
   <script src="/js/hs-unavailable-color-themes.js">
   </script>
   <!-- JAVASCRIPT SECTION: Theme and Brand Management -->
   <!-- This script runs on page load to:
        1. Apply user's theme preference from localStorage (browser memory)
        2. Generate CSS variables for brand colors
-       3. Set light/dark mode based on user preference or system setting
+       3. Set light/dark mode based on user preference ou system setting
    -->
   <script>
    function generateVariables(theme = "dashboard", brand = "blue") {
       // FUNCTION: Creates dynamic CSS color variables based on theme and brand
-      // theme: name of the color theme (e.g., "olive", "ocean")
+      // theme: name sur the color theme (e.g., "olive", "ocean")
       // brand: brand color name (e.g., "avocado", "cyan")
       const styleId = "#hs-brand-variables";
       let style = null;
@@ -152,8 +152,8 @@
           const currentTheme = colorTheme && !reducedThemes.includes(colorTheme) ? colorTheme : defaultTheme;
           const currentBrand = brand || themesDefaults[currentTheme];
 
-          console.log("Current Theme:", currentTheme);
-          console.log("Current Brand:", brand, themesDefaults[currentTheme]);
+          console.log("Actuel Theme:", currentTheme);
+          console.log("Actuel Brand:", brand, themesDefaults[currentTheme]);
 
           html.setAttribute('data-theme', `theme-${currentTheme}`);
           html.setAttribute('data-brand', currentBrand);
@@ -219,10 +219,10 @@
     }
   </style>
  </head>
- <!-- BODY SECTION: All visible content of the page -->
+ <!-- BODY SECTION: All visible content sur the page -->
  <body class="gw9cg">
   <!-- ========== HEADER SECTION ========== -->
-  <!-- Contains: Logo, Navigation menu, Search, Favorites, Cart, User Account -->
+  <!-- Contains: Logo, Navigation menu, Rechercher, Favoris, Cart, User Compte -->
   <!-- Fixed at top using Tailwind flex utilities -->
   <header class="qyrcd bq7k1 mhm76 flex flex-wrap c41c0 md:flex-nowrap hh3zb xbrjb">
    <div class="max-w-[85rem] flex flex-wrap g86xu ygafd pjr9t d8ttz items-center w-full mx-auto py-[11px] p42px cti9j gwqpr c4mnv">
@@ -277,14 +277,14 @@
       </div>
      </div>
     </div>
-    <!-- RIGHT SIDE HEADER BUTTONS: Search, Favorites, Cart, Account -->
+    <!-- RIGHT SIDE HEADER BUTTONS: Rechercher, Favoris, Cart, Compte -->
     <div class="l5bar zg7pd mqy3x flex r49qf items-center my9gz">
      <div class="flex items-center azl7k">
       <!-- USER ACCOUNT MENU: Profile picture shows dropdown with account options when clicked -->
       <div class="hs-dropdown [--auto-close:inside] [--placement:bottom-right] relative inline-flex">
        <!-- USER AVATAR IMAGE: Clickable image that triggers account menu dropdown -->
        <button aria-expanded="false" aria-haspopup="menu" aria-label="Dropdown" class="relative y6rh0 inline-flex lp3ls items-center my9gz jxr7s nj29a c4t4j bnjlx focus:outline-hidden d298d" id="hs-pro-shadnli" type="button">
-        <!-- Profile picture of logged-in user -->
+        <!-- Profile picture sur logged-in user -->
         <img alt="Avatar" class="y6rh0 uev8b nj29a auth-avatar-image hidden"/>
         <span class="auth-avatar-fallback flex y6rh0 uev8b nj29a items-center justify-center mak94 nck10">
          <svg class="y6rh0 x215h" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
@@ -293,7 +293,7 @@
          </svg>
         </span>
        </button>
-       <!-- End Account Button Icon -->
+       <!-- End Compte Button Icon -->
        <!-- ACCOUNT DROPDOWN MENU: Contains user profile info and account options -->
        <!-- aria-labelledby links this menu to the button that opens it (for accessibility) -->
        <!-- role="menu" tells screen readers this is a menu component -->
@@ -321,7 +321,7 @@
                <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
                <circle cx="12" cy="7" r="4"></circle>
               </svg>
-              Personal Info
+              Informations personnelles
              </a>
             </li>
             <li>
@@ -331,7 +331,7 @@
                <path d="M3 6h18"></path>
                <path d="M16 10a4 4 0 0 1-8 0"></path>
               </svg>
-              My Orders
+              Mes commandes
              </a>
             </li>
             <li>
@@ -345,7 +345,7 @@
                <path d="M12 7v10"></path>
                <path d="M17 7v10"></path>
               </svg>
-              Order Details
+              Details de la commande
              </a>
             </li>
            </ul>
@@ -380,11 +380,11 @@
         </div>
        </div>
       </div>
-      <!-- End Account Dropdown -->
+      <!-- End Compte Dropdown -->
      </div>
      <div class="md:hidden">
       <!-- Collapse Button Trigger -->
-      <button aria-controls="hs-pro-dmh" aria-expanded="false" aria-haspopup="dialog" aria-label="Toggle navigation" class="dv8pm x9yei inline-flex lp3ls items-center my9gz yymkp at2zb edpyz s6i1l mak94 x3ljb k0ser cirj5 dduyg disabled:opacity-50 disabled:pointer-events-none focus:outline-hidden usqtq" data-hs-overlay="#hs-pro-dmh" data-hs-overlay-options='{
+      <button aria-controls="hs-pro-dmh" aria-expanded="false" aria-haspopup="dialog" aria-label="Basculer la navigation" class="dv8pm x9yei inline-flex lp3ls items-center my9gz yymkp at2zb edpyz s6i1l mak94 x3ljb k0ser cirj5 dduyg disabled:opacity-50 disabled:pointer-events-none focus:outline-hidden usqtq" data-hs-overlay="#hs-pro-dmh" data-hs-overlay-options='{
             "moveOverlayToBody": 767
           }' id="hs-pro-dmh-collapse" type="button">
        <svg class="y6rh0 x215h" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
@@ -408,12 +408,12 @@
         <h3 class="at2zb c4t4j">
          Menu
         </h3>
-        <button aria-expanded="false" aria-label="Close" class="k85d4 o8oua inline-flex lp3ls items-center jdzig nj29a s6i1l mak94 x3ljb m859b c4t4j bnjlx focus:outline-hidden d298d disabled:opacity-50 disabled:pointer-events-none" data-hs-overlay="#hs-pro-dmh" type="button">
+        <button aria-expanded="false" aria-label="Fermer" class="k85d4 o8oua inline-flex lp3ls items-center jdzig nj29a s6i1l mak94 x3ljb m859b c4t4j bnjlx focus:outline-hidden d298d disabled:opacity-50 disabled:pointer-events-none" data-hs-overlay="#hs-pro-dmh" type="button">
          <span class="hidden lg:block">
           Esc
          </span>
          <span class="block lg:hidden">
-          Close
+          Fermer
          </span>
          <svg class="y6rh0 x215h" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
           <path d="M18 6 6 18">
@@ -444,12 +444,12 @@
      <h3 class="at2zb c4t4j" id="hs-pro-shco-label">
       Cart (0 items)
      </h3>
-     <button aria-expanded="false" aria-label="Close" class="k85d4 o8oua inline-flex lp3ls items-center jdzig nj29a s6i1l mak94 x3ljb m859b c4t4j bnjlx focus:outline-hidden d298d disabled:opacity-50 disabled:pointer-events-none" data-hs-overlay="#hs-pro-shco" type="button">
+     <button aria-expanded="false" aria-label="Fermer" class="k85d4 o8oua inline-flex lp3ls items-center jdzig nj29a s6i1l mak94 x3ljb m859b c4t4j bnjlx focus:outline-hidden d298d disabled:opacity-50 disabled:pointer-events-none" data-hs-overlay="#hs-pro-shco" type="button">
       <span class="hidden lg:block">
        Esc
       </span>
       <span class="block lg:hidden">
-       Close
+       Fermer
       </span>
       <svg class="y6rh0 x215h" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
        <path d="M18 6 6 18">
@@ -469,11 +469,11 @@
       </h4>
       <p class="liwkv m859b f1ztf">
        <a class="at2zb m859b k0ser carpj a8v2i bz0ic focus:outline-hidden ti70c" href="./Login.html">
-        Log In
+        Se connecter
        </a>
        or
        <a class="at2zb m859b k0ser carpj a8v2i bz0ic focus:outline-hidden ti70c" href="./Create Account.html">
-        Register
+        S'inscrire
        </a>
       </p>
      </div>
@@ -488,7 +488,7 @@
      <div class="p3x4c tex4h hfud4 osjzw">
       <div>
        <p class="ctc9x k0ser">
-        Subtotal
+        Sous-total
        </p>
       </div>
       <div class="qk13w">
@@ -499,14 +499,14 @@
      </div>
      <!-- End List -->
      <p class="a3olr d8kj8 text-[13px] f1ztf">
-      Shipping, taxes and discounts are calculated at checkout.
+      Livraison, taxes and discounts are calculated at checkout.
      </p>
      <div class="flex items-center my9gz">
       <a class="dvh79 cti9j relative w-full inline-flex lp3ls items-center i220p yymkp at2zb edpyz s6i1l mak94 x3ljb k0ser cirj5 bnjlx disabled:opacity-50 disabled:pointer-events-none focus:outline-hidden d298d" href="./Cart.html">
-       View cart (0)
+       Voir cart (0)
       </a>
       <a class="dvh79 cti9j w-full inline-flex lp3ls items-center my9gz yymkp at2zb edpyz z0w76 mak94 dzdw5 cncwr wqd6j disabled:opacity-50 disabled:pointer-events-none focus:outline-hidden cw5w5" href="./Checkout.html">
-       Checkout
+       Paiement
       </a>
      </div>
     </div>
@@ -517,11 +517,11 @@
    <div aria-labelledby="hs-pro-shchpdm-label" class="hs-overlay hidden e9n2b fixed bq7k1 i1rbz jh822 overflow-x-hidden overflow-y-auto [--close-when-click-inside:true] rlfos" id="hs-pro-shchpdm" role="dialog" tabindex="-1">
     <div class="hs-overlay-open:mt-7 hs-overlay-open:opacity-100 hs-overlay-open:duration-500 w6z91 opacity-0 gj74m bfnp5 k7v9y yoyse sm:w-full ru4cv sm:mx-auto h-[calc(100%-56px)] min-h-[calc(100%-56px)] flex items-center">
      <div class="relative w-full q1z22 flex flex-col wzndj mak94 xz9o5 ictpa pointer-events-auto p6d5j">
-      <!-- Close Button -->
+      <!-- Fermer Button -->
       <div class="absolute qsemm f1oya nnhrf">
-       <button aria-expanded="false" aria-label="Close" class="uev8b y6rh0 flex lp3ls items-center my9gz nj29a mak94 ijai8 nck10 c4t4j b72le disabled:opacity-50 disabled:pointer-events-none focus:outline-hidden h6ry8" data-hs-overlay="#hs-pro-shchpdm" type="button">
+       <button aria-expanded="false" aria-label="Fermer" class="uev8b y6rh0 flex lp3ls items-center my9gz nj29a mak94 ijai8 nck10 c4t4j b72le disabled:opacity-50 disabled:pointer-events-none focus:outline-hidden h6ry8" data-hs-overlay="#hs-pro-shchpdm" type="button">
         <span class="rfrdb">
-         Close
+         Fermer
         </span>
         <svg class="y6rh0 x215h" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
          <path d="M18 6 6 18">
@@ -567,7 +567,7 @@
          <div class="d0a6n d6bui cti9j gwqpr c4mnv space-y-7 ihunb nshr3 overflow-y-auto [&amp;::-webkit-scrollbar]:w-2 [&amp;::-webkit-scrollbar-thumb]:rounded-none [&amp;::-webkit-scrollbar-track]:bg-scrollbar-track [&amp;::-webkit-scrollbar-thumb]:bg-scrollbar-thumb">
           <div>
            <h5 class="wgwtz at2zb yymkp c4t4j">
-            Colors
+            Couleurs
            </h5>
            <!-- Checkbox Grid -->
            <div class="flex flex-wrap nnsxi">
@@ -761,11 +761,11 @@
             </option>
            </select>
            <button class="dvh79 cti9j w-full inline-flex lp3ls items-center my9gz yymkp at2zb edpyz pm6ks mak94 ve4ck bni17 pucrg disabled:opacity-50 disabled:pointer-events-none focus:outline-hidden soa63" type="button">
-            Add to cart
+            Ajouter au panier
            </button>
            <button class="dvh79 cti9j relative inline-flex lp3ls items-center i220p yymkp at2zb edpyz s6i1l mak94 x3ljb k0ser cirj5 bnjlx disabled:opacity-50 disabled:pointer-events-none focus:outline-hidden d298d" type="button">
             <span class="rfrdb">
-             Favorite
+             Favori
             </span>
             <svg class="y6rh0 x215h" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
              <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z">
@@ -792,11 +792,11 @@
       <h5 class="at2zb k0ser">
        Rate your purchases
       </h5>
-      <!-- Close Button -->
+      <!-- Fermer Button -->
       <div class="absolute nxqqs rnajb">
        <button class="mxukx inline-flex lp3ls items-center my9gz nj29a mak94 ijai8 nck10 h3ns9 b72le disabled:opacity-50 disabled:pointer-events-none focus:outline-hidden h6ry8" data-hs-remove-element="#hs-pro-shrpccid" type="button">
         <span class="rfrdb">
-         Close
+         Fermer
         </span>
         <svg class="y6rh0 x215h" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
          <path d="M18 6 6 18">
@@ -806,7 +806,7 @@
         </svg>
        </button>
       </div>
-      <!-- End Close Button -->
+      <!-- End Fermer Button -->
      </div>
      <!-- End Header -->
      <!-- Body -->
@@ -834,7 +834,7 @@
                 Windrunner
                </h4>
                <p class="liwkv yymkp f1ztf">
-                Color: White, Size: M
+                Couleur: White, Taille: M
                </p>
               </div>
               <div class="mt-auto">
@@ -858,7 +858,7 @@
                 White Jeans
                </h4>
                <p class="liwkv yymkp f1ztf">
-                Color: Gray, Size: M
+                Couleur: Gray, Taille: M
                </p>
               </div>
               <div class="mt-auto">
@@ -882,7 +882,7 @@
                 Embroidered Hoodie
                </h4>
                <p class="liwkv yymkp f1ztf">
-                Color: White, Size: US 10
+                Couleur: White, Taille: US 10
                </p>
               </div>
               <div class="mt-auto">
@@ -908,12 +908,12 @@
          </svg>
         </span>
         <span class="rfrdb">
-         Previous
+         Precedent
         </span>
        </button>
        <button class="hs-carousel-next hs-carousel-disabled:opacity-0 hs-carousel-disabled:cursor-default absolute ue5ra -end-2 inline-flex lp3ls items-center oh9ou s6i1l mak94 x3ljb k0ser nj29a cirj5 dduyg -translate-y-1/2 focus:outline-hidden" type="button">
         <span class="rfrdb">
-         Next
+         Suivant
         </span>
         <span aria-hidden="true" class="rdfzh">
          <svg class="y6rh0 optiv" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
@@ -1215,23 +1215,23 @@
       ];
 
       function ensureLoggedOutCard(accountDropdown) {
-        let loggedOutView = accountDropdown.querySelector('.auth-logged-out');
-        if (loggedOutView) return loggedOutView;
+        let loggedOutVoir = accountDropdown.querySelector('.auth-logged-out');
+        if (loggedOutVoir) return loggedOutVoir;
 
-        loggedOutView = document.createElement('div');
-        loggedOutView.className = 'auth-logged-out i0yn8 hidden';
-        loggedOutView.innerHTML = `
+        loggedOutVoir = document.createElement('div');
+        loggedOutVoir.className = 'auth-logged-out i0yn8 hidden';
+        loggedOutVoir.innerHTML = `
           <div class="zorzx nck10 edpyz">
             <div class="a3olr rm4xc">
-              <span class="block at2zb c4t4j">Account</span>
+              <span class="block at2zb c4t4j">Compte</span>
             </div>
             <a class="abuy9 aimp4 w-full inline-flex lp3ls items-center my9gz yymkp at2zb edpyz pm6ks mak94 ve4ck bni17 pucrg focus:outline-hidden soa63" href="./Login.html">
-              Log in
+              Connexion
             </a>
             <p class="ljp3z rm4xc yymkp f1ztf">
-              Don't have an account?
+              Vous n'avez pas de compte ?
               <a class="text-[13px] f1ztf carpj a8v2i bz0ic focus:outline-hidden ti70c" href="./Create Account.html">
-                Register
+                S'inscrire
               </a>
             </p>
           </div>
@@ -1242,7 +1242,7 @@
                   <div class="flex h7z6o">
                     <svg class="y6rh0 x215h liwkv c4t4j" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"></path><path d="M3 6h18"></path><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
                     <div class="t6ue9">
-                      <span class="yymkp c4t4j">My orders</span>
+                      <span class="yymkp c4t4j">Mes commandes</span>
                     </div>
                   </div>
                 </div>
@@ -1257,7 +1257,7 @@
                   <div class="flex h7z6o">
                     <svg class="y6rh0 x215h liwkv c4t4j" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8c0 3.613-3.869 7.429-5.393 8.795a1 1 0 0 1-1.214 0C9.87 15.429 6 11.613 6 8a6 6 0 0 1 12 0"></path><circle cx="12" cy="8" r="2"></circle><path d="M8.714 14h-3.71a1 1 0 0 0-.948.683l-2.004 6A1 1 0 0 0 3 22h18a1 1 0 0 0 .948-1.316l-2-6a1 1 0 0 0-.949-.684h-3.712"></path></svg>
                     <div class="t6ue9">
-                      <span class="yymkp c4t4j">Order status</span>
+                      <span class="yymkp c4t4j">Statut de commande</span>
                     </div>
                   </div>
                 </div>
@@ -1272,7 +1272,7 @@
                   <div class="flex h7z6o">
                     <svg class="y6rh0 x215h liwkv c4t4j" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><path d="M12 17h.01"></path></svg>
                     <div class="t6ue9">
-                      <span class="yymkp c4t4j">Help</span>
+                      <span class="yymkp c4t4j">Aide</span>
                     </div>
                   </div>
                 </div>
@@ -1284,29 +1284,29 @@
           </div>
         `;
 
-        const loggedInView = accountDropdown.querySelector('.auth-logged-in') || accountDropdown.firstElementChild;
-        if (loggedInView) {
-          loggedInView.insertAdjacentElement('afterend', loggedOutView);
+        const loggedInVoir = accountDropdown.querySelector('.auth-logged-in') || accountDropdown.firstElementChild;
+        if (loggedInVoir) {
+          loggedInVoir.insertAdjacentElement('afterend', loggedOutVoir);
         } else {
-          accountDropdown.appendChild(loggedOutView);
+          accountDropdown.appendChild(loggedOutVoir);
         }
 
-        return loggedOutView;
+        return loggedOutVoir;
       }
 
       function setupAuthDropdown() {
         const accountDropdown = document.querySelector('.hs-dropdown-menu[aria-labelledby="hs-pro-shadnli"]');
         if (!accountDropdown) return;
 
-        const loggedInView = accountDropdown.querySelector('.auth-logged-in') || accountDropdown.querySelector(':scope > .ltybu');
-        const loggedOutView = ensureLoggedOutCard(accountDropdown);
+        const loggedInVoir = accountDropdown.querySelector('.auth-logged-in') || accountDropdown.querySelector(':scope > .ltybu');
+        const loggedOutVoir = ensureLoggedOutCard(accountDropdown);
         const accountName = accountDropdown.querySelector('.auth-user-name');
         const accountEmail = accountDropdown.querySelector('.auth-user-email');
         const logoutButton = accountDropdown.querySelector('.auth-logout-button');
 
-        const setAuthView = (isLoggedIn) => {
-          if (loggedInView) loggedInView.classList.toggle('hidden', !isLoggedIn);
-          if (loggedOutView) loggedOutView.classList.toggle('hidden', isLoggedIn);
+        const setAuthVoir = (isLoggedIn) => {
+          if (loggedInVoir) loggedInVoir.classList.toggle('hidden', !isLoggedIn);
+          if (loggedOutVoir) loggedOutVoir.classList.toggle('hidden', isLoggedIn);
 
           if (isLoggedIn && accountName && accountEmail) {
             const email = localStorage.getItem(authEmailKey) || '';
@@ -1317,7 +1317,7 @@
           }
         };
 
-        setAuthView(localStorage.getItem(authKey) === 'true');
+        setAuthVoir(localStorage.getItem(authKey) === 'true');
 
         if (logoutButton && !logoutButton.dataset.authBound) {
           logoutButton.dataset.authBound = 'true';
@@ -1326,7 +1326,7 @@
             localStorage.removeItem(authKey);
             localStorage.removeItem(authEmailKey);
             localStorage.removeItem(authNameKey);
-            setAuthView(false);
+            setAuthVoir(false);
             window.location.href = './index.html';
           });
         }
