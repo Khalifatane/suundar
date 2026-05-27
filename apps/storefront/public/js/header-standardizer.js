@@ -593,7 +593,7 @@
       srText.className = "rfrdb";
       badge.appendChild(srText);
     }
-    srText.textContent = "Cart items";
+    srText.textContent = "Articles du panier";
   }
 
   function updateCartSummaries() {
@@ -607,14 +607,14 @@
     const subtotal = getFallbackCartSubtotal(items);
 
     document.querySelectorAll('a[href="./Cart.html"], a[href="./Cart.html#"]').forEach(function (link) {
-      if (/View cart/.test(link.textContent || "")) {
-        link.textContent = "View cart (" + itemCount + ")";
+      if (/View cart|Voir le panier/.test(link.textContent || "")) {
+        link.textContent = "Voir le panier (" + itemCount + ")";
       }
     });
 
     const cartHeading = document.getElementById("hs-pro-shco-label");
     if (cartHeading) {
-      cartHeading.textContent = "Cart (" + itemCount + " item" + (itemCount === 1 ? "" : "s") + ")";
+      cartHeading.textContent = "Panier (" + itemCount + " article" + (itemCount === 1 ? "" : "s") + ")";
     }
 
     const cartButton = document.querySelector('[data-hs-overlay="#hs-pro-shco"]');
@@ -622,7 +622,7 @@
     if (cartBadge) {
       cartBadge.childNodes[0].nodeValue = String(itemCount);
       const srText = cartBadge.querySelector(".rfrdb");
-      if (srText) srText.textContent = "Cart items";
+      if (srText) srText.textContent = "Articles du panier";
       cartBadge.removeAttribute("data-storefront-hidden");
     }
 
@@ -635,7 +635,7 @@
 
     document.querySelectorAll(".d8kj8, .a3olr.d8kj8").forEach(function (node) {
       if (/Shipping, taxes and discounts are calculated at checkout\./.test(node.textContent || "")) {
-        node.textContent = "Shipping, taxes and discounts are calculated at checkout.";
+        node.textContent = "Livraison, taxes et remises calculees a l'etape du paiement.";
       }
     });
   }
@@ -3528,3 +3528,5 @@
     normalizeCrossAppLinks();
   });
 })();
+
+

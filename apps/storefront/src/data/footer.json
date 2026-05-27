@@ -36,11 +36,11 @@
     }
   ],
   "location": {
-    "label": "Location",
+    "label": "",
     "value": "United Kingdom"
   },
   "feedback": {
-    "label": "Send us feedback"
+    "label": ""
   },
   "socialLinks": [
     {
@@ -69,3 +69,4 @@
     "darkModeToggle": true
   }
 }
+

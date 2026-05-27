@@ -621,7 +621,7 @@ export function updateCartSummaryUI(root = document) {
   if (cartBadge) {
     cartBadge.childNodes[0].nodeValue = String(itemCount);
     const srText = cartBadge.querySelector(".rfrdb");
-    if (srText) srText.textContent = "Cart items";
+    if (srText) srText.textContent = "Articles du panier";
     cartBadge.removeAttribute("data-storefront-hidden");
   }
 
@@ -647,7 +647,7 @@ export function updateCartSummaryUI(root = document) {
 
   scope.querySelectorAll(".d8kj8, .a3olr.d8kj8").forEach((node) => {
     if (/Shipping, taxes and discounts are calculated at checkout\./.test(node.textContent || "")) {
-      node.textContent = "Shipping, taxes and discounts are calculated at checkout.";
+      node.textContent = "Livraison, taxes et remises calculees a l'etape du paiement.";
     }
   });
 }
@@ -739,3 +739,4 @@ export function bindFavoriteToggles(root = document, options = {}) {
     renderState();
   });
 }
+
