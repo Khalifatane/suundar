@@ -1,7 +1,7 @@
 {
   "breadcrumb": [
     { "label": "Home", "href": "/" },
-    { "label": "Men's Clothing", "href": "/product-listing" },
+    { "label": "Chaussures", "href": "/product-listing" },
     { "label": "T-Shirts", "href": "/product-listing?category=tshirts" },
     { "label": "Everyday Solid Black T-Shirt", "href": "#" }
   ],

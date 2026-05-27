@@ -15,7 +15,7 @@
       "type": "categories",
       "title": "Shop by Category",
       "categories": [
-        { "label": "Men's Clothing", "href": "/product-listing?category=men", "image": "/images/cat-men.jpg" },
+        { "label": "Chaussures", "href": "/product-listing?category=men", "image": "/images/cat-men.jpg" },
         { "label": "Women's Clothing", "href": "/product-listing?category=women", "image": "/images/cat-women.jpg" },
         { "label": "Shoes", "href": "/product-listing?category=shoes", "image": "/images/cat-shoes.jpg" },
         { "label": "Accessories", "href": "/product-listing?category=accessories", "image": "/images/cat-accessories.jpg" }
